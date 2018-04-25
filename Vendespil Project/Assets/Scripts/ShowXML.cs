@@ -14,16 +14,22 @@ public class ShowXML : MonoBehaviour {
     public void LoadItems()
     {
         XmlSerializer serializer = new XmlSerializer(typeof(QuestionDatabase));
-        FileStream stream = new FileStream(Application.dataPath + "/XML/Data.xml", FileMode.CreateNew);
+        FileStream stream = new FileStream(Application.dataPath + "/XML/Data.xml", FileMode.Open);
         itemDB = serializer.Deserialize(stream) as QuestionDatabase;
         stream.Close();
-        Debug.Log(itemDB);
 
         foreach (Question temp in itemDB.list)
         {
             Vector3 temppos = holder.transform.position;
             GameObject go = Instantiate(prefab, temppos, Quaternion.identity) as GameObject;
             go.transform.parent = holder.transform;
+
+            go.GetComponent<Brik>().IdNumber = temp.IdNumber;
+            go.GetComponent<Brik>().question = temp.question;
+            go.GetComponent<Brik>().rightAnswer = temp.rightAnswer;
+            go.GetComponent<Brik>().wrongAnswer1 = temp.wrongAnswer1;
+            go.GetComponent<Brik>().wrongAnswer2 = temp.wrongAnswer2;
+            go.GetComponent<Brik>().wrongAnswer3 = temp.wrongAnswer3;
         }
     }
 

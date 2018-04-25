@@ -27,11 +27,11 @@ public class Editor : MonoBehaviour {
         a.wrongAnswer1 = WrongAnswer1.text;
         a.wrongAnswer2 = WrongAnswer2.text;
         a.wrongAnswer3 = WrongAnswer3.text;
+        itemDB.list.Add(a);
 
         XmlSerializer serializer = new XmlSerializer(typeof(QuestionDatabase));
         FileStream stream = new FileStream(Application.dataPath + "/XML/Data.xml", FileMode.Create);
         serializer.Serialize(stream, itemDB);
-        itemDB.list.Add(a);
         stream.Close();
 
 
