@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class CreateButton : MonoBehaviour
 {
@@ -9,7 +10,6 @@ public class CreateButton : MonoBehaviour
     public GameObject instantiatedButton;
     public GameObject panelEditMenu;
     public GameObject prefabButton;
-    public List<GameObject> questions = new List<GameObject>();
     public Vector3 buttonPos;
     private static int questionNumber = 0;
     private float positionFinder = 81;
@@ -23,10 +23,8 @@ public class CreateButton : MonoBehaviour
         }
         else
             instantiatedButton = Instantiate(prefabButton, new Vector3(buttonPos.x, buttonPos.y-(positionFinder*questionNumber), buttonPos.z), Quaternion.identity, panelEditMenu.transform.Find("ScrollView").GetChild(0).GetChild(0));
-        instantiatedButton.name = questionNumber.ToString();
-        Debug.Log(instantiatedButton.transform.root.name);
-        instantiatedButton.GetComponent<Button>().onClick.AddListener(() => transform.root.GetComponent<MenuManager>().OpenQuestionPanel(instantiatedButton.name));
-        questions.Add(instantiatedButton);
+        instantiatedButton.name = prefabButton.name + questionNumber.ToString();
+        instantiatedButton.GetComponent<Button>().onClick.AddListener(() => transform.root.GetComponent<MenuManager>().OpenQuestionPanel(EventSystem.current.currentSelectedGameObject.name));
         questionNumber++;
     }
 }

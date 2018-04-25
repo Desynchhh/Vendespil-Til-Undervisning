@@ -833,9 +833,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   instantiatedButton: {fileID: 0}
   panelEditMenu: {fileID: 1349743119}
-  prefabButton: {fileID: 1735546401872612, guid: dba8e6bff59136146a97cdccfbc613eb,
+  prefabButton: {fileID: 1667015853212554, guid: dba8e6bff59136146a97cdccfbc613eb,
     type: 2}
-  questions: []
   buttonPos: {x: 0, y: 0, z: 0}
 --- !u!1 &1145615915
 GameObject:
