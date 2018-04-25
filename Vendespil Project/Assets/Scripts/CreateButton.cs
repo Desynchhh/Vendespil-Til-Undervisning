@@ -5,18 +5,28 @@ using UnityEngine.UI;
 
 public class CreateButton : MonoBehaviour
 {
+
+    public GameObject instantiatedButton;
     public GameObject panelEditMenu;
     public GameObject prefabButton;
-    private GameObject instantiatedButton;
-    public static int questionNumber = 1;
-    public float positionFinder = 81;
+    public List<GameObject> questions = new List<GameObject>();
+    public Vector3 buttonPos;
+    private static int questionNumber = 0;
+    private float positionFinder = 81;
 
     public void InstantiateNewButton()
     {
-        instantiatedButton = Instantiate(prefabButton, new Vector3(prefabButton.transform.position.x, prefabButton.transform.position.y - (positionFinder*questionNumber), 0), Quaternion.identity);
-        instantiatedButton.name = prefabButton.name + questionNumber;
-        instantiatedButton.transform.SetParent(panelEditMenu.transform);
-        instantiatedButton.GetComponent<Button>().onClick.AddListener(() => transform.Find(panelEditMenu.name).parent.GetComponent<MenuManager>().OpenQuestionPanel(instantiatedButton.name));
+        if(questionNumber == 0)
+        {
+            instantiatedButton = Instantiate(prefabButton, panelEditMenu.transform.Find("ScrollView").GetChild(0).GetChild(0));
+            buttonPos = instantiatedButton.transform.position;
+        }
+        else
+            instantiatedButton = Instantiate(prefabButton, new Vector3(buttonPos.x, buttonPos.y-(positionFinder*questionNumber), buttonPos.z), Quaternion.identity, panelEditMenu.transform.Find("ScrollView").GetChild(0).GetChild(0));
+        instantiatedButton.name = questionNumber.ToString();
+        Debug.Log(instantiatedButton.transform.root.name);
+        instantiatedButton.GetComponent<Button>().onClick.AddListener(() => transform.root.GetComponent<MenuManager>().OpenQuestionPanel(instantiatedButton.name));
+        questions.Add(instantiatedButton);
         questionNumber++;
     }
 }
