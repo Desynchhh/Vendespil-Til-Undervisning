@@ -33,6 +33,7 @@ public class MenuManager : MonoBehaviour
     public void AddQuestion()
     {
         //Create a new button for the XML file
+        transform.root.GetComponent<CreateButton>().InstantiateNewButton();
         //Edit the created question with EditQuestion() function
     }
 
@@ -43,14 +44,15 @@ public class MenuManager : MonoBehaviour
 
     public void OpenQuestionPanel(string goName)
     {
-        if(transform.Find("PanelEditMenu").Find(goName).GetChild(1).gameObject.active == false)
+        if(transform.Find("PanelEditMenu").Find("ScrollView").GetChild(0).GetChild(0).Find(goName).GetChild(1).gameObject.activeInHierarchy == false)
         {
-            transform.Find("PanelEditMenu").Find(goName).GetChild(1).gameObject.SetActive(true);
+            transform.Find("PanelEditMenu").Find("ScrollView").GetChild(0).GetChild(0).Find(goName).GetChild(1).gameObject.SetActive(true);
         }
         else
         {
-            transform.Find("PanelEditMenu").Find(goName).GetChild(1).gameObject.SetActive(false);
+            transform.Find("PanelEditMenu").Find("ScrollView").GetChild(0).GetChild(0).Find(goName).GetChild(1).gameObject.SetActive(false);
         }
+        Debug.Log(goName);
     }
 
     public void EditQuestion()
