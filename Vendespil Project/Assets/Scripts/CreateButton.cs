@@ -6,25 +6,24 @@ using UnityEngine.EventSystems;
 
 public class CreateButton : MonoBehaviour
 {
-
-    public GameObject instantiatedButton;
-    public GameObject panelEditMenu;
+    
+    [Header("Object To Spawn")]
     public GameObject prefabButton;
-    public Vector3 buttonPos;
-    private static int questionNumber = 0;
-    private float positionFinder = 81;
+    private GameObject instantiatedButton;
+
+    [Header("Positioning")]
+    public GameObject content;
+    //private Vector3 buttonPos;
+    //private float positionFinder = 81;
+    public int questionNumber = 0;  //Set to the IdNumber from XML file
 
     public void InstantiateNewButton()
     {
-        if(questionNumber == 0)
-        {
-            instantiatedButton = Instantiate(prefabButton, panelEditMenu.transform.Find("ScrollView").GetChild(0).GetChild(0));
-            buttonPos = instantiatedButton.transform.position;
-        }
-        else
-            instantiatedButton = Instantiate(prefabButton, new Vector3(buttonPos.x, buttonPos.y-(positionFinder*questionNumber), buttonPos.z), Quaternion.identity, panelEditMenu.transform.Find("ScrollView").GetChild(0).GetChild(0));
+        instantiatedButton = Instantiate(prefabButton, content.transform);
         instantiatedButton.name = prefabButton.name + questionNumber.ToString();
         instantiatedButton.GetComponent<Button>().onClick.AddListener(() => transform.root.GetComponent<MenuManager>().OpenQuestionPanel(EventSystem.current.currentSelectedGameObject.name));
+        instantiatedButton.transform.GetChild(1).GetChild(0).GetComponent<Button>().onClick.AddListener(() => transform.root.GetComponent<EditQuestionsLocal>().EditQuestion(EventSystem.current.currentSelectedGameObject.transform.parent.parent.name));
+        instantiatedButton.transform.GetChild(1).GetChild(1).GetComponent<Button>().onClick.AddListener(() => transform.root.GetComponent<EditQuestionsLocal>().DeleteQuestion(EventSystem.current.currentSelectedGameObject.transform.parent.parent.name));
         questionNumber++;
     }
 }

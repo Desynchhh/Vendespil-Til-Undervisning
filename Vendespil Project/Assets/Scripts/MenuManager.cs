@@ -5,65 +5,40 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    //public GameObject MenuGame;
-    public GameObject MenuMain;
-    public GameObject MenuEdit;
+    [Header("Panels")]
+    public GameObject PanelMainMenu;
+    public GameObject PanelEditMenu;
+    public GameObject PanelGame;
 
     public void PlayGame()
     {
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);   //load game scene
-        Debug.Log("loading game..");
-        //MenuMain.SetActive(false);
-        //MenuGame.SetActive(true);     //Activate game panel
+        PanelMainMenu.SetActive(false);
+        PanelGame.SetActive(true);
     }
 
-    public void GoToEdit()
+    public void GoToEditMenu()
     {
-        MenuMain.SetActive(false);
-        MenuEdit.SetActive(true);
+        PanelMainMenu.SetActive(false);
+        PanelEditMenu.SetActive(true);
     }
 
-    public void GoToMain()
+    public void GoToMainMenu()
     {
-        //MenuGame.SetActive(false);
-        MenuEdit.SetActive(false);
-        MenuMain.SetActive(true);
+        PanelGame.SetActive(false);
+        PanelEditMenu.SetActive(false);
+        PanelMainMenu.SetActive(true);
     }
-
-    public void AddQuestion()
+   
+    public void OpenQuestionPanel(string questionName)
     {
-        //Create a new button for the XML file
-        transform.root.GetComponent<CreateButton>().InstantiateNewButton();
-        //Edit the created question with EditQuestion() function
-    }
-
-    public void DeleteAllQuestions()
-    {
-        //Delete ALL question from XML file
-    }
-
-    public void OpenQuestionPanel(string goName)
-    {
-        if(transform.Find("PanelEditMenu").Find("ScrollView").GetChild(0).GetChild(0).Find(goName).GetChild(1).gameObject.activeInHierarchy == false)
+        if(transform.Find("PanelEditMenu").Find("ScrollView").GetChild(0).GetChild(0).Find(questionName).GetChild(1).gameObject.activeInHierarchy == false)
         {
-            transform.Find("PanelEditMenu").Find("ScrollView").GetChild(0).GetChild(0).Find(goName).GetChild(1).gameObject.SetActive(true);
+            transform.Find("PanelEditMenu").Find("ScrollView").GetChild(0).GetChild(0).Find(questionName).GetChild(1).gameObject.SetActive(true);
         }
         else
         {
-            transform.Find("PanelEditMenu").Find("ScrollView").GetChild(0).GetChild(0).Find(goName).GetChild(1).gameObject.SetActive(false);
+            transform.Find("PanelEditMenu").Find("ScrollView").GetChild(0).GetChild(0).Find(questionName).GetChild(1).gameObject.SetActive(false);
         }
-        Debug.Log(goName);
-    }
-
-    public void EditQuestion()
-    {
-        //Deactivate MenuEdit panel
-        //Activate "edit question panel"
-    }
-
-    public void DeleteQuestion()
-    {
-        //Delete question from XML file
     }
 
     public void QuitGame()
