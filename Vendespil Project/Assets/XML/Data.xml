@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <QuestionDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <list>
-    <Question>
-      <IdNumber>0</IdNumber>
-      <question>5654</question>
-      <rightAnswer>654</rightAnswer>
-      <wrongAnswer1>564</wrongAnswer1>
-      <wrongAnswer2>564</wrongAnswer2>
-      <wrongAnswer3>564</wrongAnswer3>
+    <Question id="1">
+      <question />
+      <rightAnswer />
+      <wrongAnswer1 />
+      <wrongAnswer2 />
+      <wrongAnswer3 />
+    </Question>
+    <Question id="2">
+      <question />
+      <rightAnswer />
+      <wrongAnswer1 />
+      <wrongAnswer2 />
+      <wrongAnswer3 />
     </Question>
   </list>
 </QuestionDatabase>
