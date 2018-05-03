@@ -7,6 +7,8 @@ public class Brik : MonoBehaviour {
 
     [Header("UI")]
     public Text text;
+    public Text text2;
+    public Button[] buttons;
 
     [Header("Data")]
     public int IdNumber;
@@ -19,5 +21,8 @@ public class Brik : MonoBehaviour {
     private void Start()
     {
         text.text = question;
+        text2.text = question;
+
+
     }
 }
