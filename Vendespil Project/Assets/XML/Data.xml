@@ -2,18 +2,11 @@
 <QuestionDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <list>
     <Question id="1">
-      <question />
-      <rightAnswer />
-      <wrongAnswer1 />
-      <wrongAnswer2 />
-      <wrongAnswer3 />
-    </Question>
-    <Question id="2">
-      <question />
-      <rightAnswer />
-      <wrongAnswer1 />
-      <wrongAnswer2 />
-      <wrongAnswer3 />
+      <question>dddd</question>
+      <rightAnswer>deadada</rightAnswer>
+      <wrongAnswer1>dadad</wrongAnswer1>
+      <wrongAnswer2>adsadsa</wrongAnswer2>
+      <wrongAnswer3>wdasdead</wrongAnswer3>
     </Question>
   </list>
 </QuestionDatabase>

@@ -126,10 +126,10 @@ GameObject:
   - component: {fileID: 222295655335119930}
   - component: {fileID: 114237504726403100}
   - component: {fileID: 114811316241688978}
-  - component: {fileID: 114609523792765586}
+  - component: {fileID: 114077082306989414}
   m_Layer: 5
-  m_Name: ButtonQuestion
-  m_TagString: Untagged
+  m_Name: ButtonEdit
+  m_TagString: QuestionButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -167,6 +167,24 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Redig\xE9r"
+--- !u!114 &114077082306989414
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1963710302923538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf5f9540257cc5c438d5f85a68997145, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalQuestions: 0
+  id: 50
+  question: 
+  answer: 
+  wrongAnswer1: 
+  wrongAnswer2: 
+  wrongAnswer3: 
 --- !u!114 &114192217929248048
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -355,24 +373,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Sp\xF8rgsm\xE5l #"
---- !u!114 &114609523792765586
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1963710302923538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb5e7e2556d78cd42aa99387792c8b28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: {fileID: 114599784389912480}
-  IdNumber: 0
-  question: 
-  rightAnswer: 
-  wrongAnswer1: 
-  wrongAnswer2: 
-  wrongAnswer3: 
 --- !u!114 &114772293315700286
 MonoBehaviour:
   m_ObjectHideFlags: 1

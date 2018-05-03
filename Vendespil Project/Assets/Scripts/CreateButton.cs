@@ -12,18 +12,22 @@ public class CreateButton : MonoBehaviour
     private GameObject instantiatedButton;
 
     [Header("Positioning")]
-    public GameObject content;
-    //private Vector3 buttonPos;
-    //private float positionFinder = 81;
-    public int questionNumber = 0;  //Set to the IdNumber from XML file
+    public GameObject contentEdit;
+    public GameObject contentGame;
 
-    public void InstantiateNewButton()
+    public void SpawnEditButton()
     {
-        instantiatedButton = Instantiate(prefabButton, content.transform);
-        instantiatedButton.name = prefabButton.name + questionNumber.ToString();
+        instantiatedButton = Instantiate(prefabButton, contentEdit.transform);
         instantiatedButton.GetComponent<Button>().onClick.AddListener(() => transform.root.GetComponent<MenuManager>().OpenQuestionPanel(EventSystem.current.currentSelectedGameObject.name));
-        instantiatedButton.transform.GetChild(1).GetChild(0).GetComponent<Button>().onClick.AddListener(() => transform.root.GetComponent<EditQuestionsLocal>().EditQuestion(EventSystem.current.currentSelectedGameObject.transform.parent.parent.name));
-        instantiatedButton.transform.GetChild(1).GetChild(1).GetComponent<Button>().onClick.AddListener(() => transform.root.GetComponent<EditQuestionsLocal>().DeleteQuestion(EventSystem.current.currentSelectedGameObject.transform.parent.parent.name));
-        questionNumber++;
+        //instantiatedButton.transform.GetChild(1).GetChild(0).GetComponent<Button>().onClick.AddListener(() => transform.root.GetComponent<EditQuestionsLocal>().EditQuestion(EventSystem.current.currentSelectedGameObject.transform.parent.parent.name));
+        //instantiatedButton.transform.GetChild(1).GetChild(1).GetComponent<Button>().onClick.AddListener(() => transform.root.GetComponent<EditQuestionsLocal>().DeleteQuestion(EventSystem.current.currentSelectedGameObject.transform.parent.parent.name));
+        instantiatedButton.GetComponent<ButtonManager>().LoadInfo();
+        instantiatedButton.name = prefabButton.name + instantiatedButton.GetComponent<ButtonManager>().id;
+        instantiatedButton.GetComponentInChildren<Text>().text = instantiatedButton.GetComponent<ButtonManager>().question;
+    }
+
+    public void SpawnGameButton()
+    {
+
     }
 }

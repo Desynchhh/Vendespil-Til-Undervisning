@@ -8,6 +8,7 @@ public class MenuManager : MonoBehaviour
     [Header("Panels")]
     public GameObject PanelMainMenu;
     public GameObject PanelEditMenu;
+    public GameObject PanelCreateMenu;
     public GameObject PanelGame;
 
     public void PlayGame()
@@ -18,8 +19,15 @@ public class MenuManager : MonoBehaviour
 
     public void GoToEditMenu()
     {
+        PanelCreateMenu.SetActive(false);
         PanelMainMenu.SetActive(false);
         PanelEditMenu.SetActive(true);
+    }
+   
+    public void GoToCreateMenu()
+    {
+        PanelEditMenu.SetActive(false);
+        PanelCreateMenu.SetActive(true);
     }
 
     public void GoToMainMenu()
