@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <QuestionDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <list>
+<<<<<<< HEAD
     <Question id="1">
       <question />
       <rightAnswer />
@@ -64,5 +65,7 @@
       <wrongAnswer2 />
       <wrongAnswer3 />
     </Question>
+=======
+>>>>>>> 750fdf504342195b8065d482aa38510eff4fad61
   </list>
 </QuestionDatabase>
