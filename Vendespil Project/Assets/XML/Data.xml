@@ -1,20 +1,5 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <QuestionDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <list>
-    <Question id="1">
-<<<<<<< HEAD
-      <question>dddd</question>
-      <rightAnswer>deadada</rightAnswer>
-      <wrongAnswer1>dadad</wrongAnswer1>
-      <wrongAnswer2>adsadsa</wrongAnswer2>
-      <wrongAnswer3>wdasdead</wrongAnswer3>
-=======
-      <question />
-      <rightAnswer />
-      <wrongAnswer1 />
-      <wrongAnswer2 />
-      <wrongAnswer3 />
->>>>>>> a8204cf7106518d6585e35e476afa0a6e32e37a2
-    </Question>
   </list>
 </QuestionDatabase>

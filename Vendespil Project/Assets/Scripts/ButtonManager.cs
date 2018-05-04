@@ -7,7 +7,7 @@ using System.Linq;
 public class ButtonManager : MonoBehaviour
 {
     [Header("Data")]
-    public int totalQuestions;
+    private static int totalQuestions;
     public int id;
     public string question, answer, wrongAnswer1, wrongAnswer2, wrongAnswer3;
 
@@ -34,12 +34,6 @@ public class ButtonManager : MonoBehaviour
             wrongAnswer3 = el.Element(wrongAnswer3Element).Value
         }).ToList().ForEach(el =>
         {
-            //Debug.Log("xml id: " + el.id.ToString());
-            //Debug.Log("xml question: " + el.question.ToString());
-            //Debug.Log("xml answer: " + el.answer.ToString());
-            //Debug.Log("xml wrong answer 1: " + el.wrongAnswer1.ToString());
-            //Debug.Log("xml wrong answer 2: " + el.wrongAnswer2.ToString());
-            //Debug.Log("xml wrong answer 3: " + el.wrongAnswer3.ToString());
             id = int.Parse(el.id);
             question = el.question.ToString();
             answer = el.answer.ToString();
@@ -47,6 +41,5 @@ public class ButtonManager : MonoBehaviour
             wrongAnswer2 = el.wrongAnswer2.ToString();
             wrongAnswer3 = el.wrongAnswer3.ToString();
         });
-        //Debug.Log("total questions: " + totalQuestions.ToString());
     }
 }
