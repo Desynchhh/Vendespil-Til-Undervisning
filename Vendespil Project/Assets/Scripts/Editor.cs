@@ -55,6 +55,8 @@ public class Editor : MonoBehaviour
                     case XmlNodeType.EndElement:
                         switch (reader.Name)
                         {
+                            default:
+                                break;
                         }
                         break;
                 }

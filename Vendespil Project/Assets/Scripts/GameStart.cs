@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Xml.Linq;
 using System.Linq;
+using System.IO;
 
 public class GameStart : MonoBehaviour
 {
+    [Header("Panels")]
     public GameObject EditMenu;
-    public GameObject GameMenu;
     public GameObject CreateMenu;
+    public GameObject GameMenu;
 
     public void Awake()
     {
-        LoadAllQuestions();
+        if (File.Exists(Application.dataPath + "/XML/Data.xml") && File.ReadAllLines(Application.dataPath + "/XML/Data.xml").Length > 0)
+        {
+            GetComponent<Editor>().Read();
+            LoadAllQuestions();
+        }
         EditMenu.SetActive(false);
         GameMenu.SetActive(false);
         CreateMenu.SetActive(false);
@@ -21,7 +27,7 @@ public class GameStart : MonoBehaviour
     public void LoadAllQuestions()
     {
         GetEditButtons();
-        GetGameButtons();
+        //GetGameButtons();
     }
 
     private void GetEditButtons()
