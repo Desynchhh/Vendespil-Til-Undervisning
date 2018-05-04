@@ -72,7 +72,7 @@ public class Editor : MonoBehaviour
             Debug.Log("File is empty");
             Number = 0;
         }
-            
+
     }
 
     public void Button()
@@ -94,7 +94,7 @@ public class Editor : MonoBehaviour
             FileStream stream = new FileStream(Application.dataPath + "/XML/Data.xml", FileMode.Create);
             serializer.Serialize(stream, itemDB);
             stream.Close();
-            Debug.Log("File updated");
+            Debug.Log("File updated, new question id is " + a.IdNumber + ".");
         }
         else
         {
@@ -212,7 +212,8 @@ public class Editor : MonoBehaviour
 
     public void ButtonID()
     {
-        RemoveSingle(System.Convert.ToInt32(IDBOX.text));
+        //RemoveSingle(System.Convert.ToInt32(IDBOX.text));
+        Edit(System.Convert.ToInt32(IDBOX.text));
     }
 
     public void RemoveSingle(int ID)
@@ -228,6 +229,42 @@ public class Editor : MonoBehaviour
                 nodes[i].ParentNode.RemoveChild(nodes[i]);
             }
             doc.Save(filePath);
-        }     
+        }
+    }
+
+    public void Edit(int EditID)
+    {
+        if (File.Exists(filePath) && File.ReadAllLines(filePath).Length > 0)
+        {
+            string node = "//Question[@id='" + EditID + "']";
+
+
+            // instantiate XmlDocument and load XML from file
+            XmlDocument doc = new XmlDocument();
+            doc.Load(filePath);
+
+            // get a list of nodes - in this case, I'm selecting all <AID> nodes under
+            // the <GroupAIDs> node - change to suit your needs
+            XmlNodeList aNodes = doc.SelectNodes(node);
+
+            // loop through all AID nodes
+            foreach (XmlNode aNode in aNodes)
+            {
+                // grab the "id" attribute
+                XmlAttribute idAttribute = aNode.Attributes["id"];
+
+                // check if that attribute even exists...
+                if (idAttribute != null)
+                {
+                    if (System.Convert.ToInt32(idAttribute.Value) == EditID)
+                    {
+                        Debug.Log(EditID + " was found!");
+                    }
+                }
+            }
+
+            // save the XmlDocument back to disk
+            doc.Save(filePath);
+        }
     }
 }
