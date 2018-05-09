@@ -8,5 +8,19 @@
       <wrongAnswer2>blal</wrongAnswer2>
       <wrongAnswer3>blab</wrongAnswer3>
     </Question>
+    <Question id="3">
+      <question>Virker dette?</question>
+      <rightAnswer>JA!</rightAnswer>
+      <wrongAnswer1>Næ</wrongAnswer1>
+      <wrongAnswer2>Nej</wrongAnswer2>
+      <wrongAnswer3>Ikke rigtigt</wrongAnswer3>
+    </Question>
+    <Question id="4">
+      <question>ngfd</question>
+      <rightAnswer>½</rightAnswer>
+      <wrongAnswer1>1</wrongAnswer1>
+      <wrongAnswer2>2</wrongAnswer2>
+      <wrongAnswer3>31½</wrongAnswer3>
+    </Question>
   </list>
 </QuestionDatabase>
