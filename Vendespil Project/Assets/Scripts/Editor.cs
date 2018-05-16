@@ -9,28 +9,27 @@ using System.Linq;
 
 public class Editor : MonoBehaviour
 {
-
     [Header("UI")]
     public InputField QuestionText;
     public InputField RightAswer;
     public InputField WrongAnswer1;
     public InputField WrongAnswer2;
     public InputField WrongAnswer3;
-    public InputField IDBOX;
 
-    public Question b;
-
-    [Header("MISC")]
+    [HideInInspector]
     public QuestionDatabase itemDB;
+    [HideInInspector]
     public int Number;
     private XmlTextReader reader;
     private XmlTextWriter writer;
     private string filePath;
+    [HideInInspector]
     public List<int> idNummer = new List<int>();
 
     private void Start()
     {
         filePath = Application.dataPath + "/XML/Data.xml";
+        reader = new XmlTextReader(filePath);
     }
 
 
@@ -38,7 +37,6 @@ public class Editor : MonoBehaviour
     {
         if (File.ReadAllLines(filePath).Length > 0)
         {
-            reader = new XmlTextReader(filePath);
             while (reader.Read())
             {
                 switch (reader.NodeType)
@@ -113,8 +111,6 @@ public class Editor : MonoBehaviour
             stream.Close();
             Debug.Log("File created");
         }
-
-        //Add(QuestionText.text, RightAswer.text, WrongAnswer1.text, WrongAnswer2.text, WrongAnswer3.text);
     }
 
     public void UpdateXML()
@@ -127,14 +123,6 @@ public class Editor : MonoBehaviour
             stream.Close();
         }
     }
-
-    public void RemoveAll()
-    {
-        itemDB.list.Clear();
-        File.WriteAllText(filePath, "");
-        Debug.Log("File clear");
-    }
-
 
     [System.Serializable]
     public class Question
@@ -210,10 +198,11 @@ public class Editor : MonoBehaviour
         }
     }
 
-    public void ButtonID()
+    public void RemoveAll()
     {
-        //RemoveSingle(System.Convert.ToInt32(IDBOX.text));
-        Edit(System.Convert.ToInt32(IDBOX.text));
+        itemDB.list.Clear();
+        File.WriteAllText(filePath, "");
+        Debug.Log("File clear");
     }
 
     public void RemoveSingle(int ID)
@@ -228,42 +217,6 @@ public class Editor : MonoBehaviour
             {
                 nodes[i].ParentNode.RemoveChild(nodes[i]);
             }
-            doc.Save(filePath);
-        }
-    }
-
-    public void Edit(int EditID)
-    {
-        if (File.Exists(filePath) && File.ReadAllLines(filePath).Length > 0)
-        {
-            string node = "//Question[@id='" + EditID + "']";
-
-
-            // instantiate XmlDocument and load XML from file
-            XmlDocument doc = new XmlDocument();
-            doc.Load(filePath);
-
-            // get a list of nodes - in this case, I'm selecting all <AID> nodes under
-            // the <GroupAIDs> node - change to suit your needs
-            XmlNodeList aNodes = doc.SelectNodes(node);
-
-            // loop through all AID nodes
-            foreach (XmlNode aNode in aNodes)
-            {
-                // grab the "id" attribute
-                XmlAttribute idAttribute = aNode.Attributes["id"];
-
-                // check if that attribute even exists...
-                if (idAttribute != null)
-                {
-                    if (System.Convert.ToInt32(idAttribute.Value) == EditID)
-                    {
-                        Debug.Log(EditID + " was found!");
-                    }
-                }
-            }
-
-            // save the XmlDocument back to disk
             doc.Save(filePath);
         }
     }

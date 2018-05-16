@@ -1,71 +1,12 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <QuestionDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <list>
-<<<<<<< HEAD
     <Question id="1">
-      <question />
-      <rightAnswer />
-      <wrongAnswer1 />
-      <wrongAnswer2 />
-      <wrongAnswer3 />
+      <question>Hvad er 2+2</question>
+      <rightAnswer>4</rightAnswer>
+      <wrongAnswer1>6</wrongAnswer1>
+      <wrongAnswer2>2</wrongAnswer2>
+      <wrongAnswer3>3</wrongAnswer3>
     </Question>
-    <Question id="2">
-      <question />
-      <rightAnswer />
-      <wrongAnswer1 />
-      <wrongAnswer2 />
-      <wrongAnswer3 />
-    </Question>
-    <Question id="3">
-      <question />
-      <rightAnswer />
-      <wrongAnswer1 />
-      <wrongAnswer2 />
-      <wrongAnswer3 />
-    </Question>
-    <Question id="4">
-      <question />
-      <rightAnswer />
-      <wrongAnswer1 />
-      <wrongAnswer2 />
-      <wrongAnswer3 />
-    </Question>
-    <Question id="5">
-      <question />
-      <rightAnswer />
-      <wrongAnswer1 />
-      <wrongAnswer2 />
-      <wrongAnswer3 />
-    </Question>
-    <Question id="6">
-      <question />
-      <rightAnswer />
-      <wrongAnswer1 />
-      <wrongAnswer2 />
-      <wrongAnswer3 />
-    </Question>
-    <Question id="7">
-      <question />
-      <rightAnswer />
-      <wrongAnswer1 />
-      <wrongAnswer2 />
-      <wrongAnswer3 />
-    </Question>
-    <Question id="8">
-      <question />
-      <rightAnswer />
-      <wrongAnswer1 />
-      <wrongAnswer2 />
-      <wrongAnswer3 />
-    </Question>
-    <Question id="9">
-      <question />
-      <rightAnswer />
-      <wrongAnswer1 />
-      <wrongAnswer2 />
-      <wrongAnswer3 />
-    </Question>
-=======
->>>>>>> 750fdf504342195b8065d482aa38510eff4fad61
   </list>
 </QuestionDatabase>
