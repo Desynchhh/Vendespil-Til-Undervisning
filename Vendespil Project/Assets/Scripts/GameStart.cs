@@ -43,7 +43,6 @@ public class GameStart : MonoBehaviour
         }).ToList().ForEach(el =>
         {
             transform.parent.Find("PanelEditMenu").GetComponent<CreateButton>().SpawnEditButton(el.id, el.question, el.answer, el.wrongAnswer1, el.wrongAnswer2, el.wrongAnswer3);
-            //Debug.Log(counter);
         });
         counter++;
     }

@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <QuestionDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <list>
-    <Question id="1">
-      <question>blah</question>
-      <rightAnswer>blah</rightAnswer>
-      <wrongAnswer1>blaa</wrongAnswer1>
-      <wrongAnswer2>blal</wrongAnswer2>
-      <wrongAnswer3>blab</wrongAnswer3>
+    <Question id="2">
+      <question>ffxv</question>
+      <rightAnswer>æøå</rightAnswer>
+      <wrongAnswer1>2</wrongAnswer1>
+      <wrongAnswer2>t</wrongAnswer2>
+      <wrongAnswer3>1</wrongAnswer3>
     </Question>
-    <Question id="3">
-      <question>Virker dette?</question>
-      <rightAnswer>JA!</rightAnswer>
-      <wrongAnswer1>Næ</wrongAnswer1>
-      <wrongAnswer2>Nej</wrongAnswer2>
-      <wrongAnswer3>Ikke rigtigt</wrongAnswer3>
+    <Question id="11">
+      <question>rigtigt?</question>
+      <rightAnswer>rigtigt svar</rightAnswer>
+      <wrongAnswer1>rigtigt svar</wrongAnswer1>
+      <wrongAnswer2>rigtigt svar</wrongAnswer2>
+      <wrongAnswer3>rigtigt svar</wrongAnswer3>
     </Question>
-    <Question id="4">
-      <question>ngfd</question>
-      <rightAnswer>½</rightAnswer>
-      <wrongAnswer1>1</wrongAnswer1>
-      <wrongAnswer2>2</wrongAnswer2>
-      <wrongAnswer3>31½</wrongAnswer3>
+    <Question id="12">
+      <question>fsdcfdgaef</question>
+      <rightAnswer />
+      <wrongAnswer1 />
+      <wrongAnswer2 />
+      <wrongAnswer3 />
     </Question>
   </list>
 </QuestionDatabase>

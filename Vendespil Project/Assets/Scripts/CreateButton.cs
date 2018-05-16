@@ -17,22 +17,24 @@ public class CreateButton : MonoBehaviour
     public GameObject contentGame;
 
     private int nextId = 1;
+    private int maxId;
 
-    //public void SpawnEditButton()
-    //{
-    //    instantiatedButton = Instantiate(prefabEditButton, contentEdit.transform);
-    //    ButtonManager buttonData = instantiatedButton.GetComponent<ButtonManager>();
-    //    buttonData.LoadInfo(nextId);
-    //    instantiatedButton.GetComponent<Button>().onClick.AddListener(() => transform.root.Find("Manager").GetComponent<MenuManager>().OpenQuestionPanel(EventSystem.current.currentSelectedGameObject.name));
-    //    buttonData.id = nextId;
-    //    instantiatedButton.transform.GetChild(1).GetChild(1).GetComponent<Button>().onClick.AddListener(() => DeleteButton(EventSystem.current.currentSelectedGameObject.transform.parent.parent.gameObject.GetComponent<ButtonManager>().id));
-    //    instantiatedButton.name = prefabEditButton.name + nextId;
-    //    //instantiatedButton.name = prefabGameButton.name + transform.root.Find("Manager").GetComponent<Editor>().Read().ToString();
-    //    instantiatedButton.GetComponentInChildren<Text>().text = instantiatedButton.GetComponent<ButtonManager>().question;
-    //    SpawnGameButton(buttonData.id, buttonData.question, buttonData.answer, buttonData.wrongAnswer1, buttonData.wrongAnswer2, buttonData.wrongAnswer3);
-    //    nextId++;
-    //    Debug.Log("next id: " + nextId);
-    //}
+    public void SpawnEditButton()
+    {
+        instantiatedButton = Instantiate(prefabEditButton, contentEdit.transform);
+        ButtonManager buttonData = instantiatedButton.GetComponent<ButtonManager>();
+        buttonData.LoadInfo(nextId);
+        instantiatedButton.GetComponent<Button>().onClick.AddListener(() => transform.root.Find("Manager").GetComponent<MenuManager>().OpenQuestionPanel(EventSystem.current.currentSelectedGameObject.name));
+        buttonData.id = nextId;
+        instantiatedButton.transform.GetChild(1).GetChild(1).GetComponent<Button>().onClick.AddListener(() => DeleteButton(EventSystem.current.currentSelectedGameObject.transform.parent.parent.gameObject.GetComponent<ButtonManager>().id));
+        instantiatedButton.name = prefabEditButton.name + nextId;
+        instantiatedButton.GetComponentInChildren<Text>().text = buttonData.question;
+        SpawnGameButton(buttonData.id, buttonData.question, buttonData.answer, buttonData.wrongAnswer1, buttonData.wrongAnswer2, buttonData.wrongAnswer3);
+        nextId++;
+        maxId = buttonData.id;
+        Debug.Log("next id: " + nextId);
+        Debug.Log("max id: " + maxId);
+    }
 
     public void SpawnEditButton(int _id, string _question, string _answer, string _w1, string _w2, string _w3)
     {
@@ -41,7 +43,6 @@ public class CreateButton : MonoBehaviour
         instantiatedButton.GetComponent<Button>().onClick.AddListener(() => transform.root.Find("Manager").GetComponent<MenuManager>().OpenQuestionPanel(EventSystem.current.currentSelectedGameObject.name));
         instantiatedButton.transform.GetChild(1).GetChild(1).GetComponent<Button>().onClick.AddListener(() => DeleteButton(EventSystem.current.currentSelectedGameObject.transform.parent.parent.gameObject.GetComponent<ButtonManager>().id));
         instantiatedButton.name = prefabEditButton.name + _id;
-        //instantiatedButton.name = prefabGameButton.name + transform.root.Find("Manager").GetComponent<Editor>().Read().ToString();
         instantiatedButton.GetComponentInChildren<Text>().text = _question;
         buttonData.id = _id;
         buttonData.question = _question;
@@ -51,7 +52,9 @@ public class CreateButton : MonoBehaviour
         buttonData.wrongAnswer3 = _w3;
         SpawnGameButton(_id, _question, _answer, _w1, _w2, _w3);
         nextId = _id+1;
+        maxId = buttonData.id;
         Debug.Log("next id: " + nextId);
+        Debug.Log("max id: " + maxId);
     }
 
     public void SpawnGameButton(int _id, string _question, string _answer, string _wrongAnswer1, string _wrongAnswer2, string _wrongAnswer3)
@@ -77,21 +80,17 @@ public class CreateButton : MonoBehaviour
             {
                 Debug.Log("deleted child's id: " + child.GetComponent<ButtonManager>().id);
                 Debug.Log("looking for id #" + id);
+                if(id == maxId)
+                {
+                    maxId--;
+                    nextId--;
+                }
                 transform.root.Find("Manager").GetComponent<Editor>().RemoveSingle(id);
                 Destroy(child.gameObject);
             }
-            //if(child.GetComponent<ButtonManager>().id >= id)
-            //{
-            //    child.GetComponent<ButtonManager>().id--;
-            //}
         }
-        foreach(Transform child in contentGame.transform)
-        {
-            if (child.GetComponent<ButtonManager>().id == id)
-                Destroy(child.gameObject);
-        }
-        nextId--;
         Debug.Log("next id: " + nextId);
+        Debug.Log("max id: " + maxId);
     }
 
     public void DeleteAll()
