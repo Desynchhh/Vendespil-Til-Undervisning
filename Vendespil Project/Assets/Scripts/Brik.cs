@@ -30,8 +30,6 @@ public class Brik : MonoBehaviour {
         ButtonList.Add(wrongAnswer2Button.GetComponent<RectTransform>());
         ButtonList.Add(wrongAnswer3Button.GetComponent<RectTransform>());
 
-        Shuffle();
-
         filePath = Application.dataPath + "/XML/Data.xml";
         if (File.Exists(filePath) && File.ReadAllLines(filePath).Length > 0)
         {
@@ -59,25 +57,6 @@ public class Brik : MonoBehaviour {
                 }
             }
 
-        }
-    }
-
-    public void Shuffle()
-    {
-        Debug.Log(ButtonList.Count);
-        for (int i = 0; i < ButtonList.Count; i++)
-        {
-            int rnd = Random.Range(0, ButtonList.Count);
-            var tempGO = ButtonList[rnd];
-            ButtonList[rnd] = ButtonList[i];
-            ButtonList[i] = tempGO;
-        }
-
-        foreach(RectTransform rectTemp in ButtonList)
-        {
-            //Debug.Log(rectTemp.localPosition);
-            //Debug.Log(rectTemp.localPosition);
-            //AnswerButton.GetComponent<RectTransform>().localPosition = rectTemp.localPosition;
         }
     }
 }
