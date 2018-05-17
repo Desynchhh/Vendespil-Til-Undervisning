@@ -8,7 +8,8 @@ public class MenuManager : MonoBehaviour
     [Header("Panels")]
     public GameObject PanelMainMenu;
     public GameObject PanelEditMenu;
-    public GameObject PanelCreateMenu;
+    public GameObject PanelCreateQuestion;
+    public GameObject PanelEditQuestion;
     public GameObject PanelGame;
     public GameObject PanelQuestion;
     public GameObject PanelResults;
@@ -34,15 +35,21 @@ public class MenuManager : MonoBehaviour
 
     public void GoToEditMenu()
     {
-        PanelCreateMenu.SetActive(false);
+        PanelCreateQuestion.SetActive(false);
         PanelMainMenu.SetActive(false);
         PanelEditMenu.SetActive(true);
     }
    
-    public void GoToCreateMenu()
+    public void GoToCreateQuestion()
     {
         PanelEditMenu.SetActive(false);
-        PanelCreateMenu.SetActive(true);
+        PanelCreateQuestion.SetActive(true);
+    }
+
+    public void GoToEditQuestion()
+    {
+        PanelEditMenu.SetActive(false);
+        PanelEditQuestion.SetActive(true);
     }
 
     public void GoToMainMenu()
@@ -65,7 +72,7 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    public void ResetGame()
+    public void ResetGame()     //TEMP
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

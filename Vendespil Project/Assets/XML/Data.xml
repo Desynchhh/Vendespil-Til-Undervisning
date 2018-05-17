@@ -1,52 +1,19 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <QuestionDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <list>
-<<<<<<< HEAD
-    <Question id="2">
-      <question>ffxv</question>
-      <rightAnswer>æøå</rightAnswer>
-      <wrongAnswer1>2</wrongAnswer1>
-      <wrongAnswer2>t</wrongAnswer2>
-      <wrongAnswer3>1</wrongAnswer3>
-=======
     <Question id="1">
-<<<<<<< HEAD
-      <question>Hvad er 2+2</question>
+      <question>Hvad er 2+2?</question>
       <rightAnswer>4</rightAnswer>
-      <wrongAnswer1>6</wrongAnswer1>
-      <wrongAnswer2>2</wrongAnswer2>
-      <wrongAnswer3>3</wrongAnswer3>
-=======
-      <question>blah</question>
-      <rightAnswer>blah</rightAnswer>
-      <wrongAnswer1>blaa</wrongAnswer1>
-      <wrongAnswer2>blal</wrongAnswer2>
-      <wrongAnswer3>blab</wrongAnswer3>
->>>>>>> 8de51e0d765739141a4057e4f9953ad914aa2230
+      <wrongAnswer1>2</wrongAnswer1>
+      <wrongAnswer2>22</wrongAnswer2>
+      <wrongAnswer3>5</wrongAnswer3>
     </Question>
-    <Question id="11">
-      <question>rigtigt?</question>
-      <rightAnswer>rigtigt svar</rightAnswer>
-      <wrongAnswer1>rigtigt svar</wrongAnswer1>
-      <wrongAnswer2>rigtigt svar</wrongAnswer2>
-      <wrongAnswer3>rigtigt svar</wrongAnswer3>
-    </Question>
-<<<<<<< HEAD
-    <Question id="12">
-      <question>fsdcfdgaef</question>
+    <Question id="4">
+      <question>fty</question>
       <rightAnswer />
       <wrongAnswer1 />
       <wrongAnswer2 />
       <wrongAnswer3 />
-=======
-    <Question id="4">
-      <question>ngfd</question>
-      <rightAnswer>½</rightAnswer>
-      <wrongAnswer1>1</wrongAnswer1>
-      <wrongAnswer2>2</wrongAnswer2>
-      <wrongAnswer3>31½</wrongAnswer3>
->>>>>>> 6110b0b037fefe39d289e04b8c38f8744f84f196
->>>>>>> 8de51e0d765739141a4057e4f9953ad914aa2230
     </Question>
   </list>
 </QuestionDatabase>

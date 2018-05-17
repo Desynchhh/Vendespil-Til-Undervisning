@@ -25,7 +25,7 @@ public class EditXML : MonoBehaviour {
     private void Start()
     {
         filePath = Application.dataPath + "/XML/Data.xml";
-        LoadXML(ID);
+        //LoadXML(ID);
     }
 
     public void ButtonPress()
