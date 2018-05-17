@@ -201,7 +201,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 177583038}
-        m_MethodName: Button
+        m_MethodName: Add
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -629,7 +629,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 177583037}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2128f04274b829d4da67f16b0b7ca2f9, type: 3}
+  m_Script: {fileID: 11500000, guid: 99772a892ea7c2744bf5b4560fb2443d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   QuestionText: {fileID: 342351639}
@@ -639,8 +639,6 @@ MonoBehaviour:
   WrongAnswer3: {fileID: 2020222946}
   itemDB:
     list: []
-  Number: 0
-  idNummer: 
 --- !u!4 &177583039
 Transform:
   m_ObjectHideFlags: 0
@@ -716,7 +714,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 177583037}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e4c2eb48c399a54aa8aca9f87ea7304, type: 3}
   m_Name: 
@@ -727,6 +725,7 @@ MonoBehaviour:
   wrongAnswer1Text: {fileID: 1080598812}
   wrongAnswer2Text: {fileID: 844527805}
   wrongAnswer3Text: {fileID: 445796736}
+  EditID: 0
 --- !u!1 &200988824
 GameObject:
   m_ObjectHideFlags: 0
@@ -984,19 +983,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 177583038}
-        m_MethodName: Button
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1349743123}
-        m_MethodName: SpawnEditButton
+      - m_Target: {fileID: 177583043}
+        m_MethodName: Save
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5295,7 +5283,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 177583038}
+      - m_Target: {fileID: 177583043}
         m_MethodName: RemoveAll
         m_Mode: 1
         m_Arguments:

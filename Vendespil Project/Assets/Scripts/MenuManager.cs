@@ -36,6 +36,7 @@ public class MenuManager : MonoBehaviour
     public void GoToEditMenu()
     {
         PanelCreateQuestion.SetActive(false);
+        PanelEditQuestion.SetActive(false);
         PanelMainMenu.SetActive(false);
         PanelEditMenu.SetActive(true);
     }
@@ -46,8 +47,9 @@ public class MenuManager : MonoBehaviour
         PanelCreateQuestion.SetActive(true);
     }
 
-    public void GoToEditQuestion()
+    public void GoToEditQuestion(int editId)
     {
+        transform.GetComponent<EditXML>().EditID = editId;
         PanelEditMenu.SetActive(false);
         PanelEditQuestion.SetActive(true);
     }

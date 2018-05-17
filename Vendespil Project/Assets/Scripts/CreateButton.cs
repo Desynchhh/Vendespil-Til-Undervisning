@@ -27,7 +27,7 @@ public class CreateButton : MonoBehaviour
         instantiatedButton.GetComponent<Button>().onClick.AddListener(() => transform.root.Find("Manager").GetComponent<MenuManager>().OpenQuestionPanel(EventSystem.current.currentSelectedGameObject.name));
         buttonData.id = nextId;
         instantiatedButton.transform.GetChild(1).GetChild(1).GetComponent<Button>().onClick.AddListener(() => DeleteButton(EventSystem.current.currentSelectedGameObject.transform.parent.parent.gameObject.GetComponent<ButtonManager>().id));
-        instantiatedButton.transform.GetChild(1).GetChild(0).GetComponent<Button>().onClick.AddListener(() => transform.parent.Find("Manager").GetComponent<MenuManager>().GoToEditQuestion());
+        instantiatedButton.transform.GetChild(1).GetChild(0).GetComponent<Button>().onClick.AddListener(() => transform.parent.Find("Manager").GetComponent<MenuManager>().GoToEditQuestion(EventSystem.current.currentSelectedGameObject.transform.parent.parent.GetComponent<ButtonManager>().id));
         instantiatedButton.name = prefabEditButton.name + nextId;
         instantiatedButton.GetComponentInChildren<Text>().text = buttonData.question;
         SpawnGameButton(buttonData.id, buttonData.question, buttonData.answer, buttonData.wrongAnswer1, buttonData.wrongAnswer2, buttonData.wrongAnswer3);
@@ -43,6 +43,7 @@ public class CreateButton : MonoBehaviour
         ButtonManager buttonData = instantiatedButton.GetComponent<ButtonManager>();
         instantiatedButton.GetComponent<Button>().onClick.AddListener(() => transform.root.Find("Manager").GetComponent<MenuManager>().OpenQuestionPanel(EventSystem.current.currentSelectedGameObject.name));
         instantiatedButton.transform.GetChild(1).GetChild(1).GetComponent<Button>().onClick.AddListener(() => DeleteButton(EventSystem.current.currentSelectedGameObject.transform.parent.parent.gameObject.GetComponent<ButtonManager>().id));
+        instantiatedButton.transform.GetChild(1).GetChild(0).GetComponent<Button>().onClick.AddListener(() => transform.parent.Find("Manager").GetComponent<MenuManager>().GoToEditQuestion(EventSystem.current.currentSelectedGameObject.transform.parent.parent.GetComponent<ButtonManager>().id));
         instantiatedButton.name = prefabEditButton.name + _id;
         instantiatedButton.GetComponentInChildren<Text>().text = _question;
         buttonData.id = _id;
@@ -86,7 +87,7 @@ public class CreateButton : MonoBehaviour
                     maxId--;
                     nextId--;
                 }
-                transform.root.Find("Manager").GetComponent<Editor>().RemoveSingle(id);
+                transform.root.Find("Manager").GetComponent<EditXML>().RemoveSingle(id);
                 Destroy(child.gameObject);
             }
         }

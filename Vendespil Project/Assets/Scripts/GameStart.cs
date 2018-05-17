@@ -19,9 +19,13 @@ public class GameStart : MonoBehaviour
 
     public void Awake()
     {
-        filePath = Application.dataPath + "Resources/XML/Data.xml";
+        Debug.Log("Setting file path..");
+        filePath = Application.dataPath + "/Resources/XML/Data.xml";
+        Debug.Log("File path set!");
         if (File.Exists(filePath) && File.ReadAllLines(filePath).Length > 0)
             LoadAllQuestions();
+
+        Debug.Log("all questions loaded");
         EditMenu.SetActive(false);
         GameMenu.SetActive(false);
         CreateMenu.SetActive(false);

@@ -22,9 +22,9 @@ public class ButtonManager : MonoBehaviour
 
     private string filePath;
 
-    private void Start()
+    private void Awake()
     {
-         filePath = Application.dataPath + "Resources/XML/Data.xml";
+         filePath = Application.dataPath + "/Resources/XML/Data.xml";
     }
 
     public void LoadInfo(int idToFind)

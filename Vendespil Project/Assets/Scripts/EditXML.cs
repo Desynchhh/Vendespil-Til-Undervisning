@@ -30,10 +30,10 @@ public class EditXML : MonoBehaviour {
         LoadXML(ID);
     }
 
-    public void ButtonPress()
-    {
-        Save(ID, questionText.text, rightAnswerText.text, wrongAnswer1Text.text, wrongAnswer2Text.text, wrongAnswer3Text.text);
-    }
+    //public void ButtonPress()
+    //{
+    //    SaveQuestion(ID, questionText.text, rightAnswerText.text, wrongAnswer1Text.text, wrongAnswer2Text.text, wrongAnswer3Text.text);
+    //}
     
     public void LoadXML(int EditID)
     {
@@ -63,7 +63,8 @@ public class EditXML : MonoBehaviour {
         }
     }
 
-    public void Save(int EditID , string question, string rightAnswer, string wrongAnswer1, string wrongAnswer2, string wrongAnswer3)
+    public int EditID;
+    public void Save()//int EditID , string question, string rightAnswer, string wrongAnswer1, string wrongAnswer2, string wrongAnswer3)
     {
         if (File.Exists(filePath) && File.ReadAllLines(filePath).Length > 0)
         {

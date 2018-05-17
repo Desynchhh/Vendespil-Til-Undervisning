@@ -19,7 +19,7 @@ public class LoadXML : MonoBehaviour {
 
     private void Start()
     {
-        filePath = Application.dataPath + "Resources/XML/Data.xml";
+        filePath = Application.dataPath + "/Resources/XML/Data.xml";
         Load();
     }
 
