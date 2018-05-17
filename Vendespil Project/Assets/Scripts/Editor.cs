@@ -28,7 +28,7 @@ public class Editor : MonoBehaviour
 
     private void Start()
     {
-        filePath = Application.dataPath + "/XML/Data.xml";
+        filePath = Application.dataPath + "/Resources/XML/Data.xml";
         reader = new XmlTextReader(filePath);
     }
 
@@ -90,7 +90,7 @@ public class Editor : MonoBehaviour
             itemDB.list.Add(a);
 
             XmlSerializer serializer = new XmlSerializer(typeof(QuestionDatabase));
-            FileStream stream = new FileStream(Application.dataPath + "/XML/Data.xml", FileMode.Create);
+            FileStream stream = new FileStream(filePath, FileMode.Create);
             serializer.Serialize(stream, itemDB);
             stream.Close();
             Debug.Log("File updated, new question id is " + a.IdNumber + ".");
@@ -107,7 +107,7 @@ public class Editor : MonoBehaviour
             itemDB.list.Add(a);
 
             XmlSerializer serializer = new XmlSerializer(typeof(QuestionDatabase));
-            FileStream stream = new FileStream(Application.dataPath + "/XML/Data.xml", FileMode.CreateNew);
+            FileStream stream = new FileStream(filePath, FileMode.CreateNew);
             serializer.Serialize(stream, itemDB);
             stream.Close();
             Debug.Log("File created");
@@ -119,7 +119,7 @@ public class Editor : MonoBehaviour
         if (File.ReadAllLines(filePath).Length > 0)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(QuestionDatabase));
-            FileStream stream = new FileStream(Application.dataPath + "/XML/Data.xml", FileMode.Open);
+            FileStream stream = new FileStream(filePath, FileMode.Open);
             itemDB = serializer.Deserialize(stream) as QuestionDatabase;
             stream.Close();
         }

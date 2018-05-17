@@ -15,9 +15,12 @@ public class GameStart : MonoBehaviour
     public GameObject QuestionMenu;
     public GameObject ResultsMenu;
 
+    private string filePath;
+
     public void Awake()
     {
-        if (File.Exists(Application.dataPath + "/XML/Data.xml") && File.ReadAllLines(Application.dataPath + "/XML/Data.xml").Length > 0)
+        filePath = Application.dataPath + "Resources/XML/Data.xml";
+        if (File.Exists(filePath) && File.ReadAllLines(filePath).Length > 0)
             LoadAllQuestions();
         EditMenu.SetActive(false);
         GameMenu.SetActive(false);
@@ -30,7 +33,7 @@ public class GameStart : MonoBehaviour
     public void LoadAllQuestions()
     {
         int counter = 1;
-        XDocument xdoc = XDocument.Load(Application.dataPath + "/XML/Data.xml");
+        XDocument xdoc = XDocument.Load(filePath);
 
         xdoc.Descendants("Question").Where(el => int.Parse(el.Attribute("id").Value) >= counter).Select(el => new
         {

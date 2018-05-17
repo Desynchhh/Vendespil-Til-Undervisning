@@ -24,13 +24,10 @@ public class EditXML : MonoBehaviour {
 
     private void Start()
     {
-<<<<<<< HEAD
-        filePath = Application.dataPath + "/XML/Data.xml";
+        //filePath = Application.dataPath + "/XML/Data.xml";
         //LoadXML(ID);
-=======
         filePath = Application.dataPath + "/Resources/XML/Data.xml";
         LoadXML(ID);
->>>>>>> 67b169ff09a496a1495d4679b29ae504e32635ef
     }
 
     public void ButtonPress()
