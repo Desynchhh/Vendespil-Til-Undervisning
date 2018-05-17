@@ -23,7 +23,7 @@ public class ButtonManager : MonoBehaviour
     public void LoadInfo(int idToFind)
     {
         XDocument xdoc = XDocument.Load(Application.dataPath + "/XML/Data.xml");
-        xdoc.Descendants(QuestionElement).Where(predicate: q => int.Parse(q.Attribute(idAttribute).Value) == idToFind).Select(q => new
+        xdoc.Descendants(QuestionElement).Where(q => int.Parse(q.Attribute(idAttribute).Value) == idToFind).Select(q => new
         {
             id = q.Attribute(idAttribute).Value,
             question = q.Element(questionElement).Value,
