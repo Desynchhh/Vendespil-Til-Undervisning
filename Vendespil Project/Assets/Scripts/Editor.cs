@@ -72,7 +72,6 @@ public class Editor : MonoBehaviour
             Debug.Log("File is empty");
             Number = 0;
         }
-
     }
 
     public void Button()
@@ -142,62 +141,6 @@ public class Editor : MonoBehaviour
     public class QuestionDatabase
     {
         public List<Question> list = new List<Question>();
-    }
-
-    public void Read()
-    {
-        if (File.Exists(filePath) && File.ReadAllLines(filePath).Length > 0)
-        {
-            reader = new XmlTextReader(filePath);
-            int Tempid = 0;
-            while (reader.Read())
-            {
-                switch (reader.NodeType)
-                {
-                    case XmlNodeType.Element:
-                        switch (reader.Name)
-                        {
-                            case "Question":
-                                Tempid = int.Parse(reader.GetAttribute("id"));
-                                idNummer.Add(System.Convert.ToInt32(reader.GetAttribute("id")));
-                                break;
-                            case "question":
-                                Debug.Log(Tempid + ": " + reader.ReadString());
-                                break;
-                            case "rightAnswer":
-                                Debug.Log(Tempid + ": " + reader.ReadString());
-                                break;
-                            case "wrongAnswer1":
-                                Debug.Log(Tempid + ": " + reader.ReadString());
-                                break;
-                            case "wrongAnswer2":
-                                Debug.Log(Tempid + ": " + reader.ReadString());
-                                break;
-                            case "wrongAnswer3":
-                                Debug.Log(Tempid + ": " + reader.ReadString());
-                                break;
-                        }
-                        break;
-
-                    case XmlNodeType.EndElement:
-                        switch (reader.Name)
-                        {
-                        }
-                        break;
-                }
-            }
-
-            if (idNummer.Count > 0)
-            {
-                Number = idNummer.Max();
-                idNummer.Clear();
-            }
-            reader.Close();
-        }
-        else
-        {
-            Debug.Log("Error no File");
-        }
     }
 
     public void RemoveAll()

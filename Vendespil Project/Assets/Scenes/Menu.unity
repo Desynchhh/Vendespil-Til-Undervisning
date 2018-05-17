@@ -647,14 +647,6 @@ MonoBehaviour:
   WrongAnswer1: {fileID: 1580123664}
   WrongAnswer2: {fileID: 277650158}
   WrongAnswer3: {fileID: 2020222946}
-  IDBOX: {fileID: 0}
-  b:
-    IdNumber: 0
-    question: 
-    rightAnswer: 
-    wrongAnswer1: 
-    wrongAnswer2: 
-    wrongAnswer3: 
   itemDB:
     list: []
   Number: 0

@@ -1,34 +1,19 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <QuestionDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <list>
-    <Question id="1">
-<<<<<<< HEAD
-      <question>Hvad er 2+2</question>
-      <rightAnswer>4</rightAnswer>
-      <wrongAnswer1>6</wrongAnswer1>
-      <wrongAnswer2>2</wrongAnswer2>
-      <wrongAnswer3>3</wrongAnswer3>
-=======
-      <question>blah</question>
-      <rightAnswer>blah</rightAnswer>
-      <wrongAnswer1>blaa</wrongAnswer1>
-      <wrongAnswer2>blal</wrongAnswer2>
-      <wrongAnswer3>blab</wrongAnswer3>
+    <Question id="2">
+      <question />
+      <rightAnswer />
+      <wrongAnswer1 />
+      <wrongAnswer2 />
+      <wrongAnswer3 />
     </Question>
     <Question id="3">
-      <question>Virker dette?</question>
-      <rightAnswer>JA!</rightAnswer>
-      <wrongAnswer1>Næ</wrongAnswer1>
-      <wrongAnswer2>Nej</wrongAnswer2>
-      <wrongAnswer3>Ikke rigtigt</wrongAnswer3>
-    </Question>
-    <Question id="4">
-      <question>ngfd</question>
-      <rightAnswer>½</rightAnswer>
-      <wrongAnswer1>1</wrongAnswer1>
-      <wrongAnswer2>2</wrongAnswer2>
-      <wrongAnswer3>31½</wrongAnswer3>
->>>>>>> 6110b0b037fefe39d289e04b8c38f8744f84f196
+      <question />
+      <rightAnswer />
+      <wrongAnswer1 />
+      <wrongAnswer2 />
+      <wrongAnswer3 />
     </Question>
   </list>
 </QuestionDatabase>
