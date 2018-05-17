@@ -23,15 +23,15 @@ public class AddXML : MonoBehaviour
 
     private void Start()
     {
-        filePath = Application.dataPath + "/XML/Data.xml";
+        filePath = Application.dataPath + "/Resources/XML/Data.xml";
+        Debug.Log(filePath);
     }
 
     public void Add()
     {
-        if (File.Exists(filePath))
+        if (File.Exists(filePath) == true)
         {
-            //UpdateXML();
-            Debug.Log("123");
+            UpdateXML();
             Question a = new Question();
             a.IdNumber = GetHighestId() + 1;
             a.question = QuestionText.text;
@@ -40,9 +40,8 @@ public class AddXML : MonoBehaviour
             a.wrongAnswer2 = WrongAnswer2.text;
             a.wrongAnswer3 = WrongAnswer3.text;
             itemDB.list.Add(a);
-            Debug.Log("123");
             XmlSerializer serializer = new XmlSerializer(typeof(QuestionDatabase));
-            FileStream stream = new FileStream(Application.dataPath + "/XML/Data.xml", FileMode.Create); // Problemet
+            FileStream stream = new FileStream(filePath, FileMode.Create); // Problemet
             serializer.Serialize(stream, itemDB);
             stream.Close();
             Debug.Log("File updated, new question id is " + a.IdNumber + ".");
@@ -59,29 +58,36 @@ public class AddXML : MonoBehaviour
             itemDB.list.Add(a);
 
             XmlSerializer serializer = new XmlSerializer(typeof(QuestionDatabase));
-            FileStream stream = new FileStream(Application.dataPath + "/XML/Data.xml", FileMode.CreateNew);
+            FileStream stream = new FileStream(filePath, FileMode.CreateNew);
             serializer.Serialize(stream, itemDB);
             stream.Close();
-            Debug.Log("File created");
+            Debug.Log("File created, the id is 1!");
         }
     }
 
     public int GetHighestId()
     {
-        XmlDocument doc = new XmlDocument();
-        doc.Load(filePath);
-        List<int> attributes = new List<int>();
-        XmlNodeList aNodes = doc.SelectNodes("//*[@id]");
-
-        if(aNodes != null)
+        if (File.Exists(filePath) && File.ReadAllLines(filePath).Length > 0)
         {
-            foreach (XmlNode aNode in aNodes)
+            XmlDocument doc = new XmlDocument();
+            doc.Load(filePath);
+            List<int> attributes = new List<int>();
+            XmlNodeList aNodes = doc.SelectNodes("//*[@id]");
+
+            if (aNodes != null)
             {
-                attributes.Add(System.Convert.ToInt32(aNode.Attributes["id"].Value));
+                foreach (XmlNode aNode in aNodes)
+                {
+                    attributes.Add(System.Convert.ToInt32(aNode.Attributes["id"].Value));
+                }
+                int id = attributes.Max();
+                attributes.Clear();
+                return id;
             }
-            int id = attributes.Max();
-            attributes.Clear();
-            return id;
+            else
+            {
+                return 0;
+            }
         }
         else
         {

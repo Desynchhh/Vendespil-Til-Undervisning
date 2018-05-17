@@ -8,5 +8,12 @@
       <wrongAnswer2 />
       <wrongAnswer3 />
     </Question>
+    <Question id="7">
+      <question />
+      <rightAnswer />
+      <wrongAnswer1 />
+      <wrongAnswer2 />
+      <wrongAnswer3 />
+    </Question>
   </list>
 </QuestionDatabase>

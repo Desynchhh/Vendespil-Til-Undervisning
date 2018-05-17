@@ -24,7 +24,7 @@ public class EditXML : MonoBehaviour {
 
     private void Start()
     {
-        filePath = Application.dataPath + "/XML/Data.xml";
+        filePath = Application.dataPath + "/Resources/XML/Data.xml";
         LoadXML(ID);
     }
 
@@ -112,6 +112,7 @@ public class EditXML : MonoBehaviour {
                 nodes[i].ParentNode.RemoveChild(nodes[i]);
             }
             doc.Save(filePath);
+            Debug.Log("Removed " + ID +"!");
         }
     }
 }
