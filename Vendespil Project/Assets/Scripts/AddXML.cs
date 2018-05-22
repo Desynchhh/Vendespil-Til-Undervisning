@@ -82,10 +82,17 @@ public class AddXML : MonoBehaviour
                 }
                 if(attributes != null)
                 {
-
-                    int id = attributes.Max();
-                    attributes.Clear();
-                    return id;
+                    if(aNodes.Count != 0)
+                    {
+                        int id = attributes.Max();
+                        attributes.Clear();
+                        return id;
+                    }
+                    else
+                    {
+                        attributes.Clear();
+                        return 0;
+                    }
                 }
                 else
                 {
