@@ -41,7 +41,7 @@ public class AddXML : MonoBehaviour
             a.wrongAnswer3 = WrongAnswer3.text;
             itemDB.list.Add(a);
             XmlSerializer serializer = new XmlSerializer(typeof(QuestionDatabase));
-            FileStream stream = new FileStream(filePath, FileMode.Create); // Problemet
+            FileStream stream = new FileStream(filePath, FileMode.Create);
             serializer.Serialize(stream, itemDB);
             stream.Close();
             Debug.Log("File updated, new question id is " + a.IdNumber + ".");
