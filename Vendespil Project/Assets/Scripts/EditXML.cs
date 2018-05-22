@@ -7,13 +7,11 @@ using System.IO;
 using UnityEngine.UI;
 using System.Linq;
 
+[RequireComponent(typeof(AddXML))]
 public class EditXML : MonoBehaviour {
-
-    public AddXML addxml;
 
     [Header("Int")]
     public int ID;
-
 
     [Header("InputFields")]
     public InputField questionText;
@@ -100,7 +98,7 @@ public class EditXML : MonoBehaviour {
 
     public void RemoveAll()
     {
-        addxml.RemoveList();
+        gameObject.GetComponent<AddXML>().RemoveList();
         File.WriteAllText(filePath, "");
         Debug.Log("File clear");
     }
