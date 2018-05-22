@@ -38,7 +38,7 @@ public class CreateButton : MonoBehaviour
         instantiatedButton.transform.GetChild(1).GetChild(1).GetComponent<Button>().onClick.AddListener(() => DeleteButton(EventSystem.current.currentSelectedGameObject.transform.parent.parent.gameObject.GetComponent<ButtonManager>().id));
         instantiatedButton.transform.GetChild(1).GetChild(0).GetComponent<Button>().onClick.AddListener(() => transform.parent.Find("Manager").GetComponent<MenuManager>().GoToEditQuestion(EventSystem.current.currentSelectedGameObject.transform.parent.parent.GetComponent<ButtonManager>().id));
 
-        instantiatedButton.transform.GetChild(1).GetChild(0).GetComponent<Button>().onClick.AddListener(() => EditButtons());
+        instantiatedButton.transform.GetChild(1).GetChild(0).GetComponent<Button>().onClick.AddListener(() => GetQuestionInfo());
 
         instantiatedButton.name = prefabEditButton.name + nextId;
         instantiatedButton.GetComponentInChildren<Text>().text = buttonData.question;
@@ -57,7 +57,7 @@ public class CreateButton : MonoBehaviour
         instantiatedButton.transform.GetChild(1).GetChild(1).GetComponent<Button>().onClick.AddListener(() => DeleteButton(EventSystem.current.currentSelectedGameObject.transform.parent.parent.gameObject.GetComponent<ButtonManager>().id));
         instantiatedButton.transform.GetChild(1).GetChild(0).GetComponent<Button>().onClick.AddListener(() => transform.parent.Find("Manager").GetComponent<MenuManager>().GoToEditQuestion(EventSystem.current.currentSelectedGameObject.transform.parent.parent.GetComponent<ButtonManager>().id));
 
-        instantiatedButton.transform.GetChild(1).GetChild(0).GetComponent<Button>().onClick.AddListener(() => EditButtons());
+        instantiatedButton.transform.GetChild(1).GetChild(0).GetComponent<Button>().onClick.AddListener(() => GetQuestionInfo());
 
         instantiatedButton.name = prefabEditButton.name + _id;
         instantiatedButton.GetComponentInChildren<Text>().text = _question;
@@ -89,27 +89,54 @@ public class CreateButton : MonoBehaviour
         buttonData.wrongAnswer3 = _wrongAnswer3;
     }
 
+    ButtonManager currentEditData;
+    public void GetQuestionInfo()
+    {
+        currentEditData = transform.Find("ScrollView").GetChild(0).GetChild(0).Find(prefabEditButton.name + editId.ToString()).GetComponent<ButtonManager>();
+        question.GetComponent<InputField>().text = currentEditData.question;
+        rightAnswer.GetComponent<InputField>().text = currentEditData.answer;
+        wrongAnswer1.GetComponent<InputField>().text = currentEditData.wrongAnswer1;
+        wrongAnswer2.GetComponent<InputField>().text = currentEditData.wrongAnswer2;
+        wrongAnswer3.GetComponent<InputField>().text = currentEditData.wrongAnswer3;
+    }
+
     public void EditButtons()
     {
-        ButtonManager buttonData = transform.Find("ScrollView").GetChild(0).GetChild(0).Find(prefabEditButton.name + editId.ToString()).GetComponent<ButtonManager>();
-        question.GetComponentInChildren<Text>().text = buttonData.question;
-        rightAnswer.GetComponentInChildren<Text>().text = buttonData.answer;
-        wrongAnswer1.GetComponentInChildren<Text>().text = buttonData.wrongAnswer1;
-        wrongAnswer2.GetComponentInChildren<Text>().text = buttonData.wrongAnswer2;
-        wrongAnswer3.GetComponentInChildren<Text>().text = buttonData.wrongAnswer3;
-        EditEditButton(buttonData);
-        EditGameButton(buttonData);
+        EditEditButton(currentEditData);
+        EditGameButton(currentEditData);
     }
 
-    private void EditEditButton(ButtonManager buttonData)
+    private void EditEditButton(ButtonManager _currentEditData)
     {
-        Debug.Log("EditEditButton()");
-        buttonData.question = question.transform.Find("Text").GetComponent<Text>().text;
+        _currentEditData.question = question.GetComponent<InputField>().text;
+        _currentEditData.answer = rightAnswer.GetComponent<InputField>().text;
+        _currentEditData.wrongAnswer1 = wrongAnswer1.GetComponent<InputField>().text;
+        _currentEditData.wrongAnswer2 = wrongAnswer2.GetComponent<InputField>().text;
+        _currentEditData.wrongAnswer3 = wrongAnswer3.GetComponent<InputField>().text;
+        foreach(Transform child in contentEdit.transform)
+        {
+            if(child.GetComponent<ButtonManager>().id == editId)
+            {
+                child.GetComponentInChildren<Text>().text = _currentEditData.question;
+            }
+        }
     }
 
-    private void EditGameButton(ButtonManager buttonData)
+    private void EditGameButton(ButtonManager _currentEditData)
     {
-        Debug.Log("EditGameButton()");
+        ButtonManager buttonData = contentGame.transform.Find(prefabGameButton.name + editId.ToString()).GetComponent<ButtonManager>();
+        buttonData.question = _currentEditData.question;
+        buttonData.answer = _currentEditData.answer;
+        buttonData.wrongAnswer1 = _currentEditData.wrongAnswer1;
+        buttonData.wrongAnswer2 = _currentEditData.wrongAnswer2;
+        buttonData.wrongAnswer3 = _currentEditData.wrongAnswer3;
+        foreach (Transform child in contentGame.transform)
+        {
+            if (child.GetComponent<ButtonManager>().id == editId)
+            {
+                child.GetComponentInChildren<Text>().text = buttonData.question;
+            }
+        }
     }
 
     public void DeleteButton(int id)
