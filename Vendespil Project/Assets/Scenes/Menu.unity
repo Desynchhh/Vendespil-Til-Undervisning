@@ -719,6 +719,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e4c2eb48c399a54aa8aca9f87ea7304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  addxml: {fileID: 177583038}
   ID: 0
   questionText: {fileID: 1165280338}
   rightAnswerText: {fileID: 1648020255}
@@ -985,6 +986,17 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 177583043}
         m_MethodName: Save
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1349743123}
+        m_MethodName: EditButtons
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4689,6 +4701,12 @@ MonoBehaviour:
     type: 2}
   contentEdit: {fileID: 1783896952}
   contentGame: {fileID: 1895133191}
+  question: {fileID: 1165280334}
+  rightAnswer: {fileID: 1648020251}
+  wrongAnswer1: {fileID: 1080598808}
+  wrongAnswer2: {fileID: 844527801}
+  wrongAnswer3: {fileID: 445796735}
+  editId: 0
 --- !u!1 &1357659364
 GameObject:
   m_ObjectHideFlags: 0

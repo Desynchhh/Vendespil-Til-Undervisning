@@ -28,7 +28,7 @@ public class Editor : MonoBehaviour
 
     private void Start()
     {
-        filePath = Application.dataPath + "/Resources/XML/Data.xml";
+        filePath = Application.persistentDataPath + "/Data.xml";
         reader = new XmlTextReader(filePath);
     }
 

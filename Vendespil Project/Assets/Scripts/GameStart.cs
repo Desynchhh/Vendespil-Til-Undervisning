@@ -20,7 +20,7 @@ public class GameStart : MonoBehaviour
     public void Awake()
     {
         Debug.Log("Setting file path..");
-        filePath = Application.dataPath + "/Resources/XML/Data.xml";
+        filePath = Application.persistentDataPath + "/Data.xml";
         Debug.Log("File path set!");
         if (File.Exists(filePath) && File.ReadAllLines(filePath).Length > 0)
             LoadAllQuestions();

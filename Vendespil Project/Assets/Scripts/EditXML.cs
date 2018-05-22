@@ -9,6 +9,8 @@ using System.Linq;
 
 public class EditXML : MonoBehaviour {
 
+    public AddXML addxml;
+
     [Header("Int")]
     public int ID;
 
@@ -26,7 +28,7 @@ public class EditXML : MonoBehaviour {
     {
         //filePath = Application.dataPath + "/XML/Data.xml";
         //LoadXML(ID);
-        filePath = Application.dataPath + "/Resources/XML/Data.xml";
+        filePath = Application.persistentDataPath + "/Data.xml";
         LoadXML(ID);
     }
 
@@ -98,6 +100,7 @@ public class EditXML : MonoBehaviour {
 
     public void RemoveAll()
     {
+        addxml.RemoveList();
         File.WriteAllText(filePath, "");
         Debug.Log("File clear");
     }

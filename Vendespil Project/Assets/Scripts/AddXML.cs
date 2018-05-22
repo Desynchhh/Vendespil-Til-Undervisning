@@ -23,7 +23,7 @@ public class AddXML : MonoBehaviour
 
     private void Start()
     {
-        filePath = Application.dataPath + "/Resources/XML/Data.xml";
+        filePath = Application.persistentDataPath + "/Data.xml";
         Debug.Log(filePath);
     }
 
@@ -80,9 +80,17 @@ public class AddXML : MonoBehaviour
                 {
                     attributes.Add(System.Convert.ToInt32(aNode.Attributes["id"].Value));
                 }
-                int id = attributes.Max();
-                attributes.Clear();
-                return id;
+                if(attributes != null)
+                {
+
+                    int id = attributes.Max();
+                    attributes.Clear();
+                    return id;
+                }
+                else
+                {
+                    return 0;
+                }
             }
             else
             {
@@ -104,6 +112,11 @@ public class AddXML : MonoBehaviour
             itemDB = serializer.Deserialize(stream) as QuestionDatabase;
             stream.Close();
         }
+    }
+
+    public void RemoveList()
+    {
+        itemDB.list.Clear();
     }
 
     [System.Serializable]
