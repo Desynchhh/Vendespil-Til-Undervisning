@@ -61,6 +61,13 @@ public class EditXML : MonoBehaviour {
                 }
             }
         }
+        else if (!File.Exists(filePath))
+        {
+            Debug.Log("Error: " + filePath);
+            var sr = File.CreateText(filePath);
+            sr.Close();
+            Debug.Log("New file was made");
+        }
     }
 
     public int EditID;
