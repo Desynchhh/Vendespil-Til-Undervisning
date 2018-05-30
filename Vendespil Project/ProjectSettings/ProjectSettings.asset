@@ -150,7 +150,7 @@ PlayerSettings:
     oculus:
       sharedDepthBuffer: 0
       dashSupport: 0
-  protectGraphicsMemory: 0
+  protectGraphicsMemory: 1
   useHDRDisplay: 0
   m_ColorGamuts: 00000000
   targetPixelDensity: 30
@@ -162,8 +162,13 @@ PlayerSettings:
     Standalone: com.SKP-Data.Vendespil
   buildNumber: {}
   AndroidBundleVersionCode: 1
+<<<<<<< HEAD
+  AndroidMinSdkVersion: 25
+  AndroidTargetSdkVersion: 25
+=======
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
+>>>>>>> 68030e6d06dbbbd8a49ebee3f017f33cb8edcb06
   AndroidPreferredInstallLocation: 1
   aotOptions: 
   stripEngineCode: 1
@@ -246,7 +251,7 @@ PlayerSettings:
   androidSplashScreen: {fileID: 0}
   AndroidKeystoreName: 
   AndroidKeyaliasName: 
-  AndroidTVCompatibility: 1
+  AndroidTVCompatibility: 0
   AndroidIsGame: 1
   AndroidEnableTango: 0
   androidEnableBanner: 1

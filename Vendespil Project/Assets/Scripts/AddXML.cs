@@ -24,7 +24,14 @@ public class AddXML : MonoBehaviour
     private void Start()
     {
         filePath = Application.persistentDataPath + "/Data.xml";
-        Debug.Log(filePath);
+
+        if (!File.Exists(filePath))
+        {
+            Debug.Log("Error: " + filePath);
+            var sr = File.CreateText(filePath);
+            sr.Close();
+            Debug.Log("New file was made");
+        }
     }
 
     public void Add()
@@ -80,22 +87,15 @@ public class AddXML : MonoBehaviour
                 {
                     attributes.Add(System.Convert.ToInt32(aNode.Attributes["id"].Value));
                 }
-                if(attributes != null)
+                if (aNodes.Count != 0)
                 {
-                    if(aNodes.Count != 0)
-                    {
-                        int id = attributes.Max();
-                        attributes.Clear();
-                        return id;
-                    }
-                    else
-                    {
-                        attributes.Clear();
-                        return 0;
-                    }
+                    int id = attributes.Max();
+                    attributes.Clear();
+                    return id;
                 }
                 else
                 {
+                    attributes.Clear();
                     return 0;
                 }
             }
