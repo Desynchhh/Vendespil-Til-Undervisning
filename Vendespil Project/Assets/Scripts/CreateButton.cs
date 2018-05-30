@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.IO;
 
+
+//BUG I DELETEBUTTON()
 public class CreateButton : MonoBehaviour
 {
     
@@ -27,7 +30,12 @@ public class CreateButton : MonoBehaviour
     private int maxId;
     [HideInInspector]
     public int editId;
+    private string filePath;
 
+    private void Start()
+    {
+        filePath = Application.persistentDataPath + "/Data.xml";
+    }
     public void SpawnEditButton()
     {
         instantiatedButton = Instantiate(prefabEditButton, contentEdit.transform);
@@ -156,6 +164,12 @@ public class CreateButton : MonoBehaviour
                 Destroy(child.gameObject);
             }
         }
+        Debug.Log(contentEdit.transform.childCount);
+        if (File.Exists(filePath) && File.ReadAllLines(filePath).Length <= 0)       //VIRKER IKKE!
+        {
+            maxId = 0;
+            nextId = 1;
+        }
         Debug.Log("next id: " + nextId);
         Debug.Log("max id: " + maxId);
     }
@@ -170,6 +184,7 @@ public class CreateButton : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+        maxId = 0;
         nextId = 1;
         Debug.Log("next id: " + nextId);
     }
