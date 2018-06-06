@@ -69,6 +69,11 @@ public class MenuManager : MonoBehaviour
         panel.SetActive(!panel.activeSelf);
     }
 
+    public void ResetGame()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void QuitGame()
     {
         Application.Quit();
