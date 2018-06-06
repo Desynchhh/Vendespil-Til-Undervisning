@@ -65,19 +65,8 @@ public class MenuManager : MonoBehaviour
    
     public void OpenQuestionPanel(string questionName)
     {
-        if(transform.parent.Find("PanelEditMenu").Find("ScrollView").GetChild(0).GetChild(0).Find(questionName).GetChild(1).gameObject.activeInHierarchy == false)
-        {
-            transform.parent.Find("PanelEditMenu").Find("ScrollView").GetChild(0).GetChild(0).Find(questionName).GetChild(1).gameObject.SetActive(true);
-        }
-        else
-        {
-            transform.parent.Find("PanelEditMenu").Find("ScrollView").GetChild(0).GetChild(0).Find(questionName).GetChild(1).gameObject.SetActive(false);
-        }
-    }
-
-    public void ResetGame()     //TEMP
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameObject panel = transform.parent.Find("PanelEditMenu").Find("ScrollView").GetChild(0).GetChild(0).Find(questionName).GetChild(1).gameObject;
+        panel.SetActive(!panel.activeSelf);
     }
 
     public void QuitGame()

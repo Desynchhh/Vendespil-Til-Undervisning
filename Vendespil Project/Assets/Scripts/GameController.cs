@@ -89,8 +89,27 @@ public class GameController : MonoBehaviour
 
     public void WriteResults()
     {
+        totalQuestions = 0;
+        foreach (Transform child in PanelGame.transform.Find("Scroll View").GetChild(0).GetChild(0))
+        {
+            totalQuestions++;
+        }
+
+        if (answeredRight == totalQuestions)
+        {
+            wrongAnswerScore.SetActive(false);
+            rightAnswerScore.GetComponentInChildren<Text>().text = "Tillykke! Du svarede rigtigt på alle spørgsmål!";
+        }
+        else if(answeredWrong == totalQuestions)
+        {
+            rightAnswerScore.SetActive(false);
+            wrongAnswerScore.GetComponentInChildren<Text>().text = "Du svarede forkert på hvert eneste spørgsmål. Bedre held næste gang!";
+        }
+        else
+        {
         rightAnswerScore.GetComponentInChildren<Text>().text = string.Format("Du svarede rigtigt på {0} ud af {1} spørgsmål!", answeredRight, totalQuestions);
         wrongAnswerScore.GetComponentInChildren<Text>().text = string.Format("Du svarede forkert på {0} ud af {1} spørgsmål!", answeredWrong, totalQuestions);
+        }
     }
 
     private void SetRandomOrder(ButtonManager questionInfo)
@@ -116,14 +135,5 @@ public class GameController : MonoBehaviour
         btnAnswer2.GetComponentInChildren<Text>().text = randomOrderList[1];
         btnAnswer3.GetComponentInChildren<Text>().text = randomOrderList[2];
         btnAnswer4.GetComponentInChildren<Text>().text = randomOrderList[3];
-    }
-
-    public void GetTotalQuestions()
-    {
-        totalQuestions = 0;
-        foreach(Transform child in PanelGame.transform.Find("Scroll View").GetChild(0).GetChild(0))
-        {
-            totalQuestions++;
-        }
     }
 }

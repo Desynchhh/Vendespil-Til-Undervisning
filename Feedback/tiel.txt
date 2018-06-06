@@ -1,0 +1,23 @@
+1. Når der trykkes på ”nyt spørgsmål” skal det forrige ikke stå der (tar for lang tid at slette det).
+
+2. Når du skal besvare spørgsmål, så er rubrikken med svar muligheder for lille, så jeg kan kun se 1-2 ord 
+af svar muligheder.
+	- Rubrikkerne med svarmuligheder er blevet gjort breddere og højere. Indtil videre tilpasser tesktens
+	  størrelse sig alt efter hvor lang svarmuligheden er. Dvs lange svarmuligheder = lille tekst,
+	  korte svarmuligheder = stor tekst.
+	  Dette arbejder vi stadigvæk på, da teksten kan blive så lille, at man ikke længere kan læse
+	  svarmuligheden.
+
+3. Spørgsmålene skal komme random.
+
+4. Jeg vil gerne slette et spørgsmål af gangen, ikke ”slet alt”.
+	- Der er nu mulighed for at slette et spørgsmål ad gangen. Dette gøres ved at fra "Rediger Brikker"
+	  skærmen, ved at tappe én gang på det spørgsmål, som brugeren ønsker at slette eller redigere. Ved at
+	  tappe, åbner et panel med muligheder for at redigere (i tilfælde af stave fejl, forkerte svar
+	  muligheder, eller lign.) eller slette spørgsmålet.
+
+5. Vil gerne spille videre i stedet for at gå tilbage hele tiden..
+
+6. Sender screen shot, jeg har kun lavet 3 spørgsmål ?!
+	- Denne bug er blevet løst. Det korrekte antal af rigtigt, forkert, og total antal af spørgsmål
+	  nu bliver vist.

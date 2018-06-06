@@ -9,7 +9,7 @@ using System.IO;
 //BUG I DELETEBUTTON()
 public class CreateButton : MonoBehaviour
 {
-    
+
     [Header("Object To Spawn")]
     public GameObject prefabEditButton;
     public GameObject prefabGameButton;
@@ -19,12 +19,19 @@ public class CreateButton : MonoBehaviour
     public GameObject contentEdit;
     public GameObject contentGame;
 
+    [Header("Inputfields for Creating")]
+    public InputField createQuestion;
+    public InputField createRightAnswer;
+    public InputField createWrongAnswer1;
+    public InputField createWrongAnswer2;
+    public InputField createWrongAnswer3;
+
     [Header("Inputfields for Editing")]
-    public GameObject question;
-    public GameObject rightAnswer;
-    public GameObject wrongAnswer1;
-    public GameObject wrongAnswer2;
-    public GameObject wrongAnswer3;
+    public InputField editQuestion;
+    public InputField editRightAnswer;
+    public InputField editWrongAnswer1;
+    public InputField editWrongAnswer2;
+    public InputField editWrongAnswer3;
 
     private int nextId = 1;
     private int maxId;
@@ -45,9 +52,7 @@ public class CreateButton : MonoBehaviour
         buttonData.id = nextId;
         instantiatedButton.transform.GetChild(1).GetChild(1).GetComponent<Button>().onClick.AddListener(() => DeleteButton(EventSystem.current.currentSelectedGameObject.transform.parent.parent.gameObject.GetComponent<ButtonManager>().id));
         instantiatedButton.transform.GetChild(1).GetChild(0).GetComponent<Button>().onClick.AddListener(() => transform.parent.Find("Manager").GetComponent<MenuManager>().GoToEditQuestion(EventSystem.current.currentSelectedGameObject.transform.parent.parent.GetComponent<ButtonManager>().id));
-
         instantiatedButton.transform.GetChild(1).GetChild(0).GetComponent<Button>().onClick.AddListener(() => GetQuestionInfo());
-
         instantiatedButton.name = prefabEditButton.name + nextId;
         instantiatedButton.GetComponentInChildren<Text>().text = buttonData.question;
         SpawnGameButton(buttonData.id, buttonData.question, buttonData.answer, buttonData.wrongAnswer1, buttonData.wrongAnswer2, buttonData.wrongAnswer3);
@@ -55,6 +60,11 @@ public class CreateButton : MonoBehaviour
         maxId = buttonData.id;
         Debug.Log("next id: " + nextId);
         Debug.Log("max id: " + maxId);
+        createQuestion.text = "";
+        createRightAnswer.text = "";
+        createWrongAnswer1.text = "";
+        createWrongAnswer2.text = "";
+        createWrongAnswer3.text = "";
     }
 
     public void SpawnEditButton(int _id, string _question, string _answer, string _w1, string _w2, string _w3)
@@ -64,9 +74,7 @@ public class CreateButton : MonoBehaviour
         instantiatedButton.GetComponent<Button>().onClick.AddListener(() => transform.root.Find("Manager").GetComponent<MenuManager>().OpenQuestionPanel(EventSystem.current.currentSelectedGameObject.name));
         instantiatedButton.transform.GetChild(1).GetChild(1).GetComponent<Button>().onClick.AddListener(() => DeleteButton(EventSystem.current.currentSelectedGameObject.transform.parent.parent.gameObject.GetComponent<ButtonManager>().id));
         instantiatedButton.transform.GetChild(1).GetChild(0).GetComponent<Button>().onClick.AddListener(() => transform.parent.Find("Manager").GetComponent<MenuManager>().GoToEditQuestion(EventSystem.current.currentSelectedGameObject.transform.parent.parent.GetComponent<ButtonManager>().id));
-
         instantiatedButton.transform.GetChild(1).GetChild(0).GetComponent<Button>().onClick.AddListener(() => GetQuestionInfo());
-
         instantiatedButton.name = prefabEditButton.name + _id;
         instantiatedButton.GetComponentInChildren<Text>().text = _question;
         buttonData.id = _id;
@@ -76,7 +84,7 @@ public class CreateButton : MonoBehaviour
         buttonData.wrongAnswer2 = _w2;
         buttonData.wrongAnswer3 = _w3;
         SpawnGameButton(_id, _question, _answer, _w1, _w2, _w3);
-        nextId = _id+1;
+        nextId = _id + 1;
         maxId = buttonData.id;
         Debug.Log("next id: " + nextId);
         Debug.Log("max id: " + maxId);
@@ -100,12 +108,13 @@ public class CreateButton : MonoBehaviour
     ButtonManager currentEditData;
     public void GetQuestionInfo()
     {
-        currentEditData = transform.Find("ScrollView").GetChild(0).GetChild(0).Find(prefabEditButton.name + editId.ToString()).GetComponent<ButtonManager>();
-        question.GetComponent<InputField>().text = currentEditData.question;
-        rightAnswer.GetComponent<InputField>().text = currentEditData.answer;
-        wrongAnswer1.GetComponent<InputField>().text = currentEditData.wrongAnswer1;
-        wrongAnswer2.GetComponent<InputField>().text = currentEditData.wrongAnswer2;
-        wrongAnswer3.GetComponent<InputField>().text = currentEditData.wrongAnswer3;
+        currentEditData = contentEdit.transform.Find(prefabEditButton.name + editId.ToString()).GetComponent<ButtonManager>();
+        Debug.Log(currentEditData.id.ToString() + ", " + currentEditData.question.ToString());
+        editQuestion.text = currentEditData.question;
+        editRightAnswer.text = currentEditData.answer;
+        editWrongAnswer1.text = currentEditData.wrongAnswer1;
+        editWrongAnswer2.text = currentEditData.wrongAnswer2;
+        editWrongAnswer3.text = currentEditData.wrongAnswer3;
     }
 
     public void EditButtons()
@@ -116,14 +125,14 @@ public class CreateButton : MonoBehaviour
 
     private void EditEditButton(ButtonManager _currentEditData)
     {
-        _currentEditData.question = question.GetComponent<InputField>().text;
-        _currentEditData.answer = rightAnswer.GetComponent<InputField>().text;
-        _currentEditData.wrongAnswer1 = wrongAnswer1.GetComponent<InputField>().text;
-        _currentEditData.wrongAnswer2 = wrongAnswer2.GetComponent<InputField>().text;
-        _currentEditData.wrongAnswer3 = wrongAnswer3.GetComponent<InputField>().text;
-        foreach(Transform child in contentEdit.transform)
+        _currentEditData.question = editQuestion.text;
+        _currentEditData.answer = editRightAnswer.text;
+        _currentEditData.wrongAnswer1 = editWrongAnswer1.text;
+        _currentEditData.wrongAnswer2 = editWrongAnswer2.text;
+        _currentEditData.wrongAnswer3 = editWrongAnswer3.text;
+        foreach (Transform child in contentEdit.transform)
         {
-            if(child.GetComponent<ButtonManager>().id == editId)
+            if (child.GetComponent<ButtonManager>().id == editId)
             {
                 child.GetComponentInChildren<Text>().text = _currentEditData.question;
             }
@@ -147,28 +156,29 @@ public class CreateButton : MonoBehaviour
         }
     }
 
-    public void DeleteButton(int id)
+    public void DeleteButton(int deleteId)
     {
-        foreach(Transform child in contentEdit.transform)
+        foreach (Transform child in contentEdit.transform)
         {
-            if(child.GetComponent<ButtonManager>().id == id)
+            if (child.GetComponent<ButtonManager>().id == deleteId)
             {
-                Debug.Log("deleted child's id: " + child.GetComponent<ButtonManager>().id);
-                Debug.Log("looking for id #" + id);
-                if(id == maxId)
+                if (deleteId == maxId)
                 {
-                    maxId--;
-                    nextId--;
+                    if (File.Exists(filePath) && File.ReadAllLines(filePath).Length <= 12)
+                    {
+                        nextId = 1;
+                        maxId = 0;
+                        Debug.Log("maxId Reset!");
+                    }
+                    else
+                    {
+                        GetMaxID();
+                    }
                 }
-                transform.root.Find("Manager").GetComponent<EditXML>().RemoveSingle(id);
+                transform.root.Find("Manager").GetComponent<EditXML>().RemoveSingle(deleteId);
+                Destroy(contentGame.transform.Find((prefabGameButton.name + deleteId).ToString()).gameObject);
                 Destroy(child.gameObject);
             }
-        }
-        Debug.Log(contentEdit.transform.childCount);
-        if (File.Exists(filePath) && File.ReadAllLines(filePath).Length <= 0)       //VIRKER IKKE!
-        {
-            maxId = 0;
-            nextId = 1;
         }
         Debug.Log("next id: " + nextId);
         Debug.Log("max id: " + maxId);
@@ -176,7 +186,7 @@ public class CreateButton : MonoBehaviour
 
     public void DeleteAll()
     {
-        foreach(Transform child in contentEdit.transform)
+        foreach (Transform child in contentEdit.transform)
         {
             Destroy(child.gameObject);
         }
@@ -187,5 +197,24 @@ public class CreateButton : MonoBehaviour
         maxId = 0;
         nextId = 1;
         Debug.Log("next id: " + nextId);
+        Debug.Log("max id: " + maxId);
+    }
+
+    private void GetMaxID()
+    {
+        maxId = -1;
+        foreach (Transform child in contentEdit.transform)
+        {
+            maxId++;
+        }
+        nextId = maxId + 1;
+    }
+
+    public void CloseButtonAllPanels()
+    {
+        foreach (Transform child in contentEdit.transform)
+        {
+            child.GetChild(1).gameObject.SetActive(false);
+        }
     }
 }

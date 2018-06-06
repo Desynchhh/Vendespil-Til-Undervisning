@@ -48,6 +48,5 @@ public class ButtonManager : MonoBehaviour
             wrongAnswer2 = q.wrongAnswer2.ToString();
             wrongAnswer3 = q.wrongAnswer3.ToString();
         });
-        Debug.Log("ButtonManager, LoadInfo(int)" + idToFind.ToString());
     }
 }
