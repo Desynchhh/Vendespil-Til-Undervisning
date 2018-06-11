@@ -11,7 +11,6 @@ public class GameStart : MonoBehaviour
     public GameObject MainMenu;
     public GameObject EditMenu;
     public GameObject CreateMenu;
-    public GameObject GameMenu;
     public GameObject QuestionMenu;
     public GameObject ResultsMenu;
     public GameObject EditQuestionMenu;
@@ -28,7 +27,6 @@ public class GameStart : MonoBehaviour
 
         Debug.Log("all questions loaded");
         EditMenu.SetActive(false);
-        GameMenu.SetActive(false);
         CreateMenu.SetActive(false);
         QuestionMenu.SetActive(false);
         ResultsMenu.SetActive(false);

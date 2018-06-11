@@ -10,26 +10,18 @@ public class MenuManager : MonoBehaviour
     public GameObject PanelEditMenu;
     public GameObject PanelCreateQuestion;
     public GameObject PanelEditQuestion;
-    public GameObject PanelGame;
     public GameObject PanelQuestion;
     public GameObject PanelResults;
 
     public void PlayGame()
     {
-        PanelQuestion.SetActive(false);
         PanelMainMenu.SetActive(false);
-        PanelGame.SetActive(true);
-    }
-
-    public void GoToQuestion()
-    {
-        PanelGame.SetActive(false);
         PanelQuestion.SetActive(true);
     }
 
     public void GoToResults()
     {
-        PanelGame.SetActive(false);
+        PanelQuestion.SetActive(false);
         PanelResults.SetActive(true);
     }
 
@@ -58,7 +50,6 @@ public class MenuManager : MonoBehaviour
     public void GoToMainMenu()
     {
         PanelResults.SetActive(false);
-        PanelGame.SetActive(false);
         PanelEditMenu.SetActive(false);
         PanelMainMenu.SetActive(true);
     }

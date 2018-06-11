@@ -1,4 +1,6 @@
 1. Når der trykkes på ”nyt spørgsmål” skal det forrige ikke stå der (tar for lang tid at slette det).
+	- Felterne, hvor brugeren skriver spørgsmål og svarmuligheder, står nu blanke hver gang brugeren opretter
+	  et nyt spørgsmål, klar til at blive skrevet i.
 
 2. Når du skal besvare spørgsmål, så er rubrikken med svar muligheder for lille, så jeg kan kun se 1-2 ord 
 af svar muligheder.
@@ -8,7 +10,15 @@ af svar muligheder.
 	  Dette arbejder vi stadigvæk på, da teksten kan blive så lille, at man ikke længere kan læse
 	  svarmuligheden.
 
-3. Spørgsmålene skal komme random.
+3. Spørgsmålene skal komme random & 5. Vil gerne spille videre i stedet for at gå tilbage hele tiden...
+	- Spørgsmålene bliver nu sorteret i en tilfædig rækkefølge hver gang spilleren trykker på "Spil" i hovedmenuen.
+	  Når spilleren har besvaret et spørgsmål, hopper spillet direkte videre til næste spørgsmål ved tryk af en
+	  knap, i stedet for at spilleren er nød til at gå en menu tilbage efter at have besvaret et spørgsmål.
+
+	  Der er indtil videre IKKE en mulighed for at bestemme hvor mange spørgsmål der skal besvares, før man har
+	  "klaret" spillet. Det vil sige man skal svare på alle oprettede spørgsmål per session man spiller.
+	  Der er dog mulighed for implementation af sådan en funktion, og mulighed for implementation af en "giv op"
+	  knap, der slutter spillet tidligt.
 
 4. Jeg vil gerne slette et spørgsmål af gangen, ikke ”slet alt”.
 	- Der er nu mulighed for at slette et spørgsmål ad gangen. Dette gøres ved at fra "Rediger Brikker"
@@ -16,8 +26,6 @@ af svar muligheder.
 	  tappe, åbner et panel med muligheder for at redigere (i tilfælde af stave fejl, forkerte svar
 	  muligheder, eller lign.) eller slette spørgsmålet.
 
-5. Vil gerne spille videre i stedet for at gå tilbage hele tiden..
-
 6. Sender screen shot, jeg har kun lavet 3 spørgsmål ?!
-	- Denne bug er blevet løst. Det korrekte antal af rigtigt, forkert, og total antal af spørgsmål
-	  nu bliver vist.
+	- Denne bug er blevet løst. Det korrekte antal af rigtigt besvaret, forkert besvaret, og total antal af 
+	  spørgsmål nu bliver vist.
