@@ -8,10 +8,11 @@ using UnityEngine.EventSystems;
 public class GameController : MonoBehaviour
 {
     [Header("Panels")]
-    public GameObject PanelGame;
     public GameObject PanelQuestion;
+    public GameObject PanelWarning;
 
-    [Header("Fields")]
+    [Header("Fields & UI")]
+    public Transform parAnswers;
     public GameObject questionField;
     public GameObject btnAnswer1;
     public GameObject btnAnswer2;
@@ -23,7 +24,6 @@ public class GameController : MonoBehaviour
     public GameObject contentEdit;
     public List<Transform> unorderedQuestions = new List<Transform>();
     public List<Transform> orderedQuestions = new List<Transform>();
-    //private GameObject selectedQuestion;
     private string rightAnswer;
 
     [Header("Variables")]
@@ -33,7 +33,8 @@ public class GameController : MonoBehaviour
     private int answeredRight;
     private int answeredWrong;
 
-    [Header("Back Button")]
+    [Header("Buttons")]
+    public GameObject btnNext;
     public GameObject btnBack;
 
     [Header("Results Fields")]
@@ -56,20 +57,37 @@ public class GameController : MonoBehaviour
             totalQuestions++;
         }
 
-        for (int i = 0; i <= totalQuestions - 1; i++)
+        if (totalQuestions == 0)
         {
-            Transform temp;
-            int randomIndex = Random.Range(0, unorderedQuestions.Count);
-            temp = unorderedQuestions[randomIndex];
-            orderedQuestions.Add(unorderedQuestions[randomIndex]);
-            unorderedQuestions.RemoveAt(randomIndex);
+            PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().text = "Der er ikke oprettet nogle spørgsmål!\n\n Opret mindst ét spørgsmål for at spille";
+            PanelWarning.transform.Find("btnOK").gameObject.SetActive(true);
+            PanelWarning.transform.Find("btnYes").gameObject.SetActive(false);
+            PanelWarning.transform.Find("btnNo").gameObject.SetActive(false);
+            PanelWarning.SetActive(true);
         }
-        FillFields();
+        else
+        {
+            for (int i = 0; i <= totalQuestions - 1; i++)
+            {
+                Transform temp;
+                int randomIndex = Random.Range(0, unorderedQuestions.Count);
+                temp = unorderedQuestions[randomIndex];
+                orderedQuestions.Add(unorderedQuestions[randomIndex]);
+                unorderedQuestions.RemoveAt(randomIndex);
+            }
+            FillFields();
+            GetComponent<MenuManager>().PlayGame();
+        }
     }
 
 
     public void FillFields()
     {
+        foreach (Transform child in parAnswers)
+        {
+            child.GetComponent<Button>().enabled = true;
+        }
+        btnNext.GetComponent<Button>().enabled = false;
         if (totalAnswered == totalQuestions)
         {
             WriteResults();
@@ -78,7 +96,6 @@ public class GameController : MonoBehaviour
 
         else if (questionField.GetComponentInChildren<Text>().text != orderedQuestions[totalAnswered].GetComponent<ButtonManager>().question)
         {
-            Debug.Log("totalAnswered before function: " + totalAnswered);
             btnAnswer1.GetComponent<Image>().color = Color.white;
             btnAnswer2.GetComponent<Image>().color = Color.white;
             btnAnswer3.GetComponent<Image>().color = Color.white;
@@ -90,34 +107,35 @@ public class GameController : MonoBehaviour
             rightAnswer = questionInfo.answer;
             questionField.GetComponentInChildren<Text>().text = questionInfo.question;
             SetRandomOrder(questionInfo);
-            Debug.Log("totalAnswered after function: " + totalAnswered);
         }
     }
 
     public void CheckAnswer()
     {
-        if (orderedQuestions[totalAnswered].GetComponent<ButtonManager>().isAnswered == false)
+        selectedAnswer = EventSystem.current.currentSelectedGameObject;
+        if (selectedAnswer.GetComponentInChildren<Text>().text == rightAnswer)
         {
-            selectedAnswer = EventSystem.current.currentSelectedGameObject;
-            if (selectedAnswer.GetComponentInChildren<Text>().text == rightAnswer)
+            answeredRight++;
+            selectedAnswer.GetComponent<Image>().color = Color.green;
+        }
+        else
+        {
+            answeredWrong++;
+            selectedAnswer.GetComponent<Image>().color = Color.red;
+            foreach (Transform child in parAnswers)
             {
-                answeredRight++;
-                selectedAnswer.GetComponent<Image>().color = Color.green;
-            }
-            else
-            {
-                answeredWrong++;
-                selectedAnswer.GetComponent<Image>().color = Color.red;
-                foreach (Transform child in PanelQuestion.transform)
+                if (child.gameObject.GetComponentInChildren<Text>().text == rightAnswer && child.name != "Question")
                 {
-                    if (child.gameObject.GetComponentInChildren<Text>().text == rightAnswer && child.name != "Question")
-                    {
-                        child.gameObject.GetComponent<Image>().color = Color.green;
-                    }
+                    child.gameObject.GetComponent<Image>().color = Color.green;
                 }
             }
-            totalAnswered++;
         }
+        foreach (Transform child in parAnswers)
+        {
+            child.GetComponent<Button>().enabled = false;
+        }
+        totalAnswered++;
+        btnNext.GetComponent<Button>().enabled = true;
     }
 
     public void WriteResults()

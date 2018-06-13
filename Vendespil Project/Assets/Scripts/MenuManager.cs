@@ -12,11 +12,18 @@ public class MenuManager : MonoBehaviour
     public GameObject PanelEditQuestion;
     public GameObject PanelQuestion;
     public GameObject PanelResults;
+    public GameObject PanelWarning;
 
     public void PlayGame()
     {
         PanelMainMenu.SetActive(false);
         PanelQuestion.SetActive(true);
+    }
+
+    public void CloseWarning()
+    {
+        PanelWarning.SetActive(false);
+
     }
 
     public void GoToResults()

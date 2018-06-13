@@ -22,13 +22,9 @@ public class ButtonManager : MonoBehaviour
 
     private string filePath;
 
-    private void Awake()
-    {
-         filePath = Application.persistentDataPath + "/Data.xml";
-    }
-
     public void LoadInfo(int idToFind)
     {
+        filePath = Application.persistentDataPath + "/Data.xml";
         XDocument xdoc = XDocument.Load(filePath);
         xdoc.Descendants(QuestionElement).Where(q => int.Parse(q.Attribute(idAttribute).Value) == idToFind).Select(q => new
         {

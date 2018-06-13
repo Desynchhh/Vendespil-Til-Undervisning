@@ -9,6 +9,7 @@ public class GameStart : MonoBehaviour
 {
     [Header("Panels")]
     public GameObject MainMenu;
+    public GameObject NoQuestionsWarningMenu;
     public GameObject EditMenu;
     public GameObject CreateMenu;
     public GameObject QuestionMenu;
@@ -31,6 +32,7 @@ public class GameStart : MonoBehaviour
         QuestionMenu.SetActive(false);
         ResultsMenu.SetActive(false);
         EditQuestionMenu.SetActive(false);
+        NoQuestionsWarningMenu.SetActive(false);
         MainMenu.SetActive(true);
     }
 
