@@ -16,16 +16,23 @@ af svar muligheder.
 	  knap, i stedet for at spilleren er nød til at gå en menu tilbage efter at have besvaret et spørgsmål.
 
 	  Der er indtil videre IKKE en mulighed for at bestemme hvor mange spørgsmål der skal besvares, før man har
-	  "klaret" spillet. Det vil sige man skal svare på alle oprettede spørgsmål per session man spiller.
+	  "klaret" spillet. Det vil sige man skal svare på alle oprettede spørgsmål per spil session.
 	  Der er dog mulighed for implementation af sådan en funktion, og mulighed for implementation af en "giv op"
 	  knap, der slutter spillet tidligt.
 
 4. Jeg vil gerne slette et spørgsmål af gangen, ikke ”slet alt”.
-	- Der er nu mulighed for at slette et spørgsmål ad gangen. Dette gøres ved at fra "Rediger Brikker"
+	- Der er mulighed for at slette et spørgsmål ad gangen. Dette gøres ved at fra "Rediger Brikker"
 	  skærmen, ved at tappe én gang på det spørgsmål, som brugeren ønsker at slette eller redigere. Ved at
 	  tappe, åbner et panel med muligheder for at redigere (i tilfælde af stave fejl, forkerte svar
-	  muligheder, eller lign.) eller slette spørgsmålet.
+	  muligheder, eller lign.) eller slette spørgsmålet. Denne undermenu kan fjernes igen ved at trykke på 
+	  knappen igen, eller hvilket som helst andet sted på skærmen.
 
 6. Sender screen shot, jeg har kun lavet 3 spørgsmål ?!
 	- Denne bug er blevet løst. Det korrekte antal af rigtigt besvaret, forkert besvaret, og total antal af 
 	  spørgsmål nu bliver vist.
+
+
+OBS: Udover implementation af dette feedback, er det ikke længere muligt at have flere af den samme svarmulighed,
+     og det er heller ikke muligt at have en blank svarmulighed. Det er heller ikke muligt at starte spillet hvis
+     der ikke er oprettet nogle spørgsmål, dog er alle advarslerne en form for "placeholder", altså er det ikke
+     meningen det skal se ud som det gør, og teksten i nogle af de omtalte advarsler vil bliver ændret!

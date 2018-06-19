@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Animations;
 
 
 public class GameController : MonoBehaviour
@@ -22,6 +23,8 @@ public class GameController : MonoBehaviour
 
     [Header("Question Info")]
     public GameObject contentEdit;
+
+    [Header("Sorting Lists")]
     public List<Transform> unorderedQuestions = new List<Transform>();
     public List<Transform> orderedQuestions = new List<Transform>();
     private string rightAnswer;
@@ -32,6 +35,7 @@ public class GameController : MonoBehaviour
     private int totalAnswered;
     private int answeredRight;
     private int answeredWrong;
+    public bool hasOrderedQuestions;
 
     [Header("Buttons")]
     public GameObject btnNext;
@@ -59,7 +63,8 @@ public class GameController : MonoBehaviour
 
         if (totalQuestions == 0)
         {
-            PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().text = "Der er ikke oprettet nogle spørgsmål!\n\n Opret mindst ét spørgsmål for at spille";
+            hasOrderedQuestions = false;
+            PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().text = "DER ER IKKE OPRETTET NOGLE SPØRGSMÅL!\n\n OPRET MINDST ÉT SPØRGSMÅL FOR AT SPILLE";
             PanelWarning.transform.Find("btnOK").gameObject.SetActive(true);
             PanelWarning.transform.Find("btnYes").gameObject.SetActive(false);
             PanelWarning.transform.Find("btnNo").gameObject.SetActive(false);
@@ -67,6 +72,7 @@ public class GameController : MonoBehaviour
         }
         else
         {
+            hasOrderedQuestions = true;
             for (int i = 0; i <= totalQuestions - 1; i++)
             {
                 Transform temp;
@@ -76,7 +82,6 @@ public class GameController : MonoBehaviour
                 unorderedQuestions.RemoveAt(randomIndex);
             }
             FillFields();
-            GetComponent<MenuManager>().PlayGame();
         }
     }
 
@@ -140,21 +145,21 @@ public class GameController : MonoBehaviour
 
     public void WriteResults()
     {
-        if (answeredRight == totalQuestions)
-        {
-            wrongAnswerScore.SetActive(false);
-            rightAnswerScore.GetComponentInChildren<Text>().text = "Tillykke! Du svarede rigtigt på alle spørgsmål!";
-        }
-        else if (answeredWrong == totalQuestions)
-        {
-            rightAnswerScore.SetActive(false);
-            wrongAnswerScore.GetComponentInChildren<Text>().text = "Du svarede forkert på hvert eneste spørgsmål. Bedre held næste gang!";
-        }
-        else
-        {
-            rightAnswerScore.GetComponentInChildren<Text>().text = string.Format("Du svarede rigtigt på {0} ud af {1} spørgsmål!", answeredRight, totalQuestions);
-            wrongAnswerScore.GetComponentInChildren<Text>().text = string.Format("Du svarede forkert på {0} ud af {1} spørgsmål!", answeredWrong, totalQuestions);
-        }
+        //if (answeredRight == totalQuestions)
+        //{
+        //    wrongAnswerScore.SetActive(false);
+        //    rightAnswerScore.GetComponentInChildren<Text>().text = "TILLYKKE! DU SVAREDE RIGTIGT PÅ ALLE SPØRGSMÅL!";
+        //}
+        //else if (answeredWrong == totalQuestions)
+        //{
+        //    rightAnswerScore.SetActive(false);
+        //    wrongAnswerScore.GetComponentInChildren<Text>().text = "DU SVAREDE FORKERT PÅ HVERT ENESTE SPØRGSMÅL. BEDRE HELD NÆSTE GANG!";
+        //}
+        //else
+        //{
+            rightAnswerScore.GetComponentInChildren<Text>().text = string.Format("DU FIK\n {0} / {1}\n RIGTIGE!", answeredRight, totalQuestions);
+            //wrongAnswerScore.GetComponentInChildren<Text>().text = string.Format("DU SVAREDE FORKERT PÅ {0} UD AF {1} SPØRGSMÅL!", answeredWrong, totalQuestions);
+        //}
     }
 
     private void SetRandomOrder(ButtonManager questionInfo)

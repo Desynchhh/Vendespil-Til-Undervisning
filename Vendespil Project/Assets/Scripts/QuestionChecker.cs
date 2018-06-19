@@ -65,7 +65,7 @@ public class QuestionChecker : MonoBehaviour
             {
                 Debug.Log("Dupe detected!");
                 passedCheck = false;
-                PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().text = "dupe";
+                PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().text = "DU KAN IKKE HAVE 2 ELLER FLERE ENS SVARMULIGHEDER!";
                 PanelWarning.transform.Find("btnOK").gameObject.SetActive(true);
                 PanelWarning.transform.Find("btnYes").gameObject.SetActive(false);
                 PanelWarning.transform.Find("btnNo").gameObject.SetActive(false);
@@ -108,7 +108,7 @@ public class QuestionChecker : MonoBehaviour
             {
                 Debug.Log("Dupe detected!");
                 passedCheck = false;
-                PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().text = "dupe";
+                PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().text = "DU KAN IKKE HAVE 2 ELLER FLERE ENS SVARMULIGHEDER!";
                 PanelWarning.transform.Find("btnOK").gameObject.SetActive(true);
                 PanelWarning.transform.Find("btnYes").gameObject.SetActive(false);
                 PanelWarning.transform.Find("btnNo").gameObject.SetActive(false);
@@ -134,7 +134,7 @@ public class QuestionChecker : MonoBehaviour
             {
                 Debug.Log("Blank detected!");
                 passedCheck = false;
-                PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().text = "blank";
+                PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().text = "DU MÅ IKKE HAVE TOMME SVARMULIGHEDER!";
                 PanelWarning.transform.Find("btnOK").gameObject.SetActive(true);
                 PanelWarning.transform.Find("btnYes").gameObject.SetActive(false);
                 PanelWarning.transform.Find("btnNo").gameObject.SetActive(false);
@@ -160,7 +160,7 @@ public class QuestionChecker : MonoBehaviour
             {
                 Debug.Log("Blank detected!");
                 passedCheck = false;
-                PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().text = "dupe";
+                PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().text = "DU MÅ IKKE HAVE TOMME SVARMULIGHEDER!";
                 PanelWarning.transform.Find("btnOK").gameObject.SetActive(true);
                 PanelWarning.transform.Find("btnYes").gameObject.SetActive(false);
                 PanelWarning.transform.Find("btnNo").gameObject.SetActive(false);

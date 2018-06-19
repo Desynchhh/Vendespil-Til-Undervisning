@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Animations;
 
 public class MenuManager : MonoBehaviour
 {
@@ -23,7 +24,6 @@ public class MenuManager : MonoBehaviour
     public void CloseWarning()
     {
         PanelWarning.SetActive(false);
-
     }
 
     public void GoToResults()
@@ -34,12 +34,13 @@ public class MenuManager : MonoBehaviour
 
     public void GoToEditMenu()
     {
+        PanelQuestion.SetActive(false);
         PanelCreateQuestion.SetActive(false);
         PanelEditQuestion.SetActive(false);
         PanelMainMenu.SetActive(false);
         PanelEditMenu.SetActive(true);
     }
-   
+
     public void GoToCreateQuestion()
     {
         PanelEditMenu.SetActive(false);
@@ -69,7 +70,7 @@ public class MenuManager : MonoBehaviour
 
     public void ResetGame()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void QuitGame()
