@@ -63,12 +63,12 @@ public class MenuManager : MonoBehaviour
         PanelMainMenu.SetActive(true);
     }
    
-    public void OpenQuestionPanel(string questionName)
-    {
-        GameObject panel = PanelEditMenu.transform.Find("ScrollView").GetChild(0).GetChild(0).Find(questionName).GetChild(1).gameObject;
-        panel.SetActive(!panel.activeSelf);
-        //Debug.Log(PanelEditMenu.transform.Find("ScrollView").GetChild(0).GetChild(0).Find(questionName).name);
-    }
+    //public void OpenQuestionPanel(string questionName)
+    //{
+    //    GameObject panel = PanelEditMenu.transform.Find("ScrollView").GetChild(0).GetChild(0).Find(questionName).GetChild(1).gameObject;
+    //    panel.SetActive(!panel.activeSelf);
+    //    //Debug.Log(PanelEditMenu.transform.Find("ScrollView").GetChild(0).GetChild(0).Find(questionName).name);
+    //}
 
     public void ResetGame()
     {

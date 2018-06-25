@@ -36,11 +36,18 @@ public class GameController : MonoBehaviour
     private int answeredWrong;
     public bool hasOrderedQuestions;
 
+    [Header("Sprites")]
+    public Sprite black;
+    public Sprite white;
+    public Sprite red;
+    public Sprite green;
+    public Sprite nextFinalAnswer;
+    public Sprite nextCorrect;
+    public Sprite nextWrong;
+
     [Header("Colors")]
-    public Color bgColor;
-    public Color txtColor;
-    public Color wrongColor;
-    public Color rightColor;
+    public Color txtBlack;
+    public Color txtWhite;
 
     [Header("Buttons")]
     public GameObject btnNext;
@@ -51,10 +58,8 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        bgColor = new Color32(0x00, 0x00, 0x31, 0xFF);
-        wrongColor = new Color32(0xE6, 0x1E, 0x31, 0xFF);
-        rightColor = new Color32(0x88, 0xD6, 0x0D, 0xFF);
-        txtColor = new Color32(0xFF, 0xFF, 0xFF, 0xFF);
+        txtBlack = new Color32(0x00, 0x00, 0x31, 0xFF);
+        txtWhite = Color.white;
     }
 
     public void SetQuestionsRandomOrder()
@@ -103,13 +108,12 @@ public class GameController : MonoBehaviour
 
     public void FillFields()
     {
-        btnNext.GetComponent<Image>().color = bgColor;
-        btnNext.GetComponentInChildren<Text>().text = "ENDELIGE SVAR";
+        btnNext.GetComponent<Image>().sprite = nextFinalAnswer;
         foreach (Transform child in parAnswers)
         {
             child.GetComponent<Button>().enabled = true;
-            child.GetComponent<Image>().color = bgColor;
-            child.GetChild(0).GetComponent<Text>().color = txtColor;
+            child.GetComponent<Image>().sprite = black;
+            child.GetChild(0).GetComponent<Text>().color = txtWhite;
         }
         btnNext.GetComponent<Button>().enabled = false;
         if (totalAnswered == totalQuestions)
@@ -136,13 +140,13 @@ public class GameController : MonoBehaviour
         {
             if (child == selectedAnswer.transform)
             {
-                child.GetComponent<Image>().color = txtColor;
-                child.GetComponentInChildren<Text>().color = bgColor;
+                child.GetComponent<Image>().sprite = white;
+                child.GetComponentInChildren<Text>().color = txtBlack;
             }
             else
             {
-                child.GetComponent<Image>().color = bgColor;
-                child.GetComponentInChildren<Text>().color = txtColor;
+                child.GetComponent<Image>().sprite = black;
+                child.GetComponentInChildren<Text>().color = txtWhite;
             }
         }
         btnNext.GetComponent<Button>().enabled = true;
@@ -152,26 +156,22 @@ public class GameController : MonoBehaviour
         if (selectedAnswer.GetComponentInChildren<Text>().text == rightAnswer)
         {
             answeredRight++;
-            selectedAnswer.GetComponent<Image>().color = rightColor;
-            selectedAnswer.GetComponentInChildren<Text>().color = txtColor;
-            btnNext.GetComponent<Image>().color = rightColor;
-            btnNext.GetComponentInChildren<Text>().text = "RIGTIGT SVAR";
-            btnNext.GetComponentInChildren<Text>().color = txtColor;
+            selectedAnswer.GetComponent<Image>().sprite = green;
+            selectedAnswer.GetComponentInChildren<Text>().color = txtWhite;
+            btnNext.GetComponent<Image>().sprite = nextCorrect;
         }
         else
         {
             answeredWrong++;
-            selectedAnswer.GetComponent<Image>().color = wrongColor;
-            selectedAnswer.GetComponentInChildren<Text>().color = txtColor;
-            btnNext.GetComponent<Image>().color = wrongColor;
-            btnNext.GetComponentInChildren<Text>().text = "FORKERT SVAR";
-            btnNext.GetComponentInChildren<Text>().color = txtColor;
+            selectedAnswer.GetComponent<Image>().sprite = red;
+            selectedAnswer.GetComponentInChildren<Text>().color = txtWhite;
+            btnNext.GetComponent<Image>().sprite = nextWrong;
             foreach (Transform child in parAnswers)
             {
                 if (child.gameObject.GetComponentInChildren<Text>().text == rightAnswer && child.name != "Question")
                 {
-                    child.gameObject.GetComponent<Image>().color = rightColor;
-                    selectedAnswer.GetComponentInChildren<Text>().color = txtColor;
+                    child.gameObject.GetComponent<Image>().sprite = green;
+                    selectedAnswer.GetComponentInChildren<Text>().color = txtWhite;
                 }
             }
         }
