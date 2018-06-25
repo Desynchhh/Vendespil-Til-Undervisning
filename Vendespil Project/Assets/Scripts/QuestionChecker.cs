@@ -68,6 +68,7 @@ public class QuestionChecker : MonoBehaviour
                 PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().text = "DU KAN IKKE HAVE 2 ELLER FLERE ENS SVARMULIGHEDER!";
                 PanelWarning.transform.Find("btnOK").gameObject.SetActive(true);
                 PanelWarning.transform.Find("btnYes").gameObject.SetActive(false);
+                PanelWarning.transform.Find("btnYesQuit").gameObject.SetActive(false);
                 PanelWarning.transform.Find("btnNo").gameObject.SetActive(false);
                 PanelWarning.SetActive(true);
                 break;

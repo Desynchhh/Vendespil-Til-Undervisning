@@ -17,6 +17,7 @@ public class MenuManager : MonoBehaviour
 
     public void PlayGame()
     {
+        PanelResults.SetActive(false);
         PanelMainMenu.SetActive(false);
         PanelQuestion.SetActive(true);
     }
@@ -64,8 +65,9 @@ public class MenuManager : MonoBehaviour
    
     public void OpenQuestionPanel(string questionName)
     {
-        GameObject panel = transform.parent.Find("PanelEditMenu").Find("ScrollView").GetChild(0).GetChild(0).Find(questionName).GetChild(1).gameObject;
+        GameObject panel = PanelEditMenu.transform.Find("ScrollView").GetChild(0).GetChild(0).Find(questionName).GetChild(1).gameObject;
         panel.SetActive(!panel.activeSelf);
+        //Debug.Log(PanelEditMenu.transform.Find("ScrollView").GetChild(0).GetChild(0).Find(questionName).name);
     }
 
     public void ResetGame()
