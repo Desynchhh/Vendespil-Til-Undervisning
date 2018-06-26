@@ -22,13 +22,9 @@ public class ButtonManager : MonoBehaviour
 
     private string filePath;
 
-    private void Awake()
-    {
-         filePath = Application.persistentDataPath + "/Data.xml";
-    }
-
     public void LoadInfo(int idToFind)
     {
+        filePath = Application.persistentDataPath + "/Data.xml";
         XDocument xdoc = XDocument.Load(filePath);
         xdoc.Descendants(QuestionElement).Where(q => int.Parse(q.Attribute(idAttribute).Value) == idToFind).Select(q => new
         {
@@ -48,6 +44,5 @@ public class ButtonManager : MonoBehaviour
             wrongAnswer2 = q.wrongAnswer2.ToString();
             wrongAnswer3 = q.wrongAnswer3.ToString();
         });
-        Debug.Log("ButtonManager, LoadInfo(int)" + idToFind.ToString());
     }
 }

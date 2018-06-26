@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 240e3f2c7f9a6514081a1c5e5d6ec2aa
+timeCreated: 1529926451
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Frutiger LT Std
+  fontNames:
+  - Frutiger LT Std
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

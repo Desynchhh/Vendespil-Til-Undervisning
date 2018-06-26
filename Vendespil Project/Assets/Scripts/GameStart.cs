@@ -9,11 +9,12 @@ public class GameStart : MonoBehaviour
 {
     [Header("Panels")]
     public GameObject MainMenu;
+    public GameObject NoQuestionsWarningMenu;
     public GameObject EditMenu;
     public GameObject CreateMenu;
-    public GameObject GameMenu;
     public GameObject QuestionMenu;
     public GameObject ResultsMenu;
+    public GameObject EditQuestionMenu;
 
     private string filePath;
 
@@ -27,10 +28,11 @@ public class GameStart : MonoBehaviour
 
         Debug.Log("all questions loaded");
         EditMenu.SetActive(false);
-        GameMenu.SetActive(false);
         CreateMenu.SetActive(false);
         QuestionMenu.SetActive(false);
         ResultsMenu.SetActive(false);
+        EditQuestionMenu.SetActive(false);
+        NoQuestionsWarningMenu.SetActive(false);
         MainMenu.SetActive(true);
     }
 
