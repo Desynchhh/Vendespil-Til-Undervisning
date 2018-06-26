@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Animations;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
@@ -15,11 +16,17 @@ public class MenuManager : MonoBehaviour
     public GameObject PanelResults;
     public GameObject PanelWarning;
 
+    [Header("Background")]
+    public Image background;
+    public Sprite bgDefault;
+    public Sprite bgGame;
+
     public void PlayGame()
     {
         PanelResults.SetActive(false);
         PanelMainMenu.SetActive(false);
         PanelQuestion.SetActive(true);
+        background.sprite = bgGame;
     }
 
     public void CloseWarning()
@@ -29,6 +36,7 @@ public class MenuManager : MonoBehaviour
 
     public void GoToResults()
     {
+        background.sprite = bgDefault;
         PanelQuestion.SetActive(false);
         PanelResults.SetActive(true);
     }
