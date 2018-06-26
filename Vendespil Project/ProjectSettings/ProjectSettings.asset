@@ -4,15 +4,24 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 14
+<<<<<<< HEAD
+  productGUID: a92168b1c3e19744d96a9b506f9c9c1a
+=======
   productGUID: 51a988d32a19c7e43bc3433813969663
+>>>>>>> 87809f8d6f74b8144ac3eb4eaf5ec19d090b3afc
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   defaultScreenOrientation: 0
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
+<<<<<<< HEAD
+  companyName: DefaultCompany
+  productName: Vendespil Project
+=======
   companyName: SKP-Data
   productName: SKP Vendespil
+>>>>>>> 87809f8d6f74b8144ac3eb4eaf5ec19d090b3afc
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -158,7 +167,11 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
+<<<<<<< HEAD
+    Android: com.SKP.Vendespil
+=======
     Android: com.SKP_Data.Vendespil
+>>>>>>> 87809f8d6f74b8144ac3eb4eaf5ec19d090b3afc
   buildNumber: {}
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 23
@@ -245,7 +258,7 @@ PlayerSettings:
   androidSplashScreen: {fileID: 0}
   AndroidKeystoreName: 
   AndroidKeyaliasName: 
-  AndroidTVCompatibility: 0
+  AndroidTVCompatibility: 1
   AndroidIsGame: 1
   AndroidEnableTango: 0
   androidEnableBanner: 1
