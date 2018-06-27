@@ -52,7 +52,7 @@ public class CreateButton : MonoBehaviour
         buttonData.LoadInfo(nextId);
         //button.GetComponent<Button>().onClick.AddListener(() => transform.root.Find("Manager").GetComponent<MenuManager>().OpenQuestionPanel(EventSystem.current.currentSelectedGameObject.transform.parent.name));
         buttonData.id = nextId;
-        panel.GetChild(1).GetComponent<Button>().onClick.AddListener(() => DeleteButton(EventSystem.current.currentSelectedGameObject.transform.parent.parent.GetChild(0).gameObject.GetComponent<ButtonManager>().id));
+        panel.GetChild(1).GetComponent<Button>().onClick.AddListener(() => DeleteSingleWarning(EventSystem.current.currentSelectedGameObject.transform.parent.parent.GetChild(0).gameObject.GetComponent<ButtonManager>().id));
         panel.GetChild(0).GetComponent<Button>().onClick.AddListener(() => transform.parent.Find("Manager").GetComponent<MenuManager>().GoToEditQuestion(EventSystem.current.currentSelectedGameObject.transform.parent.parent.GetChild(0).GetComponent<ButtonManager>().id));
         panel.GetChild(0).GetComponent<Button>().onClick.AddListener(() => GetQuestionInfo());
         button.GetComponentInChildren<Text>().text = buttonData.question;
@@ -60,11 +60,6 @@ public class CreateButton : MonoBehaviour
         maxId = buttonData.id;
         Debug.Log("next id: " + nextId);
         Debug.Log("max id: " + maxId);
-        createQuestion.text = "";
-        createRightAnswer.text = "";
-        createWrongAnswer1.text = "";
-        createWrongAnswer2.text = "";
-        createWrongAnswer3.text = "";
     }
 
     public void SpawnEditButton(int _id, string _question, string _answer, string _w1, string _w2, string _w3)
@@ -77,7 +72,7 @@ public class CreateButton : MonoBehaviour
         buttonData.LoadInfo(nextId);
         //button.GetComponent<Button>().onClick.AddListener(() => transform.root.Find("Manager").GetComponent<MenuManager>().OpenQuestionPanel(EventSystem.current.currentSelectedGameObject.transform.parent.name));
         buttonData.id = nextId;
-        panel.GetChild(1).GetComponent<Button>().onClick.AddListener(() => DeleteButton(EventSystem.current.currentSelectedGameObject.transform.parent.parent.GetChild(0).gameObject.GetComponent<ButtonManager>().id));
+        panel.GetChild(1).GetComponent<Button>().onClick.AddListener(() => DeleteSingleWarning(EventSystem.current.currentSelectedGameObject.transform.parent.parent.GetChild(0).gameObject.GetComponent<ButtonManager>().id));
         panel.GetChild(0).GetComponent<Button>().onClick.AddListener(() => transform.parent.Find("Manager").GetComponent<MenuManager>().GoToEditQuestion(EventSystem.current.currentSelectedGameObject.transform.parent.parent.GetChild(0).GetComponent<ButtonManager>().id));
         panel.GetChild(0).GetComponent<Button>().onClick.AddListener(() => GetQuestionInfo());
         button.GetComponentInChildren<Text>().text = _question;
@@ -127,6 +122,53 @@ public class CreateButton : MonoBehaviour
         }
     }
 
+    public void ClearFields()
+    {
+        createQuestion.text = "";
+        createRightAnswer.text = "";
+        createWrongAnswer1.text = "";
+        createWrongAnswer2.text = "";
+        createWrongAnswer3.text = "";
+    }
+
+    public void DeleteAllWarning()
+    {
+        PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().fontSize = 46;
+        PanelWarning.transform.Find("WarningText").GetComponentInChildren<Text>().text = "ADVARSEL!\n\nDu er ved at slette ALLE spørgsmål\nEr du sikker?";
+        PanelWarning.transform.Find("btnOK").gameObject.SetActive(false);
+        PanelWarning.transform.Find("btnYesAll").gameObject.SetActive(true);
+        PanelWarning.transform.Find("btnYesSingle").gameObject.SetActive(false);
+        PanelWarning.transform.Find("btnNo").gameObject.SetActive(true);
+        PanelWarning.SetActive(true);
+    }
+
+    public void DeleteSingleWarning(int btnId)
+    {
+        PanelWarning.transform.Find("btnYesSingle").GetComponent<Button>().onClick.RemoveAllListeners();
+        PanelWarning.transform.Find("btnYesSingle").GetComponent<Button>().onClick.AddListener(() => DeleteButton(btnId));
+        PanelWarning.transform.Find("btnYesSingle").GetComponent<Button>().onClick.AddListener(() => transform.root.Find("Manager").GetComponent<MenuManager>().CloseWarning());
+
+        PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().fontSize = 44;
+        PanelWarning.transform.Find("WarningText").GetComponentInChildren<Text>().text = "ADVARSEL!\n\nDu er ved at slette ÉT spørgsmål\nEr du sikker?";
+        PanelWarning.transform.Find("btnOK").gameObject.SetActive(false);
+        PanelWarning.transform.Find("btnYesAll").gameObject.SetActive(false);
+        PanelWarning.transform.Find("btnYesSingle").gameObject.SetActive(true);
+        PanelWarning.transform.Find("btnNo").gameObject.SetActive(true);
+        PanelWarning.SetActive(true);
+    }
+
+    public void DeleteAll()
+    {
+        foreach (Transform child in contentEdit.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        maxId = 0;
+        nextId = 1;
+        Debug.Log("next id: " + nextId);
+        Debug.Log("max id: " + maxId);
+    }
+
     public void DeleteButton(int deleteId)
     {
         foreach (Transform child in contentEdit.transform)
@@ -150,27 +192,6 @@ public class CreateButton : MonoBehaviour
                 Destroy(child.gameObject);
             }
         }
-        Debug.Log("next id: " + nextId);
-        Debug.Log("max id: " + maxId);
-    }
-
-    public void DeleteAllWarning()
-    {
-        PanelWarning.transform.Find("WarningText").GetComponentInChildren<Text>().text = "ADVARSEL!\n\nDu er ved at slette ALLE spørgsmål\nEr du sikker?";
-        PanelWarning.transform.Find("btnOK").gameObject.SetActive(false);
-        PanelWarning.transform.Find("btnYes").gameObject.SetActive(true);
-        PanelWarning.transform.Find("btnNo").gameObject.SetActive(true);
-        PanelWarning.SetActive(true);
-    }
-
-    public void DeleteAll()
-    {
-        foreach (Transform child in contentEdit.transform)
-        {
-            Destroy(child.gameObject);
-        }
-        maxId = 0;
-        nextId = 1;
         Debug.Log("next id: " + nextId);
         Debug.Log("max id: " + maxId);
     }

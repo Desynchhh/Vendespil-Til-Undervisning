@@ -105,9 +105,11 @@ public class GameController : MonoBehaviour
         if (totalQuestions == 0)
         {
             hasOrderedQuestions = false;
-            PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().text = "DER ER IKKE OPRETTET NOGLE SPØRGSMÅL!\n\n OPRET MINDST ÉT SPØRGSMÅL FOR AT SPILLE";
+            PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().fontSize = 46;
+            PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().text = "DER ER IKKE OPRETTET NOGEN SPØRGSMÅL!\n\n OPRET MINDST ÉT SPØRGSMÅL FOR AT SPILLE";
             PanelWarning.transform.Find("btnOK").gameObject.SetActive(true);
-            PanelWarning.transform.Find("btnYes").gameObject.SetActive(false);
+            PanelWarning.transform.Find("btnYesAll").gameObject.SetActive(false);
+            PanelWarning.transform.Find("btnYesSingle").gameObject.SetActive(false);
             PanelWarning.transform.Find("btnNo").gameObject.SetActive(false);
             PanelWarning.SetActive(true);
         }
@@ -134,6 +136,7 @@ public class GameController : MonoBehaviour
     //OBS! SCRIPT WILL NOT SHOW NEXT QUESTION IF THE 'QUESTION' ELEMENT IS THE SAME AS THE LAST!
     public void FillFields()
     {
+        btnNext.GetComponent<Button>().enabled = false;
         btnNext.GetComponent<Image>().sprite = nextFinalAnswer;
         foreach (Transform child in parAnswers)
         {
@@ -162,7 +165,7 @@ public class GameController : MonoBehaviour
     public void SelectAnswer()
     {
         selectedAnswer = EventSystem.current.currentSelectedGameObject;
-        foreach(Transform child in parAnswers)
+        foreach (Transform child in parAnswers)
         {
             if (child == selectedAnswer.transform)
             {
@@ -205,6 +208,7 @@ public class GameController : MonoBehaviour
         {
             child.GetComponent<Button>().enabled = false;
         }
+        btnNext.GetComponent<Button>().enabled = false;
         totalAnswered++;
         StartCoroutine(Wait());
     }
@@ -217,13 +221,13 @@ public class GameController : MonoBehaviour
 
     public void WriteResults()
     {
-        if(answeredRight == 0)
+        bgOverlay.gameObject.SetActive(true);
+        if (answeredRight == 0)
         {
             smileyFace.sprite = score0;
             smileyArms.gameObject.SetActive(true);
             smileyCannons.gameObject.SetActive(false);
             rightAnswerScore.GetComponentInChildren<Text>().color = txtRed;
-            bgOverlay.gameObject.SetActive(true);
             bgOverlay.GetComponent<Image>().sprite = overlayBad;
         }
         else if (answeredRight == totalQuestions)
@@ -232,7 +236,22 @@ public class GameController : MonoBehaviour
             smileyArms.gameObject.SetActive(false);
             smileyCannons.gameObject.SetActive(true);
             rightAnswerScore.GetComponentInChildren<Text>().color = txtGreen;
-            bgOverlay.gameObject.SetActive(true);
+            bgOverlay.GetComponent<Image>().sprite = overlayGood;
+        }
+        else if (answeredRight < totalQuestions / 2)
+        {
+            smileyFace.sprite = scoreLt50;
+            smileyArms.gameObject.SetActive(false);
+            smileyCannons.gameObject.SetActive(false);
+            rightAnswerScore.GetComponentInChildren<Text>().color = txtRed;
+            bgOverlay.GetComponent<Image>().sprite = overlayBad;
+        }
+        else if (answeredRight > totalQuestions / 2)
+        {
+            smileyFace.sprite = scoreGt50;
+            smileyArms.gameObject.SetActive(false);
+            smileyCannons.gameObject.SetActive(false);
+            rightAnswerScore.GetComponentInChildren<Text>().color = txtGreen;
             bgOverlay.GetComponent<Image>().sprite = overlayGood;
         }
         else if (answeredRight == totalQuestions / 2)
@@ -243,24 +262,6 @@ public class GameController : MonoBehaviour
             rightAnswerScore.GetComponentInChildren<Text>().color = txtBlack;
             bgOverlay.gameObject.SetActive(false);
         }
-        else if (answeredRight < totalQuestions / 2)
-        {
-            smileyFace.sprite = scoreLt50;
-            smileyArms.gameObject.SetActive(false);
-            smileyCannons.gameObject.SetActive(false);
-            rightAnswerScore.GetComponentInChildren<Text>().color = txtRed;
-            bgOverlay.gameObject.SetActive(true);
-            bgOverlay.GetComponent<Image>().sprite = overlayBad;
-        }
-        else if (answeredRight > totalQuestions / 2)
-        {
-            smileyFace.sprite = scoreGt50;
-            smileyArms.gameObject.SetActive(false);
-            smileyCannons.gameObject.SetActive(false);
-            rightAnswerScore.GetComponentInChildren<Text>().color = txtGreen;
-            bgOverlay.gameObject.SetActive(true);
-            bgOverlay.GetComponent<Image>().sprite = overlayGood;
-        }
         rightAnswerScore.GetComponentInChildren<Text>().text = string.Format("DU FIK\n {0} / {1}\n RIGTIGE!", answeredRight, totalQuestions);
     }
 
@@ -270,10 +271,12 @@ public class GameController : MonoBehaviour
         List<string> randomOrderList = new List<string>();
         answersList.Add(questionInfo.answer);
         answersList.Add(questionInfo.wrongAnswer1);
-        answersList.Add(questionInfo.wrongAnswer2);
-        answersList.Add(questionInfo.wrongAnswer3);
-
-        for (int i = 0; i <= 3; i++)
+        if(questionInfo.wrongAnswer2 != "")
+            answersList.Add(questionInfo.wrongAnswer2);
+        if (questionInfo.wrongAnswer3 != "")
+            answersList.Add(questionInfo.wrongAnswer3);
+        int listCount = answersList.Count-1;
+        for (int i = 0; i <= listCount; i++)
         {
             string temp;
             int randomIndex = Random.Range(0, answersList.Count);
@@ -283,17 +286,19 @@ public class GameController : MonoBehaviour
         }
         btnAnswer1.GetComponentInChildren<Text>().text = randomOrderList[0];
         btnAnswer2.GetComponentInChildren<Text>().text = randomOrderList[1];
-        btnAnswer3.GetComponentInChildren<Text>().text = randomOrderList[2];
-        btnAnswer4.GetComponentInChildren<Text>().text = randomOrderList[3];
-    }
-
-    public void WarningQuit()
-    {
-        PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().text = "ER DU SIKKER PÅ DU VIL GIVE OP? DIT FREMSKIDT VIL IKKE BLIVE GEMT!";
-        PanelWarning.transform.Find("btnOK").gameObject.SetActive(false);
-        PanelWarning.transform.Find("btnYes").gameObject.SetActive(false);
-        PanelWarning.transform.Find("btnNo").gameObject.SetActive(true);
-        PanelWarning.transform.Find("btnYesQuit").gameObject.SetActive(true);
-        PanelWarning.SetActive(true);
+        if (listCount > 1)
+        {
+            btnAnswer3.GetComponentInChildren<Text>().text = randomOrderList[2];
+            btnAnswer3.SetActive(true);
+        }
+        else
+            btnAnswer3.SetActive(false);
+        if (listCount > 2)
+        {
+            btnAnswer4.GetComponentInChildren<Text>().text = randomOrderList[3];
+            btnAnswer4.SetActive(true);
+        }
+        else
+            btnAnswer4.SetActive(false);
     }
 }
