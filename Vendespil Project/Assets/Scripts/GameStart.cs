@@ -9,28 +9,37 @@ public class GameStart : MonoBehaviour
 {
     [Header("Panels")]
     public GameObject MainMenu;
+    public GameObject NoQuestionsWarningMenu;
     public GameObject EditMenu;
     public GameObject CreateMenu;
-    public GameObject GameMenu;
     public GameObject QuestionMenu;
     public GameObject ResultsMenu;
+    public GameObject EditQuestionMenu;
+
+    private string filePath;
 
     public void Awake()
     {
-        if (File.Exists(Application.dataPath + "/XML/Data.xml") && File.ReadAllLines(Application.dataPath + "/XML/Data.xml").Length > 0)
+        Debug.Log("Setting file path..");
+        filePath = Application.persistentDataPath + "/Data.xml";
+        Debug.Log("File path set!");
+        if (File.Exists(filePath) && File.ReadAllLines(filePath).Length > 0)
             LoadAllQuestions();
+
+        Debug.Log("all questions loaded");
         EditMenu.SetActive(false);
-        GameMenu.SetActive(false);
         CreateMenu.SetActive(false);
         QuestionMenu.SetActive(false);
         ResultsMenu.SetActive(false);
+        EditQuestionMenu.SetActive(false);
+        NoQuestionsWarningMenu.SetActive(false);
         MainMenu.SetActive(true);
     }
 
     public void LoadAllQuestions()
     {
         int counter = 1;
-        XDocument xdoc = XDocument.Load(Application.dataPath + "/XML/Data.xml");
+        XDocument xdoc = XDocument.Load(filePath);
 
         xdoc.Descendants("Question").Where(el => int.Parse(el.Attribute("id").Value) >= counter).Select(el => new
         {

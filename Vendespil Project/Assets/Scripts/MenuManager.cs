@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Animations;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
@@ -10,44 +12,54 @@ public class MenuManager : MonoBehaviour
     public GameObject PanelEditMenu;
     public GameObject PanelCreateQuestion;
     public GameObject PanelEditQuestion;
-    public GameObject PanelGame;
     public GameObject PanelQuestion;
     public GameObject PanelResults;
+    public GameObject PanelWarning;
+
+    [Header("Background")]
+    public Image background;
+    public Sprite bgDefault;
+    public Sprite bgGame;
 
     public void PlayGame()
     {
-        PanelQuestion.SetActive(false);
+        PanelResults.SetActive(false);
         PanelMainMenu.SetActive(false);
-        PanelGame.SetActive(true);
+        PanelQuestion.SetActive(true);
+        background.sprite = bgGame;
     }
 
-    public void GoToQuestion()
+    public void CloseWarning()
     {
-        PanelGame.SetActive(false);
-        PanelQuestion.SetActive(true);
+        PanelWarning.SetActive(false);
     }
 
     public void GoToResults()
     {
-        PanelGame.SetActive(false);
+        background.sprite = bgDefault;
+        PanelQuestion.SetActive(false);
         PanelResults.SetActive(true);
     }
 
     public void GoToEditMenu()
     {
+        PanelQuestion.SetActive(false);
         PanelCreateQuestion.SetActive(false);
+        PanelEditQuestion.SetActive(false);
         PanelMainMenu.SetActive(false);
         PanelEditMenu.SetActive(true);
     }
-   
+
     public void GoToCreateQuestion()
     {
         PanelEditMenu.SetActive(false);
         PanelCreateQuestion.SetActive(true);
     }
 
-    public void GoToEditQuestion()
+    public void GoToEditQuestion(int editId)
     {
+        transform.GetComponent<EditXML>().EditID = editId;
+        transform.parent.Find("PanelEditMenu").GetComponent<CreateButton>().editId = editId;
         PanelEditMenu.SetActive(false);
         PanelEditQuestion.SetActive(true);
     }
@@ -55,24 +67,18 @@ public class MenuManager : MonoBehaviour
     public void GoToMainMenu()
     {
         PanelResults.SetActive(false);
-        PanelGame.SetActive(false);
         PanelEditMenu.SetActive(false);
         PanelMainMenu.SetActive(true);
     }
    
-    public void OpenQuestionPanel(string questionName)
-    {
-        if(transform.parent.Find("PanelEditMenu").Find("ScrollView").GetChild(0).GetChild(0).Find(questionName).GetChild(1).gameObject.activeInHierarchy == false)
-        {
-            transform.parent.Find("PanelEditMenu").Find("ScrollView").GetChild(0).GetChild(0).Find(questionName).GetChild(1).gameObject.SetActive(true);
-        }
-        else
-        {
-            transform.parent.Find("PanelEditMenu").Find("ScrollView").GetChild(0).GetChild(0).Find(questionName).GetChild(1).gameObject.SetActive(false);
-        }
-    }
+    //public void OpenQuestionPanel(string questionName)
+    //{
+    //    GameObject panel = PanelEditMenu.transform.Find("ScrollView").GetChild(0).GetChild(0).Find(questionName).GetChild(1).gameObject;
+    //    panel.SetActive(!panel.activeSelf);
+    //    //Debug.Log(PanelEditMenu.transform.Find("ScrollView").GetChild(0).GetChild(0).Find(questionName).name);
+    //}
 
-    public void ResetGame()     //TEMP
+    public void ResetGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

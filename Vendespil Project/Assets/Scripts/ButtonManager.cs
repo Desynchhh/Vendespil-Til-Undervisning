@@ -20,9 +20,12 @@ public class ButtonManager : MonoBehaviour
     private string wrongAnswer2Element = "wrongAnswer2";
     private string wrongAnswer3Element = "wrongAnswer3";
 
+    private string filePath;
+
     public void LoadInfo(int idToFind)
     {
-        XDocument xdoc = XDocument.Load(Application.dataPath + "/XML/Data.xml");
+        filePath = Application.persistentDataPath + "/Data.xml";
+        XDocument xdoc = XDocument.Load(filePath);
         xdoc.Descendants(QuestionElement).Where(q => int.Parse(q.Attribute(idAttribute).Value) == idToFind).Select(q => new
         {
             id = q.Attribute(idAttribute).Value,
@@ -41,6 +44,5 @@ public class ButtonManager : MonoBehaviour
             wrongAnswer2 = q.wrongAnswer2.ToString();
             wrongAnswer3 = q.wrongAnswer3.ToString();
         });
-        Debug.Log("ButtonManager, LoadInfo(int)" + idToFind.ToString());
     }
 }

@@ -23,8 +23,15 @@ public class AddXML : MonoBehaviour
 
     private void Start()
     {
-        filePath = Application.dataPath + "/Resources/XML/Data.xml";
-        Debug.Log(filePath);
+        filePath = Application.persistentDataPath + "/Data.xml";
+
+        if (!File.Exists(filePath))
+        {
+            Debug.Log("Error: " + filePath);
+            var sr = File.CreateText(filePath);
+            sr.Close();
+            Debug.Log("New file was made");
+        }
     }
 
     public void Add()
@@ -41,7 +48,7 @@ public class AddXML : MonoBehaviour
             a.wrongAnswer3 = WrongAnswer3.text;
             itemDB.list.Add(a);
             XmlSerializer serializer = new XmlSerializer(typeof(QuestionDatabase));
-            FileStream stream = new FileStream(filePath, FileMode.Create); // Problemet
+            FileStream stream = new FileStream(filePath, FileMode.Create);
             serializer.Serialize(stream, itemDB);
             stream.Close();
             Debug.Log("File updated, new question id is " + a.IdNumber + ".");
@@ -80,9 +87,17 @@ public class AddXML : MonoBehaviour
                 {
                     attributes.Add(System.Convert.ToInt32(aNode.Attributes["id"].Value));
                 }
-                int id = attributes.Max();
-                attributes.Clear();
-                return id;
+                if (aNodes.Count != 0)
+                {
+                    int id = attributes.Max();
+                    attributes.Clear();
+                    return id;
+                }
+                else
+                {
+                    attributes.Clear();
+                    return 0;
+                }
             }
             else
             {
@@ -100,10 +115,15 @@ public class AddXML : MonoBehaviour
         if (File.ReadAllLines(filePath).Length > 0)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(QuestionDatabase));
-            FileStream stream = new FileStream(Application.dataPath + "/XML/Data.xml", FileMode.Open);
+            FileStream stream = new FileStream(filePath, FileMode.Open);
             itemDB = serializer.Deserialize(stream) as QuestionDatabase;
             stream.Close();
         }
+    }
+
+    public void RemoveList()
+    {
+        itemDB.list.Clear();
     }
 
     [System.Serializable]

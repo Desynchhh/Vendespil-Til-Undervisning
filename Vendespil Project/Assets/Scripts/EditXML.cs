@@ -7,11 +7,11 @@ using System.IO;
 using UnityEngine.UI;
 using System.Linq;
 
+[RequireComponent(typeof(AddXML))]
 public class EditXML : MonoBehaviour {
 
     [Header("Int")]
     public int ID;
-
 
     [Header("InputFields")]
     public InputField questionText;
@@ -24,19 +24,16 @@ public class EditXML : MonoBehaviour {
 
     private void Start()
     {
-<<<<<<< HEAD
-        filePath = Application.dataPath + "/XML/Data.xml";
+        //filePath = Application.dataPath + "/XML/Data.xml";
         //LoadXML(ID);
-=======
-        filePath = Application.dataPath + "/Resources/XML/Data.xml";
+        filePath = Application.persistentDataPath + "/Data.xml";
         LoadXML(ID);
->>>>>>> 67b169ff09a496a1495d4679b29ae504e32635ef
     }
 
-    public void ButtonPress()
-    {
-        Save(ID, questionText.text, rightAnswerText.text, wrongAnswer1Text.text, wrongAnswer2Text.text, wrongAnswer3Text.text);
-    }
+    //public void ButtonPress()
+    //{
+    //    SaveQuestion(ID, questionText.text, rightAnswerText.text, wrongAnswer1Text.text, wrongAnswer2Text.text, wrongAnswer3Text.text);
+    //}
     
     public void LoadXML(int EditID)
     {
@@ -64,9 +61,17 @@ public class EditXML : MonoBehaviour {
                 }
             }
         }
+        else if (!File.Exists(filePath))
+        {
+            Debug.Log("Error: " + filePath);
+            var sr = File.CreateText(filePath);
+            sr.Close();
+            Debug.Log("New file was made");
+        }
     }
 
-    public void Save(int EditID , string question, string rightAnswer, string wrongAnswer1, string wrongAnswer2, string wrongAnswer3)
+    public int EditID;
+    public void Save()//int EditID , string question, string rightAnswer, string wrongAnswer1, string wrongAnswer2, string wrongAnswer3)
     {
         if (File.Exists(filePath) && File.ReadAllLines(filePath).Length > 0)
         {
@@ -100,6 +105,7 @@ public class EditXML : MonoBehaviour {
 
     public void RemoveAll()
     {
+        gameObject.GetComponent<AddXML>().RemoveList();
         File.WriteAllText(filePath, "");
         Debug.Log("File clear");
     }
