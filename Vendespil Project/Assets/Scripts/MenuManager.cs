@@ -15,8 +15,10 @@ public class MenuManager : MonoBehaviour
     public GameObject PanelQuestion;
     public GameObject PanelResults;
     public GameObject PanelWarning;
+    public GameObject PanelLogin;
 
     [Header("Background")]
+    public GameObject bgOverlay;
     public Image background;
     public Sprite bgDefault;
     public Sprite bgGame;
@@ -66,8 +68,10 @@ public class MenuManager : MonoBehaviour
 
     public void GoToMainMenu()
     {
+        bgOverlay.SetActive(false);
         PanelResults.SetActive(false);
         PanelEditMenu.SetActive(false);
+        PanelLogin.SetActive(false);
         PanelMainMenu.SetActive(true);
     }
    
@@ -81,10 +85,5 @@ public class MenuManager : MonoBehaviour
     public void ResetGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
     }
 }
