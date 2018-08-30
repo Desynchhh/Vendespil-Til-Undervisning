@@ -68,11 +68,11 @@ public class MenuManager : MonoBehaviour
 
     public void GoToMainMenu()
     {
-        //bgOverlay.SetActive(false);
-        //PanelResults.SetActive(false);
-        //PanelEditMenu.SetActive(false);
-        //PanelLogin.SetActive(false);
-        // PanelMainMenu.SetActive(true);
+        bgOverlay.SetActive(false);
+        PanelResults.SetActive(false);
+        PanelEditMenu.SetActive(false);
+        PanelLogin.SetActive(false);
+        PanelMainMenu.SetActive(true);
     }
    
     //public void OpenQuestionPanel(string questionName)
