@@ -35,7 +35,11 @@ public class Login : MonoBehaviour
 
         WWW result = api.POST(post);
 
-        while (!result.isDone) { } // Make sure it will stay here until it's done with the API request
+        // Make sure it will stay here until it's done with the API request
+        while (!result.isDone)
+        {
+            // TODO: Gør så den automatisk hopper ud efter 25 sekunder
+        } 
 
         string jsonData = result.text;
 
