@@ -21,7 +21,8 @@ public class LoginWarning : MonoBehaviour {
 
     public void DisplayWarning(bool Successful, string RealName)
     {
-        if(Successful == true)
+        SuccessfulTemp = Successful;
+        if (Successful == true)
         {
             TextBox.text = "Velkommen tilbage " + RealName;
         }

@@ -16,6 +16,7 @@ public class MenuManager : MonoBehaviour
     public GameObject PanelResults;
     public GameObject PanelWarning;
     public GameObject PanelLogin;
+    public GameObject PanelLoginWarning;
 
     [Header("Background")]
     public GameObject bgOverlay;
@@ -72,6 +73,7 @@ public class MenuManager : MonoBehaviour
         PanelResults.SetActive(false);
         PanelEditMenu.SetActive(false);
         PanelLogin.SetActive(false);
+        PanelLoginWarning.SetActive(false); 
         PanelMainMenu.SetActive(true);
     }
    

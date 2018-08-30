@@ -405,7 +405,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 177583041}
-        m_MethodName: GoToMainMenu
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4399,6 +4399,7 @@ MonoBehaviour:
   PanelResults: {fileID: 1675650324}
   PanelWarning: {fileID: 32805197}
   PanelLogin: {fileID: 1971774924}
+  PanelLoginWarning: {fileID: 1325728234}
   bgOverlay: {fileID: 961598893}
   background: {fileID: 302767343}
   bgDefault: {fileID: 21300000, guid: d3d87b14576497b48ad328197af5047a, type: 3}
