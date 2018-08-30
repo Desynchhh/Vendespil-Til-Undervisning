@@ -249,15 +249,28 @@ class ApiClass {
         return ([ "error" => $errorMessage ]);
     }
 
-    function message($key, $message)
+    function message($array)
     {
-        return [$key => $message];
+        return $array;
     }
 
     function checkUsernameAndPasswordJson($username, $password)
     {
+
         $login = $this->checkUsernameAndPassword($username,$password);
-        return $this->message("login", $login);
+        if ($login)
+        {
+            $user = $this->getUserByUsername($username);
+
+            return $this->message([
+                "login" => $login,
+                "userdata" => $user
+            ]);
+        }
+        else
+        {
+            return $this->message(["login" => $login]);
+        }
     }
 
 
