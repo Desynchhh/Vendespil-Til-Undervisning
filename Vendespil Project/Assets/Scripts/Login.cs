@@ -41,16 +41,28 @@ public class Login : MonoBehaviour
             // TODO: Gør så den automatisk hopper ud efter 25 sekunder
         } 
 
-        string jsonData = result.text;
-
-        var N = JSON.Parse(jsonData);
-
+        var N = JSON.Parse(result.text);
         bool correctLogin = N["login"].AsBool;
-
+        
         if (correctLogin)
-            Debug.Log("Correct login");
+        {
+            UserData.User = new User
+            {
+                id = N["userdata"]["username"],
+                name = N["userdata"]["name"],
+                password = N["userdata"]["password"],
+                isAdmin = N["userdata"]["isAdmin"],
+                teamId = N["userdata"]["teamId"],
+                username = N["userdata"]["username"]
+            };
+            GameObject.Find("Manager").GetComponent<LoginWarning>().DisplayWarning(correctLogin, UserData.User.name);
+        }
         else
-            Debug.Log("Wrong login");
+        {
+            GameObject.Find("Manager").GetComponent<LoginWarning>().DisplayWarning(correctLogin, null);
+        }
+        
+
 
     }
 
