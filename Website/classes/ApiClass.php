@@ -54,6 +54,10 @@ class ApiClass {
             case "getUserByUsername":
                 $this->_returnData = $this->getUserByUsername(@$_POST['name']);
                 break;
+            case "getUsersByTeamId":
+                $this->_returnData = $this->getUsersByTeamId(@$_POST['id']);
+                break;
+
 
             /**
              * Question API methods
@@ -179,15 +183,38 @@ class ApiClass {
         return $question;
     }
 
+    function getAllUsersWithQuestionsByTeamId($id)
+    {
+        $this->_db->where('teamId', $id);
+        $users = $this->_db->get('users');
+
+        foreach ($users as $user)
+        {
+
+        }
+    }
+
     /**
      * Return array of user based on username.
-     * @param $username
+     * @param $name
      * @return array
      */
     function getUserByUsername($name)
     {
         $this->_db->where ('username', $name);
         return $this->_db->getOne('users');
+    }
+
+    /**
+     * Return array of users whre teamId
+     * is equal to the given parameter.
+     * @param $id
+     * @return array
+     */
+    function getUsersByTeamId($id)
+    {
+        $this->_db->where ('teamId', $id);
+        return $this->get('users');
     }
 
     /**
