@@ -26,6 +26,7 @@ namespace Assets.Scripts
 
             StartCoroutine(WaitForRequest(www));
             return www;
+
         }
 
         private IEnumerator WaitForRequest(WWW www)
