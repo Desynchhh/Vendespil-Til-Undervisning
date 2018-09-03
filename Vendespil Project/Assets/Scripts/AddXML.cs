@@ -72,6 +72,11 @@ public class AddXML : MonoBehaviour
         }
     }
 
+    public void SendData()
+    {
+        
+    }
+
     public int GetHighestId()
     {
         if (File.Exists(filePath) && File.ReadAllLines(filePath).Length > 0)

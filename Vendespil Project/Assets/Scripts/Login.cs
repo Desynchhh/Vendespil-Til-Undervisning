@@ -16,14 +16,18 @@ public class Login : MonoBehaviour
     public InputField Username;
     public InputField Password;
 
-
     private void Start()
     {
-        LoginButton.onClick.AddListener(CheckLogin);
+        LoginButton.onClick.AddListener(Click);
 
     }
-    
-    void CheckLogin()
+
+    private void Click()
+    {
+        StartCoroutine(CheckLogin());
+    }
+
+    IEnumerator CheckLogin()
     {
         //StartCoroutine(SendDataToPHP(Username.text, Password.text));
         ApiHandler api = GameObject.Find("ApiHandler").GetComponentInChildren<ApiHandler>();
@@ -35,15 +39,11 @@ public class Login : MonoBehaviour
 
         WWW result = api.POST(post);
 
-        // Make sure it will stay here until it's done with the API request
-        while (!result.isDone)
-        {
-            // TODO: Gør så den automatisk hopper ud efter 25 sekunder
-        } 
+        yield return new WaitUntil(() => result.isDone == true);
 
         var N = JSON.Parse(result.text);
         bool correctLogin = N["login"].AsBool;
-        
+
         if (correctLogin)
         {
             UserData.User = new User
@@ -61,11 +61,5 @@ public class Login : MonoBehaviour
         {
             GameObject.Find("Manager").GetComponent<LoginWarning>().DisplayWarning(correctLogin, null);
         }
-        
-
-
     }
-
-
-
 }

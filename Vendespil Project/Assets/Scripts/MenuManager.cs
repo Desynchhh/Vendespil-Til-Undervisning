@@ -17,6 +17,7 @@ public class MenuManager : MonoBehaviour
     public GameObject PanelWarning;
     public GameObject PanelLogin;
     public GameObject PanelLoginWarning;
+    public GameObject PanelPickList;
 
     [Header("Background")]
     public GameObject bgOverlay;
@@ -28,7 +29,8 @@ public class MenuManager : MonoBehaviour
     {
         PanelResults.SetActive(false);
         PanelMainMenu.SetActive(false);
-        PanelQuestion.SetActive(true);
+        PanelPickList.SetActive(true);
+        //PanelQuestion.SetActive(true);
         background.sprite = bgGame;
     }
 
