@@ -57,7 +57,9 @@ class ApiClass {
             case "getUsersByTeamId":
                 $this->_returnData = $this->getUsersByTeamId(@$_POST['id']);
                 break;
-
+            case "getAllUsersWithQuestionsByTeamId":
+                $this->_returnData = $this->getAllUsersWithQuestionsByTeamId(@$_POST['id']);
+                break;
 
             /**
              * Question API methods
@@ -183,15 +185,42 @@ class ApiClass {
         return $question;
     }
 
+    /**
+     * Return array of users based on teamId where
+     * users have questions in the question table in database.
+     * So only users that questions will be returned by this
+     * function.
+     * @param $id
+     * @return array
+     */
     function getAllUsersWithQuestionsByTeamId($id)
     {
-        $this->_db->where('teamId', $id);
-        $users = $this->_db->get('users');
-
-        foreach ($users as $user)
+        // Make sure that id is not null
+        if ($id == null)
         {
-
+            return $this->errorMessage("There needs to be an ID parameter for this to work!");
         }
+
+        // Here we: SELECT * FROM questions WHERE teamId = $id GROUP BY userId
+        $this->_db->where('teamId', $id);
+        $this->_db->groupBy('userId');
+        $userIDsWithQuestions = $this->_db->get('questions', null, 'userId');
+
+        $whereArray = array();
+        foreach ($userIDsWithQuestions as $key => $value)
+        {
+            array_push($whereArray, $value['userId']);
+        }
+
+        if (empty($whereArray))
+        {
+            return $whereArray;
+        }
+
+        $this->_db->where('id', $whereArray, 'IN');
+        $returnUsers = $this->_db->get('users');
+
+        return $returnUsers;
     }
 
     /**
@@ -299,6 +328,5 @@ class ApiClass {
             return $this->message(["login" => $login]);
         }
     }
-
 
 }
