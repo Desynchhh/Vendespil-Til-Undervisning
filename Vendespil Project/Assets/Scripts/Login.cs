@@ -29,7 +29,6 @@ public class Login : MonoBehaviour
 
     IEnumerator CheckLogin()
     {
-        //StartCoroutine(SendDataToPHP(Username.text, Password.text));
         ApiHandler api = GameObject.Find("ApiHandler").GetComponentInChildren<ApiHandler>();
 
         Dictionary<string, string> post = new Dictionary<string, string>();
