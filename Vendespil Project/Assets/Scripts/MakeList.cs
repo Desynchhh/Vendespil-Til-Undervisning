@@ -16,8 +16,8 @@ public class MakeList : MonoBehaviour {
         ApiHandler api = GameObject.Find("ApiHandler").GetComponentInChildren<ApiHandler>();
 
         Dictionary<string, string> post = new Dictionary<string, string>();
-        post.Add("action", "getQuestionsByTeamId");
-        post.Add("teamId", UserData.User.teamId.ToString());
+        post.Add("action", "getUsersByTeamId");
+        post.Add("id", UserData.User.teamId.ToString());
 
         WWW result = api.POST(post);
 
@@ -28,7 +28,8 @@ public class MakeList : MonoBehaviour {
         }
 
         var N = JSON.Parse(result.text);
-        Debug.Log(result.text);
+        Debug.Log(N["userdata"]["name"]);
+        //Debug.Log(result.text);
     }
 
     private void OnEnable()
