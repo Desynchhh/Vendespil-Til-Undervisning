@@ -75,7 +75,8 @@ public class MenuManager : MonoBehaviour
         PanelResults.SetActive(false);
         PanelEditMenu.SetActive(false);
         PanelLogin.SetActive(false);
-        PanelLoginWarning.SetActive(false); 
+        PanelLoginWarning.SetActive(false);
+        PanelPickList.SetActive(false);
         PanelMainMenu.SetActive(true);
     }
    

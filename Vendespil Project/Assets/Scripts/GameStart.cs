@@ -16,6 +16,7 @@ public class GameStart : MonoBehaviour
     public GameObject ResultsMenu;
     public GameObject EditQuestionMenu;
     public GameObject LoginMenu;
+    public GameObject PickList;
 
     private string filePath;
 
@@ -35,6 +36,7 @@ public class GameStart : MonoBehaviour
         EditQuestionMenu.SetActive(false);
         NoQuestionsWarningMenu.SetActive(false);
         MainMenu.SetActive(false);
+        PickList.SetActive(false);
         LoginMenu.SetActive(true);
     }
 

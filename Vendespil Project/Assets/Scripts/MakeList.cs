@@ -9,31 +9,42 @@ using UnityEngine.UI;
 public class MakeList : MonoBehaviour {
 
     public GameObject Content;
+    public GameObject Prefab;
 
-    public void AddList()
+    IEnumerator AddList()
     {
         //StartCoroutine(SendDataToPHP(Username.text, Password.text));
         ApiHandler api = GameObject.Find("ApiHandler").GetComponentInChildren<ApiHandler>();
 
         Dictionary<string, string> post = new Dictionary<string, string>();
-        post.Add("action", "getUsersByTeamId");
+        //post.Add("action", "getAllUsers");
+        post.Add("action", "getAllUsersWithQuestionsByTeamId");
         post.Add("id", UserData.User.teamId.ToString());
 
         WWW result = api.POST(post);
 
-        // Make sure it will stay here until it's done with the API request
-        while (!result.isDone)
-        {
-            // TODO: Gør så den automatisk hopper ud efter 25 sekunder
-        }
+        yield return new WaitUntil(() => result.isDone == true);
 
         var N = JSON.Parse(result.text);
-        Debug.Log(N["userdata"]["name"]);
-        //Debug.Log(result.text);
+
+        foreach (Transform child in Content.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+
+        foreach (var item in N)
+        {
+            GameObject newList = (GameObject)Instantiate(Prefab, Content.transform);
+            newList.name = item.Value["username"];
+            newList.GetComponentInChildren<Text>().text = item.Value["name"];
+        }
+
+        //Debug.Log(N["userdata"]["name"]);
+        Debug.Log(result.text);
     }
 
     private void OnEnable()
     {
-        AddList();
+        StartCoroutine(AddList());
     }
 }

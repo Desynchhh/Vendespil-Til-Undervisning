@@ -29,6 +29,8 @@ public class Login : MonoBehaviour
 
     IEnumerator CheckLogin()
     {
+        LoginButton.interactable = false;
+
         ApiHandler api = GameObject.Find("ApiHandler").GetComponentInChildren<ApiHandler>();
 
         Dictionary<string, string> post = new Dictionary<string, string>();
@@ -39,6 +41,8 @@ public class Login : MonoBehaviour
         WWW result = api.POST(post);
 
         yield return new WaitUntil(() => result.isDone == true);
+
+        LoginButton.interactable = true;
 
         var N = JSON.Parse(result.text);
         bool correctLogin = N["login"].AsBool;
