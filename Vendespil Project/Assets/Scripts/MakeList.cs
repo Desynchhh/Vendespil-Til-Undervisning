@@ -17,9 +17,9 @@ public class MakeList : MonoBehaviour {
         ApiHandler api = GameObject.Find("ApiHandler").GetComponentInChildren<ApiHandler>();
 
         Dictionary<string, string> post = new Dictionary<string, string>();
-        //post.Add("action", "getAllUsers");
-        post.Add("action", "getAllUsersWithQuestionsByTeamId");
-        post.Add("id", UserData.User.teamId.ToString());
+        post.Add("action", "getAllUsers");
+        //post.Add("action", "getAllUsersWithQuestionsByTeamId");
+        //post.Add("id", UserData.User.teamId.ToString());
 
         WWW result = api.POST(post);
 
@@ -34,13 +34,22 @@ public class MakeList : MonoBehaviour {
 
         foreach (var item in N)
         {
-            GameObject newList = (GameObject)Instantiate(Prefab, Content.transform);
-            newList.name = item.Value["username"];
-            newList.GetComponentInChildren<Text>().text = item.Value["name"];
+            if(N["error"] == null)
+            {
+                GameObject newList = (GameObject)Instantiate(Prefab, Content.transform);
+                newList.name = item.Value["username"];
+                newList.GetComponentInChildren<Text>().text = item.Value["name"];
+                newList.GetComponent<ListButton>().UserID = item.Value["id"];
+            }
         }
 
         //Debug.Log(N["userdata"]["name"]);
-        Debug.Log(result.text);
+        //Debug.Log(result.text);
+    }
+
+    public void SetData(int ID)
+    {
+        Debug.Log(ID);
     }
 
     private void OnEnable()
