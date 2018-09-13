@@ -10,16 +10,14 @@ public class MakeList : MonoBehaviour {
 
     public GameObject Content;
     public GameObject Prefab;
+    public List<LoadedQuestion> questions = new List<LoadedQuestion>();
 
     IEnumerator AddList()
     {
-        //StartCoroutine(SendDataToPHP(Username.text, Password.text));
         ApiHandler api = GameObject.Find("ApiHandler").GetComponentInChildren<ApiHandler>();
 
         Dictionary<string, string> post = new Dictionary<string, string>();
         post.Add("action", "getAllUsers");
-        //post.Add("action", "getAllUsersWithQuestionsByTeamId");
-        //post.Add("id", UserData.User.teamId.ToString());
 
         WWW result = api.POST(post);
 
@@ -42,18 +40,62 @@ public class MakeList : MonoBehaviour {
                 newList.GetComponent<ListButton>().UserID = item.Value["id"];
             }
         }
-
-        //Debug.Log(N["userdata"]["name"]);
-        //Debug.Log(result.text);
     }
 
     public void SetData(int ID)
     {
-        Debug.Log(ID);
+        StartCoroutine(getQuestionsByUserId(ID));
+    }
+
+    IEnumerator getQuestionsByUserId(int UserID)
+    {
+        ApiHandler api = GameObject.Find("ApiHandler").GetComponentInChildren<ApiHandler>();
+
+        Dictionary<string, string> post = new Dictionary<string, string>();
+        post.Add("action", "getQuestionsByUserId");
+        post.Add("id", UserID.ToString());
+
+        WWW result = api.POST(post);
+
+        yield return new WaitUntil(() => result.isDone == true);
+
+        var N = JSON.Parse(result.text);
+
+        foreach (var item in N)
+        {
+            if (N["error"] == null)
+            {
+                LoadedQuestion x = new LoadedQuestion();
+                x.IdNumber = item.Value["id"];
+                x.question = item.Value["question"];
+                x.rightAnswer = item.Value["correctAnwser"];
+                x.wrongAnswer1 = item.Value["wrongAnwser1"];
+                x.wrongAnswer2 = item.Value["wrongAnwser2"];
+                x.wrongAnswer3 = item.Value["wrongAnwser3"];
+                questions.Add(x);
+            }
+        }
+
+        foreach(var item in questions)
+        {
+            Debug.Log("ID: (" + item.IdNumber + ") Spørgsmål: (" + item.question + ") Rigtigt: (" + item.rightAnswer + ") Forkert1: (" + item.wrongAnswer1 + ") Forkert2: (" + item.wrongAnswer2 + ") Forkert3: (" + item.wrongAnswer3 + ")");
+        }
+
+        questions.Clear();
     }
 
     private void OnEnable()
     {
         StartCoroutine(AddList());
+    }
+
+    public class LoadedQuestion
+    {
+        public int IdNumber;
+        public string question;
+        public string rightAnswer;
+        public string wrongAnswer1;
+        public string wrongAnswer2;
+        public string wrongAnswer3;
     }
 }
