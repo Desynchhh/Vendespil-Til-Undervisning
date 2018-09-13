@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Xml.Linq;
 using System.Linq;
+using UnityEngine.Events;
+using UnityEngine.Networking;
+using UnityEngine.UI;
+using Assets.Scripts;
+using SimpleJSON;
 
 public class ButtonManager : MonoBehaviour
 {
@@ -22,6 +27,7 @@ public class ButtonManager : MonoBehaviour
 
     private string filePath;
 
+    
     public void LoadInfo(int idToFind)
     {
         filePath = Application.persistentDataPath + "/Data.xml";
