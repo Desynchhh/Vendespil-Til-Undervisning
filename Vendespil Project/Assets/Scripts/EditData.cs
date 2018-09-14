@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts;
 using SimpleJSON;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,20 +18,14 @@ public class EditData : MonoBehaviour
     public InputField wrongAnswer2Text;
     public InputField wrongAnswer3Text;
 
-    private string filePath;
+    public List<QuestionForEdit> questions = new List<QuestionForEdit>();
 
-    private void Start()
+    private void OnEnable()
     {
-        filePath = Application.persistentDataPath + "/Data.xml";
-        LoadXML(ID);
+        StartCoroutine(LoadQuestionsForEdit());
     }
 
-    public void LoadXML(int EditID)
-    {
-        StartCoroutine(getQuestionById(EditID));
-    }
-
-    public void Save(int EditID, string question, string rightAnswer, string wrongAnswer1, string wrongAnswer2, string wrongAnswer3)
+    public void Save() //int EditID, string question, string rightAnswer, string wrongAnswer1, string wrongAnswer2, string wrongAnswer3)
     {
         //Send data til databasen så det bliver gemt.
     }
@@ -42,7 +37,38 @@ public class EditData : MonoBehaviour
 
     public void RemoveSingle(int ID)
     {
-        deleteQuestionById(ID);
+        StartCoroutine(deleteQuestionById(ID));
+    }
+
+    IEnumerator LoadQuestionsForEdit()
+    {
+        questions.Clear();
+        ApiHandler api = GameObject.Find("ApiHandler").GetComponentInChildren<ApiHandler>();
+
+        Dictionary<string, string> post = new Dictionary<string, string>();
+        post.Add("action", "getQuestionsByUserId");
+        post.Add("id", UserData.User.id.ToString());
+
+        WWW result = api.POST(post);
+
+        yield return new WaitUntil(() => result.isDone == true);
+
+        var N = JSON.Parse(result.text);
+
+        foreach (var item in N)
+        {
+            if (N["error"] == null)
+            {
+                QuestionForEdit x = new QuestionForEdit();
+                x.IdNumber = item.Value["id"];
+                x.question = item.Value["question"];
+                x.rightAnswer = item.Value["correctAnwser"];
+                x.wrongAnswer1 = item.Value["wrongAnwser1"];
+                x.wrongAnswer2 = item.Value["wrongAnwser2"];
+                x.wrongAnswer3 = item.Value["wrongAnwser3"];
+                questions.Add(x);
+            }
+        }
     }
 
     IEnumerator deleteQuestionById(int ID)
@@ -57,31 +83,17 @@ public class EditData : MonoBehaviour
 
         yield return new WaitUntil(() => result.isDone == true);
 
-        var N = JSON.Parse(result.text);
+        //var N = JSON.Parse(result.text);
     }
 
-    IEnumerator getQuestionById(int ID)
+    [Serializable]
+    public class QuestionForEdit
     {
-        ApiHandler api = GameObject.Find("ApiHandler").GetComponentInChildren<ApiHandler>();
-
-        Dictionary<string, string> post = new Dictionary<string, string>();
-        post.Add("action", "getQuestionById");
-        post.Add("id", ID.ToString());
-
-        WWW result = api.POST(post);
-
-        yield return new WaitUntil(() => result.isDone == true);
-
-        var N = JSON.Parse(result.text);
-
-        if (N["error"] == null)
-        {
-            questionText.text = N["question"];
-            rightAnswerText.text = N["correctAnwser"];
-            wrongAnswer1Text.text = N["wrongAnwser1"];
-            wrongAnswer2Text.text = N["wrongAnwser2"];
-            wrongAnswer3Text.text = N["wrongAnwser3"];
-            Debug.Log(ID + " was loaded!");
-        }
+        public int IdNumber;
+        public string question;
+        public string rightAnswer;
+        public string wrongAnswer1;
+        public string wrongAnswer2;
+        public string wrongAnswer3;
     }
 }

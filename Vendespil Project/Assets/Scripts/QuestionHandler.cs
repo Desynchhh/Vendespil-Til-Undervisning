@@ -28,11 +28,6 @@ public class QuestionHandler
 
         var N = JSON.Parse(result.text);
 
-
-<<<<<<< HEAD
     }
     */
-=======
-    }*/
->>>>>>> 39e52a4b7185e452b24c5bf6d72e071f6e410f8d
 }
