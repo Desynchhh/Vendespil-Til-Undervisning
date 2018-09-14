@@ -4,8 +4,8 @@
  * This is the class used to get and return data to database
  */
 class ApiClass {
-    private $_db;
-    private $_returnData;
+    protected $_db;
+    protected $_returnData;
 
     /**
      * ApiClass constructor.
@@ -76,6 +76,9 @@ class ApiClass {
             case "getQuestionById":
                 $this->_returnData = $this->getQuestionById(@$_POST['id']);
                 break;
+            case "deleteQuestionById":
+                $this->_returnData = $this->deleteQuestionById(@$_POST['id']);
+                break;
 
             /**
              * Team API methods
@@ -107,7 +110,7 @@ class ApiClass {
      * Return all teams in the database.
      * @return array
      */
-    function getAllTeams()
+    public function getAllTeams()
     {
         $data = $this->_db->get('teams');
         return $data;
@@ -118,7 +121,7 @@ class ApiClass {
      * @param $id
      * @return array
      */
-    function getTeamById($id)
+    public function getTeamById($id)
     {
         $this->_db->where('id', $id);
         $data = $this->_db->get('teams');
@@ -130,7 +133,7 @@ class ApiClass {
      * @param $name
      * @return array
      */
-    function getTeamByName($name)
+    public function getTeamByName($name)
     {
         $this->_db->where('name', $name);
         $data = $this->_db->get('teams');
@@ -141,7 +144,7 @@ class ApiClass {
      * Return array of all questions from the database.
      * @return array
      */
-    function getAllQuestions()
+    public function getAllQuestions()
     {
         $questions = $this->_db->get('questions');
         return $questions;
@@ -153,7 +156,7 @@ class ApiClass {
      * @param $id
      * @return array
      */
-    function getQuestionsByTeamId($id)
+    public function getQuestionsByTeamId($id)
     {
         $this->_db->where('teamId', $id);
         $questions = $this->_db->get('questions');
@@ -166,7 +169,7 @@ class ApiClass {
      * @param $id
      * @return array
      */
-    function getQuestionsByUserId($id)
+    public function getQuestionsByUserId($id)
     {
         $this->_db->where('userId', $id);
         $questions = $this->_db->get('questions');
@@ -178,7 +181,7 @@ class ApiClass {
      * @param $id
      * @return array
      */
-    function getQuestionById($id)
+    public function getQuestionById($id)
     {
         $this->_db->where('id', $id);
         $question = $this->_db->get('questions');
@@ -193,7 +196,7 @@ class ApiClass {
      * @param $id
      * @return array
      */
-    function getAllUsersWithQuestionsByTeamId($id)
+    public function getAllUsersWithQuestionsByTeamId($id)
     {
         // Make sure that id is not null
         if ($id == null)
@@ -228,7 +231,7 @@ class ApiClass {
      * @param $name
      * @return array
      */
-    function getUserByUsername($name)
+    public function getUserByUsername($name)
     {
         $this->_db->where ('username', $name);
         return $this->_db->getOne('users');
@@ -240,10 +243,20 @@ class ApiClass {
      * @param $id
      * @return array
      */
-    function getUsersByTeamId($id)
+    public function getUsersByTeamId($id)
     {
         $this->_db->where ('teamId', $id);
-        return $this->get('users');
+        return $this->_db->get('users');
+    }
+
+    /**
+     * Return array of all users that has no team id
+     * @return array
+     */
+    public function getAllUsersWithNoTeam()
+    {
+        $this->_db->where('teamId', null);
+        return $this->_db->get('users');
     }
 
     /**
@@ -251,7 +264,7 @@ class ApiClass {
      * @param $id
      * @return array
      */
-    function getUserById($id)
+    public function getUserById($id)
     {
         $this->_db->where ('id', $id);
         return $this->_db->getOne('users');
@@ -261,7 +274,7 @@ class ApiClass {
      * Return array with all users in the database.
      * @return array
      */
-    function getAllUsers()
+    public function getAllUsers()
     {
         return $this->_db->get('users');
     }
@@ -272,7 +285,7 @@ class ApiClass {
      * @param $password
      * @return bool
      */
-    function checkUsernameAndPassword($username, $password)
+    public function checkUsernameAndPassword($username, $password)
     {
         if ($username == null || $password == null)
             return false;
@@ -290,27 +303,39 @@ class ApiClass {
      * @param $data
      * @return string
      */
-    function formatToJson($data)
+    public function formatToJson($data)
     {
         return json_encode($data, JSON_UNESCAPED_UNICODE);
     }
+
+    /**
+     * Delete question from the database based on ID
+     * @param $id
+     * @return bool
+     */
+    public function deleteQuestionById($id)
+    {
+        $this->_db->where('id', $id);
+        return $this->_db->delete('questions') ? true : false;
+    }
+
 
     /**
      * Return a json string formatted as the error message we use.
      * @param $errorMessage
      * @return array
      */
-    function errorMessage($errorMessage)
+    public function errorMessage($errorMessage)
     {
-        return ([ "error" => $errorMessage ]);
+        return (Array( "error" => $errorMessage ));
     }
 
-    function message($array)
+    public function message($array)
     {
         return $array;
     }
 
-    function checkUsernameAndPasswordJson($username, $password)
+    public function checkUsernameAndPasswordJson($username, $password)
     {
 
         $login = $this->checkUsernameAndPassword($username,$password);
@@ -318,14 +343,14 @@ class ApiClass {
         {
             $user = $this->getUserByUsername($username);
 
-            return $this->message([
+            return $this->message(Array(
                 "login" => $login,
                 "userdata" => $user
-            ]);
+            ));
         }
         else
         {
-            return $this->message(["login" => $login]);
+            return $this->message(Array( "login" => $login ));
         }
     }
 
