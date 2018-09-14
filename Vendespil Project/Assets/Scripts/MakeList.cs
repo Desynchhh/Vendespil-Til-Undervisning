@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts;
 using SimpleJSON;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -49,6 +50,7 @@ public class MakeList : MonoBehaviour {
 
     IEnumerator getQuestionsByUserId(int UserID)
     {
+        questions.Clear();
         ApiHandler api = GameObject.Find("ApiHandler").GetComponentInChildren<ApiHandler>();
 
         Dictionary<string, string> post = new Dictionary<string, string>();
@@ -78,10 +80,8 @@ public class MakeList : MonoBehaviour {
 
         foreach(var item in questions)
         {
-            Debug.Log("ID: (" + item.IdNumber + ") Spørgsmål: (" + item.question + ") Rigtigt: (" + item.rightAnswer + ") Forkert1: (" + item.wrongAnswer1 + ") Forkert2: (" + item.wrongAnswer2 + ") Forkert3: (" + item.wrongAnswer3 + ")");
+            print("ID: (" + item.IdNumber + ") Spørgsmål: (" + item.question + ") Rigtigt: (" + item.rightAnswer + ") Forkert1: (" + item.wrongAnswer1 + ") Forkert2: (" + item.wrongAnswer2 + ") Forkert3: (" + item.wrongAnswer3 + ")");
         }
-
-        questions.Clear();
     }
 
     private void OnEnable()
@@ -89,6 +89,7 @@ public class MakeList : MonoBehaviour {
         StartCoroutine(AddList());
     }
 
+    [Serializable]
     public class LoadedQuestion
     {
         public int IdNumber;

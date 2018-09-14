@@ -36,7 +36,7 @@ namespace Assets.Scripts
             // check for errors
             if (www.error == null)
             {
-                Debug.Log("API Sucess: " + www.text);
+                //Debug.Log("API Sucess: " + www.text);
             }
             else
             {
