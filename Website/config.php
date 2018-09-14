@@ -1,8 +1,8 @@
 <?php
 
 // Require needed files for the API to work
-include_once (__DIR__ . '/classes/dbObject.php'); // Used for the MySQLIDB object
-include_once (__DIR__ . '/classes/MysqliDb.php'); // Class used for database
+require_once (__DIR__ . '/classes/MysqliDb.php'); // Class used for database
+include_once (__DIR__ . '/classes/ApiClass.php'); // API Class with all the methods
 
 session_start();
 

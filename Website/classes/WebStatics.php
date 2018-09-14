@@ -3,13 +3,14 @@
 class WebStatics
 {
     private $_db;
-
+    private $_apiClass;
     /**
      * LoginClass constructor.
      */
     public function __construct()
     {
         $this->_db = MysqliDb::getInstance();
+        $this->_apiClass = new ApiClass();
     }
 
     /**

@@ -13,7 +13,6 @@ if (empty($_POST)) {
 }
 
 include_once (__DIR__ . '/config.php');
-include_once (__DIR__ . '/classes/ApiClass.php'); // API Class with all the methods
 
 $api_object = new ApiClass();
 $api_object->handlePostRequest();
