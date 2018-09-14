@@ -24,8 +24,8 @@ public class GameController : MonoBehaviour
     public GameObject contentEdit;
 
     [Header("Sorting Lists")]
-    private List<Transform> unorderedQuestions = new List<Transform>();
-    private List<Transform> orderedQuestions = new List<Transform>();
+    public List<MakeList.LoadedQuestion> unorderedQuestions = new List<MakeList.LoadedQuestion>();
+    public List<MakeList.LoadedQuestion> orderedQuestions = new List<MakeList.LoadedQuestion>();
     private string rightAnswer;
 
     [Header("Variables")]
@@ -86,19 +86,23 @@ public class GameController : MonoBehaviour
         txtGreen = new Color32(0x88, 0xD6, 0x0D, 0xFF);
     }
 
-    public void SetQuestionsRandomOrder()
+    public void SetQuestions(List <MakeList.LoadedQuestion> test)
     {
-        if (orderedQuestions.Count >= 0 || unorderedQuestions.Count >= 0)
+        /*if (orderedQuestions.Count >= 0 || unorderedQuestions.Count >= 0)
         {
             totalQuestions = 0;
             totalAnswered = 0;
             unorderedQuestions.Clear();
             orderedQuestions.Clear();
-        }
+        }*/
+        unorderedQuestions = test;
+    }
 
-        foreach (Transform child in contentEdit.transform)
+    public void SetQuestionsRandomOrder()
+    {
+
+        foreach (var question in unorderedQuestions)
         {
-            unorderedQuestions.Add(child);
             totalQuestions++;
         }
 
@@ -118,7 +122,7 @@ public class GameController : MonoBehaviour
             hasOrderedQuestions = true;
             for (int i = 0; i <= totalQuestions - 1; i++)
             {
-                Transform temp;
+                MakeList.LoadedQuestion temp;
                 int randomIndex = Random.Range(0, unorderedQuestions.Count);
                 temp = unorderedQuestions[randomIndex];
                 orderedQuestions.Add(unorderedQuestions[randomIndex]);
@@ -151,14 +155,13 @@ public class GameController : MonoBehaviour
             GetComponent<MenuManager>().GoToResults();
         }
 
-        else if (questionField.GetComponentInChildren<Text>().text != orderedQuestions[totalAnswered].GetChild(0).GetComponent<ButtonManager>().question)
+        else if (questionField.GetComponentInChildren<Text>().text != orderedQuestions[totalAnswered].question)
         {
             progress.text = totalAnswered + 1 + "/" + totalQuestions;
-
-            ButtonManager questionInfo = orderedQuestions[totalAnswered].GetChild(0).GetComponent<ButtonManager>();
-            rightAnswer = questionInfo.answer;
-            questionField.GetComponentInChildren<Text>().text = questionInfo.question;
-            SetRandomOrder(questionInfo);
+            
+            rightAnswer = orderedQuestions[totalAnswered].rightAnswer;
+            questionField.GetComponentInChildren<Text>().text = orderedQuestions[totalAnswered].question;
+            SetRandomOrder(orderedQuestions[totalAnswered].rightAnswer, orderedQuestions[totalAnswered].wrongAnswer1, orderedQuestions[totalAnswered].wrongAnswer2, orderedQuestions[totalAnswered].wrongAnswer3);
         }
     }
 
@@ -263,18 +266,20 @@ public class GameController : MonoBehaviour
             bgOverlay.gameObject.SetActive(false);
         }
         rightAnswerScore.GetComponentInChildren<Text>().text = string.Format("DU FIK\n {0} / {1}\n RIGTIGE!", answeredRight, totalQuestions);
+
+        Reset();
     }
 
-    private void SetRandomOrder(ButtonManager questionInfo)
+    private void SetRandomOrder(string rightAnswer, string wrongAnswer1, string wrongAnswer2, string wrongAnswer3)
     {
         List<string> answersList = new List<string>();
         List<string> randomOrderList = new List<string>();
-        answersList.Add(questionInfo.answer);
-        answersList.Add(questionInfo.wrongAnswer1);
-        if(questionInfo.wrongAnswer2 != "")
-            answersList.Add(questionInfo.wrongAnswer2);
-        if (questionInfo.wrongAnswer3 != "")
-            answersList.Add(questionInfo.wrongAnswer3);
+        answersList.Add(rightAnswer);
+        answersList.Add(wrongAnswer1);
+        if(wrongAnswer2 != "")
+            answersList.Add(wrongAnswer2);
+        if (wrongAnswer3 != "")
+            answersList.Add(wrongAnswer3);
         int listCount = answersList.Count-1;
         for (int i = 0; i <= listCount; i++)
         {
@@ -300,5 +305,13 @@ public class GameController : MonoBehaviour
         }
         else
             btnAnswer4.SetActive(false);
+    }
+
+    private void Reset()
+    {
+        unorderedQuestions.Clear();
+        orderedQuestions.Clear();
+        totalAnswered = 0;
+        totalQuestions = 0;
     }
 }

@@ -12,7 +12,7 @@ public class QuestionHandler
 
   
     }
-
+    /*
     public List<Question> ReturnAllQuestions()
     {
         ApiHandler api = GameObject.Find("ApiHandler").GetComponentInChildren<ApiHandler>();
@@ -29,5 +29,5 @@ public class QuestionHandler
         var N = JSON.Parse(result.text);
 
 
-    }
+    }*/
 }
