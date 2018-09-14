@@ -46,7 +46,9 @@ public class MakeList : MonoBehaviour {
     public void SetData(int ID)
     {
         StartCoroutine(getQuestionsByUserId(ID));
+
     }
+
 
     IEnumerator getQuestionsByUserId(int UserID)
     {
@@ -82,6 +84,11 @@ public class MakeList : MonoBehaviour {
         {
             print("ID: (" + item.IdNumber + ") Spørgsmål: (" + item.question + ") Rigtigt: (" + item.rightAnswer + ") Forkert1: (" + item.wrongAnswer1 + ") Forkert2: (" + item.wrongAnswer2 + ") Forkert3: (" + item.wrongAnswer3 + ")");
         }
+<<<<<<< HEAD
+=======
+        transform.root.Find("Manager").GetComponent<GameController>().SetQuestions(questions);
+        transform.root.Find("Manager").GetComponent<GameController>().SetQuestionsRandomOrder();
+>>>>>>> 39e52a4b7185e452b24c5bf6d72e071f6e410f8d
     }
 
     private void OnEnable()

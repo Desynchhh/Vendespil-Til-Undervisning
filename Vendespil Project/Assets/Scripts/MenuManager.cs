@@ -25,13 +25,19 @@ public class MenuManager : MonoBehaviour
     public Sprite bgDefault;
     public Sprite bgGame;
 
-    public void PlayGame()
+    public void ChooseQuestions()
     {
         PanelResults.SetActive(false);
         PanelMainMenu.SetActive(false);
         PanelPickList.SetActive(true);
         //PanelQuestion.SetActive(true);
         background.sprite = bgGame;
+    }
+
+    public void PlayGame()
+    {
+        PanelPickList.SetActive(false);
+        PanelQuestion.SetActive(true);
     }
 
     public void CloseWarning()
