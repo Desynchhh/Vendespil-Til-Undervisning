@@ -8,6 +8,7 @@ public class ListButton : MonoBehaviour {
 
     public void SendID()
     {
+        Debug.Log(UserID);
         GameObject.Find("Manager").GetComponent<MakeList>().SetData(UserID);
     }
 }
