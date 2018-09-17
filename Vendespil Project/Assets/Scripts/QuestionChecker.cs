@@ -13,7 +13,7 @@ public class QuestionChecker : MonoBehaviour
     [Header("Warning Panel")]
     public GameObject PanelWarning;
 
-    [Header("Create")]
+    [Header("Create Menu")]
     public Transform createParFields;
     public InputField createQuestion;
     public InputField createAnswer;
@@ -21,7 +21,7 @@ public class QuestionChecker : MonoBehaviour
     public InputField createWrongAnswer2;
     public InputField createWrongAnswer3;
 
-    [Header("Edit")]
+    [Header("Edit Menu")]
     public Transform editParFields;
     public InputField editQuestion;
     public InputField editAnswer;
@@ -32,11 +32,15 @@ public class QuestionChecker : MonoBehaviour
     public void CheckCreate()
     {
         CreateCheckDupes();
+        if (passedCheck)
+            CreateCheckBlank();
     }
 
     public void CheckEdit()
     {
         EditCheckDupes();
+        if (passedCheck)
+            EditCheckBlank();
     }
 
     private void CreateCheckDupes()
@@ -76,12 +80,10 @@ public class QuestionChecker : MonoBehaviour
             }
             else
             {
-                counter = 0;
+                //counter = 0;
                 passedCheck = true;
             }
         }
-        if (passedCheck)
-            CreateCheckBlank();
     }
 
     private void EditCheckDupes()
@@ -125,30 +127,35 @@ public class QuestionChecker : MonoBehaviour
                 counter = 0;
             }
         }
-        if (passedCheck)
-            EditCheckBlank();
-
     }
 
     private void CreateCheckBlank()
     {
-        if (createParFields.transform.GetChild(0).GetComponent<InputField>().text == "" || createParFields.transform.GetChild(1).GetComponent<InputField>().text == "" || createParFields.transform.GetChild(2).GetComponent<InputField>().text == "")
+        foreach (Transform child in createParFields)
         {
-            Debug.Log("Blank detected!");
-            passedCheck = false;
-            PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().fontSize = 50;
-            PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().text = "DER SKAL VÆRE MINIMUM 2 SVARMULIGHEDER OG 1 SPØRGSMÅL";
-            PanelWarning.transform.Find("btnOK").gameObject.SetActive(true);
-            PanelWarning.transform.Find("btnYesAll").gameObject.SetActive(false);
-            PanelWarning.transform.Find("btnYesSingle").gameObject.SetActive(false);
-            PanelWarning.transform.Find("btnNo").gameObject.SetActive(false);
-            PanelWarning.SetActive(true);
+            if (child.GetComponent<InputField>().text == "")
+            {
+                Debug.Log("Blank detected!");
+                passedCheck = false;
+                PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().fontSize = 50;
+                PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().text = "DER SKAL VÆRE MINIMUM 2 SVARMULIGHEDER OG 1 SPØRGSMÅL";
+                PanelWarning.transform.Find("btnOK").gameObject.SetActive(true);
+                PanelWarning.transform.Find("btnYesAll").gameObject.SetActive(false);
+                PanelWarning.transform.Find("btnYesSingle").gameObject.SetActive(false);
+                PanelWarning.transform.Find("btnNo").gameObject.SetActive(false);
+                PanelWarning.SetActive(true);
+            }
+            else
+            {
+                passedCheck = true;
+                break;
+            }
         }
-        else
-            passedCheck = true;
+        //if (createParFields.transform.GetChild(0).GetComponent<InputField>().text == "" || createParFields.transform.GetChild(1).GetComponent<InputField>().text == "" || createParFields.transform.GetChild(2).GetComponent<InputField>().text == "")
+        //{
+        //}
         if (passedCheck)
         {
-            //GetComponent<AddXML>().Add();
             PanelEditMenu.GetComponent<CreateButton>().SpawnEditButton();
             PanelEditMenu.GetComponent<CreateButton>().ClearFields();
             GetComponent<MenuManager>().GoToEditMenu();
@@ -157,24 +164,32 @@ public class QuestionChecker : MonoBehaviour
 
     private void EditCheckBlank()
     {
-        if (editParFields.transform.GetChild(0).GetComponent<InputField>().text == "" || editParFields.transform.GetChild(1).GetComponent<InputField>().text == "" || editParFields.transform.GetChild(2).GetComponent<InputField>().text == "")
+        foreach (Transform child in editParFields)
         {
-            Debug.Log("Blank detected!");
-            passedCheck = false;
-            PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().fontSize = 50;
-            PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().text = "DER SKAL VÆRE MINIMUM 2 SVARMULIGHEDER OG 1 SPØRGSMÅL";
-            PanelWarning.transform.Find("btnOK").gameObject.SetActive(true);
-            PanelWarning.transform.Find("btnYesAll").gameObject.SetActive(false);
-            PanelWarning.transform.Find("btnYesSingle").gameObject.SetActive(false);
-            PanelWarning.transform.Find("btnNo").gameObject.SetActive(false);
-            PanelWarning.SetActive(true);
+            if (child.GetComponent<InputField>().text == "")
+            {
+                Debug.Log("Blank detected!");
+                passedCheck = false;
+                PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().fontSize = 50;
+                PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().text = "DER SKAL VÆRE MINIMUM 2 SVARMULIGHEDER OG 1 SPØRGSMÅL";
+                PanelWarning.transform.Find("btnOK").gameObject.SetActive(true);
+                PanelWarning.transform.Find("btnYesAll").gameObject.SetActive(false);
+                PanelWarning.transform.Find("btnYesSingle").gameObject.SetActive(false);
+                PanelWarning.transform.Find("btnNo").gameObject.SetActive(false);
+                PanelWarning.SetActive(true);
+            }
+            else
+            {
+                passedCheck = true;
+                break;
+            }
         }
-        else
-            passedCheck = true;
+        //if (editParFields.transform.GetChild(0).GetComponent<InputField>().text == "" || editParFields.transform.GetChild(1).GetComponent<InputField>().text == "" || editParFields.transform.GetChild(2).GetComponent<InputField>().text == "")
+        //{
+        //}
 
         if (passedCheck)
         {
-            //GetComponent<EditXML>().Save();
             PanelEditMenu.GetComponent<CreateButton>().EditButtons();
             GetComponent<MenuManager>().GoToEditMenu();
         }
