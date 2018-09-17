@@ -8,6 +8,6 @@ public class ListButton : MonoBehaviour {
 
     public void SendID()
     {
-        GameObject.Find("Manager").GetComponent<MakeList>().SetData(UserID);
+        GameObject.Find("PanelPickList").GetComponent<MakeList>().SetData(UserID);
     }
 }
