@@ -82,7 +82,7 @@ public class MakeList : MonoBehaviour {
 
         foreach(var item in questions)
         {
-            Debug.Log("ID: (" + item.IdNumber + ") Spørgsmål: (" + item.question + ") Rigtigt: (" + item.rightAnswer + ") Forkert1: (" + item.wrongAnswer1 + ") Forkert2: (" + item.wrongAnswer2 + ") Forkert3: (" + item.wrongAnswer3 + ")");
+            print("ID: (" + item.IdNumber + ") Spørgsmål: (" + item.question + ") Rigtigt: (" + item.rightAnswer + ") Forkert1: (" + item.wrongAnswer1 + ") Forkert2: (" + item.wrongAnswer2 + ") Forkert3: (" + item.wrongAnswer3 + ")");
         }
         transform.root.Find("Manager").GetComponent<GameController>().SetQuestions(questions);
         transform.root.Find("Manager").GetComponent<GameController>().SetQuestionsRandomOrder();

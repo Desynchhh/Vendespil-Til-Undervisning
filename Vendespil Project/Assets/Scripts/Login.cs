@@ -51,7 +51,7 @@ public class Login : MonoBehaviour
         {
             UserData.User = new User
             {
-                id = N["userdata"]["username"],
+                id = N["userdata"]["id"],
                 name = N["userdata"]["name"],
                 password = N["userdata"]["password"],
                 isAdmin = N["userdata"]["isAdmin"],

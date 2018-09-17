@@ -4396,7 +4396,6 @@ GameObject:
   - component: {fileID: 177583044}
   - component: {fileID: 177583045}
   - component: {fileID: 177583046}
-  - component: {fileID: 177583047}
   m_Layer: 5
   m_Name: Manager
   m_TagString: Untagged
@@ -4410,7 +4409,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 177583037}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99772a892ea7c2744bf5b4560fb2443d, type: 3}
   m_Name: 
@@ -4530,7 +4529,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 177583037}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e4c2eb48c399a54aa8aca9f87ea7304, type: 3}
   m_Name: 
@@ -4595,20 +4594,6 @@ MonoBehaviour:
   WarningPanel: {fileID: 1325728234}
   Button: {fileID: 1029304713}
   TextBox: {fileID: 1211545806}
---- !u!114 &177583047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 177583037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab7186193c2ac154f9aa8cb5a228e315, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Content: {fileID: 1815571591}
-  Prefab: {fileID: 1562445366626904, guid: b753b803690fa00418447d4300c187a6, type: 2}
-  questions: []
 --- !u!1 &225637710
 GameObject:
   m_ObjectHideFlags: 0
@@ -23860,6 +23845,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1327644677}
   - component: {fileID: 1327644676}
+  - component: {fileID: 1327644675}
   m_Layer: 5
   m_Name: PanelMainMenu
   m_TagString: Untagged
@@ -23867,6 +23853,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &1327644675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1327644674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0330301955445f419f9db1d3a7d88af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 0
+  questionText: {fileID: 0}
+  rightAnswerText: {fileID: 0}
+  wrongAnswer1Text: {fileID: 0}
+  wrongAnswer2Text: {fileID: 0}
+  wrongAnswer3Text: {fileID: 0}
+  questions: []
 --- !u!222 &1327644676
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -30989,6 +30993,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1380169314}
   - component: {fileID: 1380169317}
+  - component: {fileID: 1380169315}
   m_Layer: 5
   m_Name: PanelPickList
   m_TagString: Untagged
@@ -31017,6 +31022,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -0.000061035156}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1380169315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1380169313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab7186193c2ac154f9aa8cb5a228e315, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Content: {fileID: 1815571591}
+  Prefab: {fileID: 1562445366626904, guid: b753b803690fa00418447d4300c187a6, type: 2}
+  questions: []
 --- !u!222 &1380169317
 CanvasRenderer:
   m_ObjectHideFlags: 0
