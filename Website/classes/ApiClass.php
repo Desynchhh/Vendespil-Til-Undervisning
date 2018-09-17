@@ -272,12 +272,12 @@ class ApiClass {
 
         if ($userId != null)
         {
-            $insertData['userId'] = $userId;
+            $data['userId'] = $userId;
         }
 
         if ($teamId != null)
         {
-            $insertData['teamId'] = $teamId;
+            $data['teamId'] = $teamId;
         }
 
         $this->_db->where ('id', $id);
@@ -447,6 +447,7 @@ class ApiClass {
     {
 
         $login = $this->checkUsernameAndPassword($username,$password);
+
         if ($login)
         {
             $user = $this->getUserByUsername($username);
