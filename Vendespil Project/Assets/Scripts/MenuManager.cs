@@ -27,16 +27,15 @@ public class MenuManager : MonoBehaviour
 
     public void ChooseQuestions()
     {
-        PanelResults.SetActive(false);
         PanelMainMenu.SetActive(false);
         PanelPickList.SetActive(true);
-        //PanelQuestion.SetActive(true);
         background.sprite = bgGame;
     }
 
     public void PlayGame()
     {
         PanelPickList.SetActive(false);
+        PanelResults.SetActive(false);
         PanelQuestion.SetActive(true);
     }
 

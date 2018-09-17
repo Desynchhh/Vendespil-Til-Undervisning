@@ -4396,6 +4396,7 @@ GameObject:
   - component: {fileID: 177583044}
   - component: {fileID: 177583045}
   - component: {fileID: 177583046}
+  - component: {fileID: 177583047}
   m_Layer: 5
   m_Name: Manager
   m_TagString: Untagged
@@ -4500,7 +4501,7 @@ MonoBehaviour:
   btnAnswer3: {fileID: 1793753567}
   btnAnswer4: {fileID: 726306716}
   progress: {fileID: 1041414426}
-  contentEdit: {fileID: 1783896952}
+  selectedQuestions: []
   unorderedQuestions: []
   orderedQuestions: []
   hasOrderedQuestions: 0
@@ -4594,6 +4595,20 @@ MonoBehaviour:
   WarningPanel: {fileID: 1325728234}
   Button: {fileID: 1029304713}
   TextBox: {fileID: 1211545806}
+--- !u!114 &177583047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 177583037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab7186193c2ac154f9aa8cb5a228e315, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Content: {fileID: 1815571591}
+  Prefab: {fileID: 1562445366626904, guid: b753b803690fa00418447d4300c187a6, type: 2}
+  questions: []
 --- !u!1 &225637710
 GameObject:
   m_ObjectHideFlags: 0
@@ -14806,6 +14821,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 177583042}
+        m_MethodName: Reset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 177583041}
         m_MethodName: GoToMainMenu
         m_Mode: 1
@@ -46202,7 +46228,29 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 177583042}
+        m_MethodName: Reset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 177583042}
         m_MethodName: SetQuestionsRandomOrder
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 177583041}
+        m_MethodName: PlayGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
