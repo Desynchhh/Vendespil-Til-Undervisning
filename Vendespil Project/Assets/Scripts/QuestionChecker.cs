@@ -148,7 +148,7 @@ public class QuestionChecker : MonoBehaviour
             passedCheck = true;
         if (passedCheck)
         {
-            GetComponent<AddXML>().Add();
+            //GetComponent<AddXML>().Add();
             PanelEditMenu.GetComponent<CreateButton>().SpawnEditButton();
             PanelEditMenu.GetComponent<CreateButton>().ClearFields();
             GetComponent<MenuManager>().GoToEditMenu();
@@ -174,7 +174,7 @@ public class QuestionChecker : MonoBehaviour
 
         if (passedCheck)
         {
-            GetComponent<EditXML>().Save();
+            //GetComponent<EditXML>().Save();
             PanelEditMenu.GetComponent<CreateButton>().EditButtons();
             GetComponent<MenuManager>().GoToEditMenu();
         }

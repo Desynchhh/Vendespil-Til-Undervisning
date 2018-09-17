@@ -27,7 +27,7 @@ public class ButtonManager : MonoBehaviour
 
     private string filePath;
 
-    
+    /*
     public void LoadInfo(int idToFind)
     {
         filePath = Application.persistentDataPath + "/Data.xml";
@@ -51,4 +51,5 @@ public class ButtonManager : MonoBehaviour
             wrongAnswer3 = q.wrongAnswer3.ToString();
         });
     }
+    */
 }

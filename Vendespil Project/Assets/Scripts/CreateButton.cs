@@ -35,11 +35,11 @@ public class CreateButton : MonoBehaviour
 
     [HideInInspector]
     public int editId;
-    private string filePath;
+    //private string filePath;
 
     private void Start()
     {
-        filePath = Application.persistentDataPath + "/Data.xml";
+        //filePath = Application.persistentDataPath + "/Data.xml";
     }
 
     public void SpawnEditButton()
@@ -49,7 +49,7 @@ public class CreateButton : MonoBehaviour
         Transform panel = instantiatedButton.transform.GetChild(1);
         GameObject button = instantiatedButton.transform.GetChild(0).gameObject;
         ButtonManager buttonData = button.GetComponent<ButtonManager>();
-        buttonData.LoadInfo(nextId);
+        //buttonData.LoadInfo(nextId);
         //button.GetComponent<Button>().onClick.AddListener(() => transform.root.Find("Manager").GetComponent<MenuManager>().OpenQuestionPanel(EventSystem.current.currentSelectedGameObject.transform.parent.name));
         buttonData.id = nextId;
         panel.GetChild(1).GetComponent<Button>().onClick.AddListener(() => DeleteSingleWarning(EventSystem.current.currentSelectedGameObject.transform.parent.parent.GetChild(0).gameObject.GetComponent<ButtonManager>().id));
@@ -69,7 +69,7 @@ public class CreateButton : MonoBehaviour
         Transform panel = instantiatedButton.transform.GetChild(1);
         GameObject button = instantiatedButton.transform.GetChild(0).gameObject;
         ButtonManager buttonData = button.GetComponent<ButtonManager>();
-        buttonData.LoadInfo(nextId);
+        //buttonData.LoadInfo(nextId);
         //button.GetComponent<Button>().onClick.AddListener(() => transform.root.Find("Manager").GetComponent<MenuManager>().OpenQuestionPanel(EventSystem.current.currentSelectedGameObject.transform.parent.name));
         buttonData.id = nextId;
         panel.GetChild(1).GetComponent<Button>().onClick.AddListener(() => DeleteSingleWarning(EventSystem.current.currentSelectedGameObject.transform.parent.parent.GetChild(0).gameObject.GetComponent<ButtonManager>().id));
@@ -177,6 +177,7 @@ public class CreateButton : MonoBehaviour
             {
                 if (deleteId == maxId)
                 {
+                    /*
                     if (File.Exists(filePath) && File.ReadAllLines(filePath).Length <= 12)
                     {
                         nextId = 1;
@@ -187,8 +188,9 @@ public class CreateButton : MonoBehaviour
                     {
                         GetMaxID();
                     }
+                    */
                 }
-                transform.root.Find("Manager").GetComponent<EditXML>().RemoveSingle(deleteId);
+                //transform.root.Find("Manager").GetComponent<EditXML>().RemoveSingle(deleteId);
                 Destroy(child.gameObject);
             }
         }

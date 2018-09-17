@@ -59,6 +59,7 @@ public class Login : MonoBehaviour
                 username = N["userdata"]["username"]
             };
             GameObject.Find("Manager").GetComponent<LoginWarning>().DisplayWarning(correctLogin, UserData.User.name);
+            GameObject.Find("Manager").GetComponent<MakeList>().MakeListOnPlay();
         }
         else
         {

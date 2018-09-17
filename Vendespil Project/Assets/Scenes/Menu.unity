@@ -4389,8 +4389,6 @@ GameObject:
   m_Component:
   - component: {fileID: 177583039}
   - component: {fileID: 177583040}
-  - component: {fileID: 177583038}
-  - component: {fileID: 177583043}
   - component: {fileID: 177583041}
   - component: {fileID: 177583042}
   - component: {fileID: 177583044}
@@ -4404,24 +4402,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &177583038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 177583037}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99772a892ea7c2744bf5b4560fb2443d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  QuestionText: {fileID: 342351639}
-  RightAswer: {fileID: 2054819718}
-  WrongAnswer1: {fileID: 1580123664}
-  WrongAnswer2: {fileID: 277650158}
-  WrongAnswer3: {fileID: 2020222946}
-  itemDB:
-    list: []
 --- !u!4 &177583039
 Transform:
   m_ObjectHideFlags: 0
@@ -4524,24 +4504,6 @@ MonoBehaviour:
   score50: {fileID: 21300000, guid: f447c0a81ee760446b168a8be0c63824, type: 3}
   scoreGt50: {fileID: 21300000, guid: 26654c460d0e7d7439a989ef44772615, type: 3}
   score100: {fileID: 21300000, guid: 6f0ee3261d12b5e438fb55f902663e10, type: 3}
---- !u!114 &177583043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 177583037}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e4c2eb48c399a54aa8aca9f87ea7304, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ID: 0
-  questionText: {fileID: 2105595237}
-  rightAnswerText: {fileID: 1648020255}
-  wrongAnswer1Text: {fileID: 1080598812}
-  wrongAnswer2Text: {fileID: 844527805}
-  wrongAnswer3Text: {fileID: 445796736}
-  EditID: 0
 --- !u!114 &177583044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4601,7 +4563,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 177583037}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab7186193c2ac154f9aa8cb5a228e315, type: 3}
   m_Name: 
@@ -23540,7 +23502,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 177583043}
+      - m_Target: {fileID: 0}
         m_MethodName: RemoveAll
         m_Mode: 1
         m_Arguments:
@@ -23861,6 +23823,7 @@ GameObject:
   - component: {fileID: 1327644677}
   - component: {fileID: 1327644676}
   - component: {fileID: 1327644675}
+  - component: {fileID: 1327644678}
   m_Layer: 5
   m_Name: PanelMainMenu
   m_TagString: Untagged
@@ -23914,6 +23877,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1327644678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1327644674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab7186193c2ac154f9aa8cb5a228e315, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Content: {fileID: 1815571591}
+  Prefab: {fileID: 1562445366626904, guid: b753b803690fa00418447d4300c187a6, type: 2}
+  questions: []
 --- !u!1 &1332799375
 GameObject:
   m_ObjectHideFlags: 0
@@ -31008,7 +30985,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1380169314}
   - component: {fileID: 1380169317}
-  - component: {fileID: 1380169315}
   m_Layer: 5
   m_Name: PanelPickList
   m_TagString: Untagged
@@ -31037,20 +31013,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -0.000061035156}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1380169315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1380169313}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab7186193c2ac154f9aa8cb5a228e315, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Content: {fileID: 1815571591}
-  Prefab: {fileID: 1562445366626904, guid: b753b803690fa00418447d4300c187a6, type: 2}
-  questions: []
 --- !u!222 &1380169317
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -41913,7 +41875,6 @@ GameObject:
   - component: {fileID: 2043085256}
   - component: {fileID: 2043085255}
   - component: {fileID: 2043085254}
-  - component: {fileID: 2043085257}
   m_Layer: 5
   m_Name: ButtonPlay
   m_TagString: Untagged
@@ -41979,6 +41940,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 177583047}
+        m_MethodName: MakeListOnPlay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 177583041}
         m_MethodName: ChooseQuestions
         m_Mode: 1
@@ -42025,36 +41997,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2043085252}
---- !u!114 &2043085257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2043085252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: isClickedPlay
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
-        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  delegates: []
 --- !u!1 &2054819716
 GameObject:
   m_ObjectHideFlags: 0

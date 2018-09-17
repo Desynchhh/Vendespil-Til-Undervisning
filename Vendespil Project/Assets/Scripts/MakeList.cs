@@ -88,10 +88,11 @@ public class MakeList : MonoBehaviour {
         transform.root.Find("Manager").GetComponent<GameController>().SetQuestionsRandomOrder();
     }
 
-    private void OnEnable()
+    public void MakeListOnPlay()
     {
         StartCoroutine(AddList());
     }
+
 
     [Serializable]
     public class LoadedQuestion

@@ -68,7 +68,7 @@ public class MenuManager : MonoBehaviour
 
     public void GoToEditQuestion(int editId)
     {
-        transform.GetComponent<EditXML>().EditID = editId;
+        //transform.GetComponent<EditXML>().EditID = editId;
         transform.parent.Find("PanelEditMenu").GetComponent<CreateButton>().editId = editId;
         PanelEditMenu.SetActive(false);
         PanelEditQuestion.SetActive(true);
