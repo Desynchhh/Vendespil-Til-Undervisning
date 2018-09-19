@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 17, 2018 at 01:08 PM
+-- Generation Time: Aug 30, 2018 at 09:52 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -34,18 +34,18 @@ CREATE TABLE `questions` (
   `teamId` int(11) NOT NULL,
   `question` text NOT NULL,
   `correctAnwser` text NOT NULL,
-  `wrongAnswer1` text NOT NULL,
-  `wrongAnswer2` text NOT NULL,
-  `wrongAnswer3` text NOT NULL
+  `wrongAnwser1` text NOT NULL,
+  `wrongAnwser2` text NOT NULL,
+  `wrongAnwser3` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `questions`
 --
 
-INSERT INTO `questions` (`id`, `userId`, `teamId`, `question`, `correctAnwser`, `wrongAnswer1`, `wrongAnswer2`, `wrongAnswer3`) VALUES
-(3, 3, 2, 'awd', 'awd', 'awd', 'awd', 'awd'),
-(4, 2, 2, 'awd', 'awd', 'awd', 'awd', 'awd');
+INSERT INTO `questions` (`id`, `userId`, `teamId`, `question`, `correctAnwser`, `wrongAnwser1`, `wrongAnwser2`, `wrongAnwser3`) VALUES
+(1, 1, 1, 'Hvad er 1+1?', '2', '4', '6', '3'),
+(2, 1, 1, 'Hvad er solen?', 'En stjerne', 'En ost', 'En Torsk', '');
 
 -- --------------------------------------------------------
 
@@ -80,7 +80,7 @@ CREATE TABLE `users` (
   `username` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
   `isAdmin` int(2) NOT NULL DEFAULT '0',
-  `teamId` int(11) DEFAULT NULL
+  `teamId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -88,9 +88,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `password`, `isAdmin`, `teamId`) VALUES
-(1, 'Simeon Lucas Dahl', 'simeondahl', 'simeon1234', 0, 1),
-(2, 'Kris Larsen', 'krisl', 'kris1234', 0, NULL),
-(3, 'Test Test', 'test', 'test', 1, 2);
+(1, 'Simeon Dahl', 'simeondahl', 'simeon1234', 0, 1),
+(2, 'Kris Larsen', 'krisl', 'kris1234', 0, 1);
 
 --
 -- Indexes for dumped tables
@@ -125,19 +124,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `teams`
 --
 ALTER TABLE `teams`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

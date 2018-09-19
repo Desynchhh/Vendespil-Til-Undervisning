@@ -8,10 +8,11 @@ session_start();
 
 // Database object used for the database
 $db = new MysqliDb (Array (
-	'host' => '10.11.4.190',
-    'username' => 'test',
-    'password' => 'test',
+    'host' => 'localhost',
+    'username' => 'root',
+    'password' => '',
     'db'=> 'skp-quiz',
     'port' => 3306,
     'prefix' => '',
-    'charset' => 'utf8'));
+    'charset' => 'utf8')
+);
