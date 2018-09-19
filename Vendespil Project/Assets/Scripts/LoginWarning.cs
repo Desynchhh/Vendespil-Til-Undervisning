@@ -33,6 +33,12 @@ public class LoginWarning : MonoBehaviour {
         WarningPanel.SetActive(true);
     }
 
+    public void DisplayError()
+    {
+        TextBox.text = "ADVARSEL! \n Serveren blev ikke fundet";
+        WarningPanel.SetActive(true);
+    }
+
     public void RemoveWarning()
     {
         if(SuccessfulTemp == true)

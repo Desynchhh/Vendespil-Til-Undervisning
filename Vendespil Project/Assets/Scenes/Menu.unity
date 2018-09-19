@@ -8273,7 +8273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fff1ba351fe4ce847b8056ba95a175dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  URL: http://localhost/api.php
+  URL: http://10.11.4.190/api.php
 --- !u!1 &302767341
 GameObject:
   m_ObjectHideFlags: 0
@@ -23842,12 +23842,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0330301955445f419f9db1d3a7d88af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 0
-  questionText: {fileID: 0}
-  rightAnswerText: {fileID: 0}
-  wrongAnswer1Text: {fileID: 0}
-  wrongAnswer2Text: {fileID: 0}
-  wrongAnswer3Text: {fileID: 0}
   questions: []
 --- !u!222 &1327644676
 CanvasRenderer:

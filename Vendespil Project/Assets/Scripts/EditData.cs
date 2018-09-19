@@ -8,15 +8,6 @@ using UnityEngine.UI;
 
 public class EditData : MonoBehaviour
 {
-    [Header("Int")]
-    public int ID;
-
-    [Header("InputFields")]
-    public InputField questionText;
-    public InputField rightAnswerText;
-    public InputField wrongAnswer1Text;
-    public InputField wrongAnswer2Text;
-    public InputField wrongAnswer3Text;
 
     public List<QuestionForEdit> questions = new List<QuestionForEdit>();
 
@@ -25,7 +16,7 @@ public class EditData : MonoBehaviour
         StartCoroutine(LoadQuestionsForEdit());
     }
 
-    public void Save() //int EditID, string question, string rightAnswer, string wrongAnswer1, string wrongAnswer2, string wrongAnswer3)
+    public void Save() //int EditID, string question, string rightAnswer, string wrongAnswer1, string wrongAnswer2, string wrongAnswer3
     {
         //Send data til databasen så det bliver gemt.
     }
