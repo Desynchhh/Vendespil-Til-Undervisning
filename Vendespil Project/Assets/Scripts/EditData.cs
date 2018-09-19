@@ -53,10 +53,10 @@ public class EditData : MonoBehaviour
                 QuestionForEdit x = new QuestionForEdit();
                 x.IdNumber = item.Value["id"];
                 x.question = item.Value["question"];
-                x.rightAnswer = item.Value["correctAnwser"];
-                x.wrongAnswer1 = item.Value["wrongAnwser1"];
-                x.wrongAnswer2 = item.Value["wrongAnwser2"];
-                x.wrongAnswer3 = item.Value["wrongAnwser3"];
+                x.rightAnswer = item.Value["correctAnswer"];
+                x.wrongAnswer1 = item.Value["wrongAnswer1"];
+                x.wrongAnswer2 = item.Value["wrongAnswer2"];
+                x.wrongAnswer3 = item.Value["wrongAnswer3"];
                 questions.Add(x);
             }
         }
