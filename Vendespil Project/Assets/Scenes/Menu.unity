@@ -4427,15 +4427,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad7bc90bc4c673145aabcfa71b7f168c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainMenu: {fileID: 1327644674}
-  NoQuestionsWarningMenu: {fileID: 32805197}
-  EditMenu: {fileID: 1349743119}
-  CreateMenu: {fileID: 1912802251}
-  QuestionMenu: {fileID: 534621217}
-  ResultsMenu: {fileID: 1675650324}
-  EditQuestionMenu: {fileID: 361936591}
-  LoginMenu: {fileID: 1971774924}
-  PickList: {fileID: 1380169313}
 --- !u!114 &177583041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4495,7 +4486,7 @@ MonoBehaviour:
   overlayBad: {fileID: 21300000, guid: f44e0d45d4f8ee242933ba8f4db60ed5, type: 3}
   overlayGood: {fileID: 21300000, guid: a521baa4ef56352479da7dd921aa7df9, type: 3}
   btnNext: {fileID: 894875183}
-  score: {fileID: 1675650324}
+  panelResult: {fileID: 1675650324}
   smileyFace: {fileID: 23664606}
   smileyCannons: {fileID: 1067320396}
   smileyArms: {fileID: 1444813256}
@@ -41278,7 +41269,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1971774925
 RectTransform:
   m_ObjectHideFlags: 0

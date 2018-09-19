@@ -60,7 +60,7 @@ public class GameController : MonoBehaviour
     public GameObject btnNext;
 
     [Header("Results Field")]
-    public GameObject score;
+    public GameObject panelResult;
 
     [Header("Smiley")]
     public Image smileyFace;
@@ -215,7 +215,7 @@ public class GameController : MonoBehaviour
             smileyFace.sprite = score0;
             smileyArms.gameObject.SetActive(true);
             smileyCannons.gameObject.SetActive(false);
-            score.GetComponentInChildren<Text>().color = txtRed;
+            panelResult.GetComponentInChildren<Text>().color = txtRed;
             bgOverlay.GetComponent<Image>().sprite = overlayBad;
         }
         else if (answeredRight == totalQuestions)
@@ -223,7 +223,7 @@ public class GameController : MonoBehaviour
             smileyFace.sprite = score100;
             smileyArms.gameObject.SetActive(false);
             smileyCannons.gameObject.SetActive(true);
-            score.GetComponentInChildren<Text>().color = txtGreen;
+            panelResult.GetComponentInChildren<Text>().color = txtGreen;
             bgOverlay.GetComponent<Image>().sprite = overlayGood;
         }
         else if (answeredRight < totalQuestions / 2)
@@ -231,7 +231,7 @@ public class GameController : MonoBehaviour
             smileyFace.sprite = scoreLt50;
             smileyArms.gameObject.SetActive(false);
             smileyCannons.gameObject.SetActive(false);
-            score.GetComponentInChildren<Text>().color = txtRed;
+            panelResult.GetComponentInChildren<Text>().color = txtRed;
             bgOverlay.GetComponent<Image>().sprite = overlayBad;
         }
         else if (answeredRight > totalQuestions / 2)
@@ -239,7 +239,7 @@ public class GameController : MonoBehaviour
             smileyFace.sprite = scoreGt50;
             smileyArms.gameObject.SetActive(false);
             smileyCannons.gameObject.SetActive(false);
-            score.GetComponentInChildren<Text>().color = txtGreen;
+            panelResult.GetComponentInChildren<Text>().color = txtGreen;
             bgOverlay.GetComponent<Image>().sprite = overlayGood;
         }
         else if (answeredRight == totalQuestions / 2)
@@ -247,10 +247,10 @@ public class GameController : MonoBehaviour
             smileyFace.sprite = score50;
             smileyArms.gameObject.SetActive(false);
             smileyCannons.gameObject.SetActive(false);
-            score.GetComponentInChildren<Text>().color = txtBlack;
+            panelResult.GetComponentInChildren<Text>().color = txtBlack;
             bgOverlay.gameObject.SetActive(false);
         }
-        score.GetComponentInChildren<Text>().text = string.Format("DU FIK\n {0} / {1}\n RIGTIGE!", answeredRight, totalQuestions);
+        panelResult.GetComponentInChildren<Text>().text = string.Format("DU FIK\n {0} / {1}\n RIGTIGE!", answeredRight, totalQuestions);
     }
 
     private void SetRandomOrder(string rightAnswer, string wrongAnswer1, string wrongAnswer2, string wrongAnswer3)

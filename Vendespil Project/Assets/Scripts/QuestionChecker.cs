@@ -55,6 +55,7 @@ public class QuestionChecker : MonoBehaviour
         int counter = 0;
         for (int i = 0; i <= itemsToCheck.Count - 1; i++)
         {
+            Debug.Log(counter);
             if (itemsToCheck[i] == itemsToCheck[0] && itemsToCheck[0] != "")
                 counter++;
             if (itemsToCheck[i] == itemsToCheck[1] && itemsToCheck[1] != "")
@@ -65,6 +66,7 @@ public class QuestionChecker : MonoBehaviour
                 counter++;
             if (itemsToCheck[i] == itemsToCheck[4] && itemsToCheck[4] != "")
                 counter++;
+            Debug.Log(counter);
             if (counter >= 2)
             {
                 Debug.Log("Dupe detected!");
@@ -80,7 +82,7 @@ public class QuestionChecker : MonoBehaviour
             }
             else
             {
-                //counter = 0;
+                counter = 0;
                 passedCheck = true;
             }
         }
@@ -123,15 +125,15 @@ public class QuestionChecker : MonoBehaviour
             }
             else
             {
-                passedCheck = true;
                 counter = 0;
+                passedCheck = true;
             }
         }
     }
 
     private void CreateCheckBlank()
     {
-        foreach (Transform child in createParFields)
+        foreach (Transform child in createParFields)    //this replaces the if statement down below
         {
             if (child.GetComponent<InputField>().text == "")
             {
@@ -164,7 +166,7 @@ public class QuestionChecker : MonoBehaviour
 
     private void EditCheckBlank()
     {
-        foreach (Transform child in editParFields)
+        foreach (Transform child in editParFields)  //this replaces the if statement down below
         {
             if (child.GetComponent<InputField>().text == "")
             {
