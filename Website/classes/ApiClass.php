@@ -10,26 +10,29 @@ class ApiClass {
     /**
      * ApiClass constructor.
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->_db = MysqliDb::getInstance();
         $this->_returnData = null;
     }
 
     /**
      * Return the data og _returnData that is getting set after each method has been
-     * run in the handlePostRequest. When you get the data form this getReturnData() method
+     * run in the handlePostRequest. When you get the data form this getReturnDataAsJson() method
      * then it will already be json format.
-     * @return string Json
+     * @return string json
      */
     public function getReturnDataAsJson()
     {
-        if (is_bool($this->_returnData)) {
+        if (is_bool($this->_returnData))
+        {
             $this->_returnData = Array(
                 'status' => $this->_returnData
             );
         }
 
-        if ($this->_returnData == null || $this->_returnData == "null" ) {
+        if ($this->_returnData == null || $this->_returnData == "null" )
+        {
             $this->_returnData = $this->errorMessage("There was no data to show.");
         }
 
@@ -39,7 +42,7 @@ class ApiClass {
     /**
      * Handles the POST requests send to the API class to make sure that
      * the correct actions runs the correct values. If you want the data
-     * after the API as done it's job, then you need to call "getReturnData".
+     * after the API as done it's job, then you need to call "getReturnDataAsJson".
      * This variable will contain the requested data.
      */
     public function handlePostRequest()
@@ -150,7 +153,7 @@ class ApiClass {
 
     /**
      * Return array of team form database based on teamId.
-     * @param $id
+     * @param $id int
      * @return array
      */
     public function getTeamById($id)
@@ -162,7 +165,7 @@ class ApiClass {
 
     /**
      * Return array of teams form database based on name.
-     * @param $name
+     * @param $name string
      * @return array
      */
     public function getTeamByName($name)
@@ -185,7 +188,7 @@ class ApiClass {
     /**
      * Return array of questions form the database where TeamId is equal
      * to the $id parameter.
-     * @param $id
+     * @param $id int
      * @return array
      */
     public function getQuestionsByTeamId($id)
@@ -198,7 +201,7 @@ class ApiClass {
     /**
      * Return array of questions form the database where UserId is equal
      * to the $id parameter.
-     * @param $id
+     * @param $id int
      * @return array
      */
     public function getQuestionsByUserId($id)
@@ -210,7 +213,7 @@ class ApiClass {
 
     /**
      * Return array of a question based on the id.
-     * @param $id
+     * @param $id int
      * @return array
      */
     public function getQuestionById($id)
@@ -222,7 +225,7 @@ class ApiClass {
 
     /**
      * Delete question from the database based on ID
-     * @param $id
+     * @param $id int
      * @return bool
      */
     public function deleteQuestionById($id)
@@ -237,7 +240,7 @@ class ApiClass {
      * done or not.
      * True = Deleted
      * False = Error happened
-     * @param $id
+     * @param $id int
      * @return bool
      */
 	public function deleteAllQuestionsByUserId($id)
@@ -250,14 +253,14 @@ class ApiClass {
      * This method edits a question in the database based on the given ID.
      * The TeamId and UserID is not needed to edit a question, just keep
      * this in mind.
-     * @param $id
-     * @param $question
-     * @param $correctAnswer
-     * @param $wrongAnswerOne
-     * @param $wrongAnswerTwo
-     * @param $wrongAnswerThree
-     * @param null $teamId
-     * @param null $userId
+     * @param $id int
+     * @param $question string
+     * @param $correctAnswer string
+     * @param $wrongAnswerOne string
+     * @param $wrongAnswerTwo string
+     * @param $wrongAnswerThree string
+     * @param null $teamId int
+     * @param null $userId int
      * @return bool
      */
 	public function editQuestionById($id, $question, $correctAnswer, $wrongAnswerOne, $wrongAnswerTwo, $wrongAnswerThree, $teamId = null, $userId = null)
@@ -287,13 +290,13 @@ class ApiClass {
 
     /**
      * Insert question into the database. The ID will be given in the database table, no need to worry about that.
-     * @param $question
-     * @param $correctAnswer
-     * @param $wrongAnswerOne
-     * @param $wrongAnswerTwo
-     * @param $wrongAnswerThree
-     * @param $teamId
-     * @param $userId
+     * @param $question string
+     * @param $correctAnswer string
+     * @param $wrongAnswerOne string
+     * @param $wrongAnswerTwo string
+     * @param $wrongAnswerThree string
+     * @param $teamId int
+     * @param $userId int
      * @return bool
      */
     public function insertNewQuestion($question, $correctAnswer, $wrongAnswerOne, $wrongAnswerTwo, $wrongAnswerThree, $teamId, $userId)
@@ -318,7 +321,7 @@ class ApiClass {
      * users have questions in the question table in database.
      * So only users that questions will be returned by this
      * function.
-     * @param $id
+     * @param $id int
      * @return array
      */
     public function getAllUsersWithQuestionsByTeamId($id)
@@ -346,32 +349,51 @@ class ApiClass {
         }
 
         $this->_db->where('id', $whereArray, 'IN');
-        $returnUsers = $this->_db->get('users');
+
+        $select = Array('id', 'name', 'username', 'isAdmin', 'teamId');
+        $returnUsers = $this->_db->get('users', null, $select);
 
         return $returnUsers;
     }
 
     /**
+     * Update the password on a user row in the database based on
+     * the user id. It will then return bool on if it has been done
+     * or if some error happened.
+     * @param $id int
+     * @param $newPassword string
+     * @return bool
+     */
+    public function editUserPasswordByUserId($id, $newPassword)
+    {
+        $data = Array ('password' => $newPassword);
+        $this->_db->where ('id', $id);
+        return $this->_db->update('users', $data) ? true : false;
+    }
+
+    /**
      * Return array of user based on username.
-     * @param $name
+     * @param $name string
      * @return array
      */
     public function getUserByUsername($name)
     {
         $this->_db->where ('username', $name);
-        return $this->_db->getOne('users');
+        $select = Array('id', 'name', 'username', 'isAdmin', 'teamId');
+        return $this->_db->getOne('users', $select);
     }
 
     /**
-     * Return array of users whre teamId
+     * Return array of users where teamId
      * is equal to the given parameter.
-     * @param $id
+     * @param $id int
      * @return array
      */
     public function getUsersByTeamId($id)
     {
         $this->_db->where ('teamId', $id);
-        return $this->_db->get('users');
+        $select = Array('id', 'name', 'username', 'isAdmin', 'teamId');
+        return $this->_db->get('users', null, $select);
     }
 
     /**
@@ -381,18 +403,20 @@ class ApiClass {
     public function getAllUsersWithNoTeam()
     {
         $this->_db->where('teamId', null);
-        return $this->_db->get('users');
+        $select = Array('id', 'name', 'username', 'isAdmin', 'teamId');
+        return $this->_db->get('users', null, $select);
     }
 
     /**
      * Return array of user based on userId.
-     * @param $id
+     * @param $id int
      * @return array
      */
     public function getUserById($id)
     {
         $this->_db->where ('id', $id);
-        return $this->_db->getOne('users');
+        $select = Array('id', 'name', 'username', 'isAdmin', 'teamId');
+        return $this->_db->getOne('users', null, $select);
     }
 
     /**
@@ -401,31 +425,44 @@ class ApiClass {
      */
     public function getAllUsers()
     {
-        return $this->_db->get('users');
+        $select = Array('id', 'name', 'username', 'isAdmin', 'teamId');
+        return $this->_db->get('users', null, $select);
+    }
+
+    /**
+     * Return password of user based on username.
+     * @param $name
+     * @return mixed
+     */
+    private function getUserPasswordByUsername($name)
+    {
+        $this->_db->where('username', $name);
+        $user = $this->_db->getOne('users', Array('password'));
+        return $user['password'];
     }
 
     /**
      * Return bool on if username and password match in the database.
-     * @param $username
-     * @param $password
+     * @param $username string
+     * @param $password string
      * @return bool
      */
     public function checkUsernameAndPassword($username, $password)
     {
         if ($username == null || $password == null)
-            return false;
-
-        $user = $this->getUserByUsername($username);
-        if ($user['password'] == $password) {
-            return true;
-        } else {
+        {
             return false;
         }
+
+
+        $userPassword = $this->getUserPasswordByUsername($username);
+
+        return $userPassword == $password ? true : false;
     }
 
     /**
      * Return a json string based on array input.
-     * @param $data
+     * @param $data string
      * @return string
      */
     public function formatToJson($data)
@@ -445,13 +482,11 @@ class ApiClass {
 
     public function checkUsernameAndPasswordJson($username, $password)
     {
-
         $login = $this->checkUsernameAndPassword($username,$password);
 
         if ($login)
         {
             $user = $this->getUserByUsername($username);
-
             return Array(
                 "login" => $login,
                 "userdata" => $user
@@ -459,6 +494,7 @@ class ApiClass {
         }
         else
         {
+
             return Array( "login" => $login );
         }
     }
