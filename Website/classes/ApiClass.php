@@ -23,6 +23,12 @@ class ApiClass {
      */
     public function getReturnDataAsJson()
     {
+        if (is_bool($this->_returnData)) {
+            $this->_returnData = Array(
+                'status' => $this->_returnData
+            );
+        }
+
         if ($this->_returnData == null || $this->_returnData == "null" ) {
             $this->_returnData = $this->errorMessage("There was no data to show.");
         }
@@ -64,20 +70,46 @@ class ApiClass {
             /**
              * Question API methods
              */
-            case "getAllQuestions":
+            case 'getAllQuestions':
                 $this->_returnData = $this->getAllQuestions();
                 break;
-            case "getQuestionsByTeamId":
+            case 'getQuestionsByTeamId':
                 $this->_returnData = $this->getQuestionsByTeamId(@$_POST['id']);
                 break;
-            case "getQuestionsByUserId":
+            case 'getQuestionsByUserId':
                 $this->_returnData = $this->getQuestionsByUserId(@$_POST['id']);
                 break;
-            case "getQuestionById":
+            case 'getQuestionById':
                 $this->_returnData = $this->getQuestionById(@$_POST['id']);
                 break;
-            case "deleteQuestionById":
+            case 'deleteQuestionById':
                 $this->_returnData = $this->deleteQuestionById(@$_POST['id']);
+                break;
+            case 'deleteAllQuestionsByUserId':
+                $this->_returnData = $this->deleteAllQuestionsByUserId(@$_POST['id']);
+                break;
+            case 'editQuestionById':
+                $this->_returnData = $this->editQuestionById(
+                  @$_POST['id'],
+                  @$_POST['question'],
+                  @$_POST['correctAnswer'],
+                  @$_POST['wrongAnswerOne'],
+                  @$_POST['wrongAnswerTwo'],
+                  @$_POST['wrongAnswerThree'],
+                  @$_POST['teamId'],
+                  @$_POST['userId']
+                );
+                break;
+            case 'insertNewQuestion':
+                $this->_returnData = $this->insertNewQuestion(
+                    @$_POST['question'],
+                    @$_POST['correctAnswer'],
+                    @$_POST['wrongAnswerOne'],
+                    @$_POST['wrongAnswerTwo'],
+                    @$_POST['wrongAnswerThree'],
+                    @$_POST['teamId'],
+                    @$_POST['userId']
+                );
                 break;
 
             /**
@@ -186,6 +218,99 @@ class ApiClass {
         $this->_db->where('id', $id);
         $question = $this->_db->get('questions');
         return $question;
+    }
+
+    /**
+     * Delete question from the database based on ID
+     * @param $id
+     * @return bool
+     */
+    public function deleteQuestionById($id)
+    {
+        $this->_db->where('id', $id);
+        return $this->_db->delete('questions') ? true : false;
+    }
+
+    /**
+     * Delete all questions from database where userId is equal to the
+     * ID parameter. It will then return bool on if the delete has been
+     * done or not.
+     * True = Deleted
+     * False = Error happened
+     * @param $id
+     * @return bool
+     */
+	public function deleteAllQuestionsByUserId($id)
+	{
+		$this->_db->where('userId', $id);
+        return $this->_db->delete('users') ? true : false;
+	}
+
+    /**
+     * This method edits a question in the database based on the given ID.
+     * The TeamId and UserID is not needed to edit a question, just keep
+     * this in mind.
+     * @param $id
+     * @param $question
+     * @param $correctAnswer
+     * @param $wrongAnswerOne
+     * @param $wrongAnswerTwo
+     * @param $wrongAnswerThree
+     * @param null $teamId
+     * @param null $userId
+     * @return bool
+     */
+	public function editQuestionById($id, $question, $correctAnswer, $wrongAnswerOne, $wrongAnswerTwo, $wrongAnswerThree, $teamId = null, $userId = null)
+    {
+        $data = Array (
+            'question'       => $question,
+            'correctAnswer'  => $correctAnswer,
+            'wrongAnswer1'   => $wrongAnswerOne,
+            'wrongAnswer2'   => $wrongAnswerTwo,
+            'wrongAnswer3'   => $wrongAnswerThree
+        );
+
+        if ($userId != null)
+        {
+            $data['userId'] = $userId;
+        }
+
+        if ($teamId != null)
+        {
+            $data['teamId'] = $teamId;
+        }
+
+        $this->_db->where ('id', $id);
+
+        return $this->_db->update('questions', $data) ? true : false;
+    }
+
+    /**
+     * Insert question into the database. The ID will be given in the database table, no need to worry about that.
+     * @param $question
+     * @param $correctAnswer
+     * @param $wrongAnswerOne
+     * @param $wrongAnswerTwo
+     * @param $wrongAnswerThree
+     * @param $teamId
+     * @param $userId
+     * @return bool
+     */
+    public function insertNewQuestion($question, $correctAnswer, $wrongAnswerOne, $wrongAnswerTwo, $wrongAnswerThree, $teamId, $userId)
+    {
+        $data = Array (
+            'question'       => $question,
+            'correctAnswer'  => $correctAnswer,
+            'wrongAnswer1'   => $wrongAnswerOne,
+            'wrongAnswer2'   => $wrongAnswerTwo,
+            'wrongAnswer3'   => $wrongAnswerThree,
+            'teamId'         => $teamId,
+            'userId'         => $userId
+        );
+
+        $id = $this->_db->insert ('questions', $data);
+
+        return $id ? true : false;
     }
 
     /**
@@ -309,18 +434,6 @@ class ApiClass {
     }
 
     /**
-     * Delete question from the database based on ID
-     * @param $id
-     * @return bool
-     */
-    public function deleteQuestionById($id)
-    {
-        $this->_db->where('id', $id);
-        return $this->_db->delete('questions') ? true : false;
-    }
-
-
-    /**
      * Return a json string formatted as the error message we use.
      * @param $errorMessage
      * @return array
@@ -330,27 +443,23 @@ class ApiClass {
         return (Array( "error" => $errorMessage ));
     }
 
-    public function message($array)
-    {
-        return $array;
-    }
-
     public function checkUsernameAndPasswordJson($username, $password)
     {
 
         $login = $this->checkUsernameAndPassword($username,$password);
+
         if ($login)
         {
             $user = $this->getUserByUsername($username);
 
-            return $this->message(Array(
+            return Array(
                 "login" => $login,
                 "userdata" => $user
-            ));
+            );
         }
         else
         {
-            return $this->message(Array( "login" => $login ));
+            return Array( "login" => $login );
         }
     }
 

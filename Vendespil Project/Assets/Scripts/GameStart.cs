@@ -1,9 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Xml.Linq;
-using System.Linq;
-using System.IO;
 
 public class GameStart : MonoBehaviour
 {
@@ -17,8 +14,6 @@ public class GameStart : MonoBehaviour
     public GameObject EditQuestionMenu;
     public GameObject LoginMenu;
     public GameObject PickList;
-
-    private string filePath;
 
     public void Awake()
     {

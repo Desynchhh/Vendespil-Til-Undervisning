@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Animations;
 using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
@@ -37,6 +36,7 @@ public class MenuManager : MonoBehaviour
         PanelPickList.SetActive(false);
         PanelResults.SetActive(false);
         PanelQuestion.SetActive(true);
+        background.sprite = bgGame;
     }
 
     public void CloseWarning()

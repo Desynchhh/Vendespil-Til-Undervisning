@@ -35,12 +35,6 @@ public class CreateButton : MonoBehaviour
 
     [HideInInspector]
     public int editId;
-    //private string filePath;
-
-    private void Start()
-    {
-        //filePath = Application.persistentDataPath + "/Data.xml";
-    }
 
     public void SpawnEditButton()
     {
@@ -49,8 +43,6 @@ public class CreateButton : MonoBehaviour
         Transform panel = instantiatedButton.transform.GetChild(1);
         GameObject button = instantiatedButton.transform.GetChild(0).gameObject;
         ButtonManager buttonData = button.GetComponent<ButtonManager>();
-        //buttonData.LoadInfo(nextId);
-        //button.GetComponent<Button>().onClick.AddListener(() => transform.root.Find("Manager").GetComponent<MenuManager>().OpenQuestionPanel(EventSystem.current.currentSelectedGameObject.transform.parent.name));
         buttonData.id = nextId;
         panel.GetChild(1).GetComponent<Button>().onClick.AddListener(() => DeleteSingleWarning(EventSystem.current.currentSelectedGameObject.transform.parent.parent.GetChild(0).gameObject.GetComponent<ButtonManager>().id));
         panel.GetChild(0).GetComponent<Button>().onClick.AddListener(() => transform.parent.Find("Manager").GetComponent<MenuManager>().GoToEditQuestion(EventSystem.current.currentSelectedGameObject.transform.parent.parent.GetChild(0).GetComponent<ButtonManager>().id));
@@ -69,8 +61,6 @@ public class CreateButton : MonoBehaviour
         Transform panel = instantiatedButton.transform.GetChild(1);
         GameObject button = instantiatedButton.transform.GetChild(0).gameObject;
         ButtonManager buttonData = button.GetComponent<ButtonManager>();
-        //buttonData.LoadInfo(nextId);
-        //button.GetComponent<Button>().onClick.AddListener(() => transform.root.Find("Manager").GetComponent<MenuManager>().OpenQuestionPanel(EventSystem.current.currentSelectedGameObject.transform.parent.name));
         buttonData.id = nextId;
         panel.GetChild(1).GetComponent<Button>().onClick.AddListener(() => DeleteSingleWarning(EventSystem.current.currentSelectedGameObject.transform.parent.parent.GetChild(0).gameObject.GetComponent<ButtonManager>().id));
         panel.GetChild(0).GetComponent<Button>().onClick.AddListener(() => transform.parent.Find("Manager").GetComponent<MenuManager>().GoToEditQuestion(EventSystem.current.currentSelectedGameObject.transform.parent.parent.GetChild(0).GetComponent<ButtonManager>().id));
@@ -103,10 +93,10 @@ public class CreateButton : MonoBehaviour
 
     public void EditButtons()
     {
-        EditEditButton(currentEditData);
+        EditButtonData(currentEditData);
     }
 
-    private void EditEditButton(ButtonManager _currentEditData)
+    private void EditButtonData(ButtonManager _currentEditData)
     {
         _currentEditData.question = editQuestion.text;
         _currentEditData.answer = editRightAnswer.text;
@@ -145,9 +135,8 @@ public class CreateButton : MonoBehaviour
     public void DeleteSingleWarning(int btnId)
     {
         PanelWarning.transform.Find("btnYesSingle").GetComponent<Button>().onClick.RemoveAllListeners();
-        PanelWarning.transform.Find("btnYesSingle").GetComponent<Button>().onClick.AddListener(() => DeleteButton(btnId));
+        PanelWarning.transform.Find("btnYesSingle").GetComponent<Button>().onClick.AddListener(() => DeleteSingle(btnId));
         PanelWarning.transform.Find("btnYesSingle").GetComponent<Button>().onClick.AddListener(() => transform.root.Find("Manager").GetComponent<MenuManager>().CloseWarning());
-
         PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().fontSize = 44;
         PanelWarning.transform.Find("WarningText").GetComponentInChildren<Text>().text = "ADVARSEL!\n\nDu er ved at slette ÉT spørgsmål\nEr du sikker?";
         PanelWarning.transform.Find("btnOK").gameObject.SetActive(false);
@@ -169,27 +158,25 @@ public class CreateButton : MonoBehaviour
         Debug.Log("max id: " + maxId);
     }
 
-    public void DeleteButton(int deleteId)
+    public void DeleteSingle(int deleteId)
     {
         foreach (Transform child in contentEdit.transform)
         {
             if (child.GetChild(0).GetComponent<ButtonManager>().id == deleteId)
             {
-                if (deleteId == maxId)
-                {
-                    /*
-                    if (File.Exists(filePath) && File.ReadAllLines(filePath).Length <= 12)
-                    {
-                        nextId = 1;
-                        maxId = 0;
-                        Debug.Log("maxId Reset!");
-                    }
-                    else
-                    {
-                        GetMaxID();
-                    }
-                    */
-                }
+                //if (deleteId == maxId)
+                //{
+                //    if (File.Exists(filePath) && File.ReadAllLines(filePath).Length <= 12)
+                //    {
+                //        nextId = 1;
+                //        maxId = 0;
+                //        Debug.Log("maxId Reset!");
+                //    }
+                //    else
+                //    {
+                //        GetMaxID();
+                //    }
+                //}
                 //transform.root.Find("Manager").GetComponent<EditXML>().RemoveSingle(deleteId);
                 Destroy(child.gameObject);
             }
@@ -207,12 +194,4 @@ public class CreateButton : MonoBehaviour
         }
         nextId = maxId + 1;
     }
-
-    //public void CloseButtonAllPanels()
-    //{
-    //    foreach (Transform child in contentEdit.transform)
-    //    {
-    //        child.GetChild(1).gameObject.SetActive(false);
-    //    }
-    //}
 }

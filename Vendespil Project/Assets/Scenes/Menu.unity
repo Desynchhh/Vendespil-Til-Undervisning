@@ -4484,7 +4484,6 @@ MonoBehaviour:
   selectedQuestions: []
   unorderedQuestions: []
   orderedQuestions: []
-  hasOrderedQuestions: 0
   btnBlack: {fileID: 21300000, guid: eed398ba72a836b4f8c5e36108fe3b7b, type: 3}
   btnWhite: {fileID: 21300000, guid: 0b77458a277f6484a8bb3cc31ed9ff20, type: 3}
   btnRed: {fileID: 21300000, guid: 42e29c0041ad24a46990df758997f9af, type: 3}
@@ -4496,9 +4495,10 @@ MonoBehaviour:
   overlayBad: {fileID: 21300000, guid: f44e0d45d4f8ee242933ba8f4db60ed5, type: 3}
   overlayGood: {fileID: 21300000, guid: a521baa4ef56352479da7dd921aa7df9, type: 3}
   btnNext: {fileID: 894875183}
-  btnBack: {fileID: 2099601621}
-  rightAnswerScore: {fileID: 1310744563}
-  smiley: {fileID: 1836240969}
+  score: {fileID: 1675650324}
+  smileyFace: {fileID: 23664606}
+  smileyCannons: {fileID: 1067320396}
+  smileyArms: {fileID: 1444813256}
   score0: {fileID: 21300000, guid: 3639cac1008c6c54280074317d4bbc4f, type: 3}
   scoreLt50: {fileID: 21300000, guid: c573644fcd2cc434b9055665459bab5b, type: 3}
   score50: {fileID: 21300000, guid: f447c0a81ee760446b168a8be0c63824, type: 3}

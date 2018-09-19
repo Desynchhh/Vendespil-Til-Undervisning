@@ -35,8 +35,6 @@ public class GameController : MonoBehaviour
     private int totalAnswered;
     private int answeredRight;
     private int answeredWrong;
-    [HideInInspector]
-    public bool hasOrderedQuestions;
 
     [Header("Question Sprites")]
     public Sprite btnBlack;
@@ -60,16 +58,14 @@ public class GameController : MonoBehaviour
 
     [Header("Buttons")]
     public GameObject btnNext;
-    public GameObject btnBack;
 
     [Header("Results Field")]
-    public GameObject rightAnswerScore;
+    public GameObject score;
 
     [Header("Smiley")]
-    public Transform smiley;
-    private Image smileyFace;
-    private Transform smileyCannons;
-    private Transform smileyArms;
+    public Image smileyFace;
+    public Transform smileyCannons;
+    public Transform smileyArms;
     public Sprite score0;
     public Sprite scoreLt50;
     public Sprite score50;
@@ -78,9 +74,6 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        smileyFace = smiley.Find("Face").GetComponent<Image>();
-        smileyCannons = smiley.Find("Cannons");
-        smileyArms = smiley.Find("Arms");
         txtBlack = new Color32(0x00, 0x00, 0x31, 0xFF);
         txtWhite = Color.white;
         txtRed = new Color32(0xE6, 0x1E, 0x31, 0xFF);
@@ -104,7 +97,6 @@ public class GameController : MonoBehaviour
 
         if (totalQuestions == 0)
         {
-            hasOrderedQuestions = false;
             PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().fontSize = 46;
             PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().text = "DER ER IKKE OPRETTET NOGEN SPØRGSMÅL!\n\n OPRET MINDST ÉT SPØRGSMÅL FOR AT SPILLE";
             PanelWarning.transform.Find("btnOK").gameObject.SetActive(true);
@@ -115,7 +107,6 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            hasOrderedQuestions = true;
             for (int i = 0; i <= totalQuestions - 1; i++)
             {
                 int randomIndex = Random.Range(0, unorderedQuestions.Count);
@@ -224,7 +215,7 @@ public class GameController : MonoBehaviour
             smileyFace.sprite = score0;
             smileyArms.gameObject.SetActive(true);
             smileyCannons.gameObject.SetActive(false);
-            rightAnswerScore.GetComponentInChildren<Text>().color = txtRed;
+            score.GetComponentInChildren<Text>().color = txtRed;
             bgOverlay.GetComponent<Image>().sprite = overlayBad;
         }
         else if (answeredRight == totalQuestions)
@@ -232,7 +223,7 @@ public class GameController : MonoBehaviour
             smileyFace.sprite = score100;
             smileyArms.gameObject.SetActive(false);
             smileyCannons.gameObject.SetActive(true);
-            rightAnswerScore.GetComponentInChildren<Text>().color = txtGreen;
+            score.GetComponentInChildren<Text>().color = txtGreen;
             bgOverlay.GetComponent<Image>().sprite = overlayGood;
         }
         else if (answeredRight < totalQuestions / 2)
@@ -240,7 +231,7 @@ public class GameController : MonoBehaviour
             smileyFace.sprite = scoreLt50;
             smileyArms.gameObject.SetActive(false);
             smileyCannons.gameObject.SetActive(false);
-            rightAnswerScore.GetComponentInChildren<Text>().color = txtRed;
+            score.GetComponentInChildren<Text>().color = txtRed;
             bgOverlay.GetComponent<Image>().sprite = overlayBad;
         }
         else if (answeredRight > totalQuestions / 2)
@@ -248,7 +239,7 @@ public class GameController : MonoBehaviour
             smileyFace.sprite = scoreGt50;
             smileyArms.gameObject.SetActive(false);
             smileyCannons.gameObject.SetActive(false);
-            rightAnswerScore.GetComponentInChildren<Text>().color = txtGreen;
+            score.GetComponentInChildren<Text>().color = txtGreen;
             bgOverlay.GetComponent<Image>().sprite = overlayGood;
         }
         else if (answeredRight == totalQuestions / 2)
@@ -256,10 +247,10 @@ public class GameController : MonoBehaviour
             smileyFace.sprite = score50;
             smileyArms.gameObject.SetActive(false);
             smileyCannons.gameObject.SetActive(false);
-            rightAnswerScore.GetComponentInChildren<Text>().color = txtBlack;
+            score.GetComponentInChildren<Text>().color = txtBlack;
             bgOverlay.gameObject.SetActive(false);
         }
-        rightAnswerScore.GetComponentInChildren<Text>().text = string.Format("DU FIK\n {0} / {1}\n RIGTIGE!", answeredRight, totalQuestions);
+        score.GetComponentInChildren<Text>().text = string.Format("DU FIK\n {0} / {1}\n RIGTIGE!", answeredRight, totalQuestions);
     }
 
     private void SetRandomOrder(string rightAnswer, string wrongAnswer1, string wrongAnswer2, string wrongAnswer3)
