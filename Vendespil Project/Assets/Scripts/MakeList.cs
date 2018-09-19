@@ -18,7 +18,8 @@ public class MakeList : MonoBehaviour {
         ApiHandler api = GameObject.Find("ApiHandler").GetComponentInChildren<ApiHandler>();
 
         Dictionary<string, string> post = new Dictionary<string, string>();
-        post.Add("action", "getAllUsers");
+        post.Add("action", "getAllUsersWithQuestionsByTeamId");
+        post.Add("id", UserData.User.teamId.ToString());
 
         WWW result = api.POST(post);
 
@@ -72,10 +73,10 @@ public class MakeList : MonoBehaviour {
                 LoadedQuestion x = new LoadedQuestion();
                 x.IdNumber = item.Value["id"];
                 x.question = item.Value["question"];
-                x.rightAnswer = item.Value["correctAnwser"];
-                x.wrongAnswer1 = item.Value["wrongAnwser1"];
-                x.wrongAnswer2 = item.Value["wrongAnwser2"];
-                x.wrongAnswer3 = item.Value["wrongAnwser3"];
+                x.rightAnswer = item.Value["correctAnswer"];
+                x.wrongAnswer1 = item.Value["wrongAnswer1"];
+                x.wrongAnswer2 = item.Value["wrongAnswer2"];
+                x.wrongAnswer3 = item.Value["wrongAnswer3"];
                 questions.Add(x);
             }
         }

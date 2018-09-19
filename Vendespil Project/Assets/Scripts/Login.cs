@@ -59,7 +59,6 @@ public class Login : MonoBehaviour
                 {
                     id = N["userdata"]["id"],
                     name = N["userdata"]["name"],
-                    password = N["userdata"]["password"],
                     isAdmin = N["userdata"]["isAdmin"],
                     teamId = N["userdata"]["teamId"],
                     username = N["userdata"]["username"]
