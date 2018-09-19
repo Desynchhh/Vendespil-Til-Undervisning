@@ -44,26 +44,32 @@ public class Login : MonoBehaviour
 
         LoginButton.interactable = true;
 
-        var N = JSON.Parse(result.text);
-        bool correctLogin = N["login"].AsBool;
-
-        if (correctLogin)
+        if (result.error != null)
         {
-            UserData.User = new User
-            {
-                id = N["userdata"]["id"],
-                name = N["userdata"]["name"],
-                password = N["userdata"]["password"],
-                isAdmin = N["userdata"]["isAdmin"],
-                teamId = N["userdata"]["teamId"],
-                username = N["userdata"]["username"]
-            };
-            GameObject.Find("Manager").GetComponent<LoginWarning>().DisplayWarning(correctLogin, UserData.User.name);
-            GameObject.Find("Manager").GetComponent<MakeList>().MakeListOnPlay();
+            GameObject.Find("Manager").GetComponent<LoginWarning>().DisplayError();
         }
         else
         {
-            GameObject.Find("Manager").GetComponent<LoginWarning>().DisplayWarning(correctLogin, null);
+            var N = JSON.Parse(result.text);
+            bool correctLogin = N["login"].AsBool;
+
+            if (correctLogin)
+            {
+                UserData.User = new User
+                {
+                    id = N["userdata"]["id"],
+                    name = N["userdata"]["name"],
+                    isAdmin = N["userdata"]["isAdmin"],
+                    teamId = N["userdata"]["teamId"],
+                    username = N["userdata"]["username"]
+                };
+                GameObject.Find("Manager").GetComponent<LoginWarning>().DisplayWarning(correctLogin, UserData.User.name);
+                GameObject.Find("Manager").GetComponent<MakeList>().MakeListOnPlay();
+            }
+            else
+            {
+                GameObject.Find("Manager").GetComponent<LoginWarning>().DisplayWarning(correctLogin, null);
+            }
         }
     }
 }

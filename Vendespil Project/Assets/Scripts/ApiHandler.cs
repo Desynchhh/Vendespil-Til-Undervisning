@@ -32,7 +32,6 @@ namespace Assets.Scripts
         private IEnumerator WaitForRequest(WWW www)
         {
             yield return www;
-
             // check for errors
             if (www.error == null)
             {   

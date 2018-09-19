@@ -8,15 +8,6 @@ using UnityEngine.UI;
 
 public class EditData : MonoBehaviour
 {
-    [Header("Int")]
-    public int ID;
-
-    [Header("InputFields")]
-    public InputField questionText;
-    public InputField rightAnswerText;
-    public InputField wrongAnswer1Text;
-    public InputField wrongAnswer2Text;
-    public InputField wrongAnswer3Text;
 
     public List<QuestionForEdit> questions = new List<QuestionForEdit>();
 
@@ -25,7 +16,7 @@ public class EditData : MonoBehaviour
         StartCoroutine(LoadQuestionsForEdit());
     }
 
-    public void Save() //int EditID, string question, string rightAnswer, string wrongAnswer1, string wrongAnswer2, string wrongAnswer3)
+    public void Save() //int EditID, string question, string rightAnswer, string wrongAnswer1, string wrongAnswer2, string wrongAnswer3
     {
         //Send data til databasen så det bliver gemt.
     }
@@ -62,10 +53,10 @@ public class EditData : MonoBehaviour
                 QuestionForEdit x = new QuestionForEdit();
                 x.IdNumber = item.Value["id"];
                 x.question = item.Value["question"];
-                x.rightAnswer = item.Value["correctAnwser"];
-                x.wrongAnswer1 = item.Value["wrongAnwser1"];
-                x.wrongAnswer2 = item.Value["wrongAnwser2"];
-                x.wrongAnswer3 = item.Value["wrongAnwser3"];
+                x.rightAnswer = item.Value["correctAnswer"];
+                x.wrongAnswer1 = item.Value["wrongAnswer1"];
+                x.wrongAnswer2 = item.Value["wrongAnswer2"];
+                x.wrongAnswer3 = item.Value["wrongAnswer3"];
                 questions.Add(x);
             }
         }
