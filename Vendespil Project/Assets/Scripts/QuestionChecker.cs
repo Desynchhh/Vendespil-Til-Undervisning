@@ -80,7 +80,7 @@ public class QuestionChecker : MonoBehaviour
             }
             else
             {
-                //counter = 0;
+                counter = 0;
                 passedCheck = true;
             }
         }
@@ -156,7 +156,7 @@ public class QuestionChecker : MonoBehaviour
         //}
         if (passedCheck)
         {
-            PanelEditMenu.GetComponent<CreateButton>().SpawnEditButton();
+            PanelEditMenu.GetComponent<CreateButton>().CreateQuestionButton();
             PanelEditMenu.GetComponent<CreateButton>().ClearFields();
             GetComponent<MenuManager>().GoToEditMenu();
         }

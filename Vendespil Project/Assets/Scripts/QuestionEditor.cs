@@ -14,9 +14,19 @@ public class QuestionEditor : MonoBehaviour {
         StartCoroutine(LoadQuestionsForEdit());
     }
 
+    public void CreateQuestion(string _question, string _correctAnswer, string _wrongAnswer1, string _wrongAnswer2, string _wrongAnswer3)
+    {
+        StartCoroutine(insertNewQuestion(_question, _correctAnswer, _wrongAnswer1, _wrongAnswer2, _wrongAnswer3));
+    }
+
+    public void EditQuestion(int _id, string _question, string _correctAnswer, string _wrongAnswer1, string _wrongAnswer2, string _wrongAnswer3)
+    {
+        StartCoroutine(editQuestionById(_id, _question, _correctAnswer, _wrongAnswer1, _wrongAnswer2, _wrongAnswer3));
+    }
+
     public void RemoveAll()
     {
-        //Lav api så man kan fjerne alle spørgsmål der er lavet af en bruger.
+        StartCoroutine(deleteAllQuestionsByUserId());
     }
 
     public void RemoveSingle(int ID)

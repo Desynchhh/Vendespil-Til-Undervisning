@@ -23502,17 +23502,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: RemoveAll
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1349743123}
         m_MethodName: DeleteAll
         m_Mode: 1
@@ -24030,6 +24019,7 @@ MonoBehaviour:
   editWrongAnswer2: {fileID: 844527805}
   editWrongAnswer3: {fileID: 445796736}
   PanelWarning: {fileID: 32805197}
+  questions: []
   editId: 0
 --- !u!114 &1349743124
 MonoBehaviour:
@@ -36828,6 +36818,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 177583041}
         m_MethodName: GoToEditMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1349743123}
+        m_MethodName: LoadQuestionButtons
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
