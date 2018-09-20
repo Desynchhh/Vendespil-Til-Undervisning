@@ -65,7 +65,7 @@ public class CreateButton : MonoBehaviour
         panel.GetChild(0).GetComponent<Button>().onClick.AddListener(() => GetQuestionInfo());
 
         //Create the question in the database
-        transform.parent.Find("PanelMainMenu").GetComponent<QuestionEditor>().CreateQuestion(buttonData.question, buttonData.rightAnswer, buttonData.wrongAnswer1, buttonData.wrongAnswer2, buttonData.wrongAnswer3);
+        transform.parent.Find("Manager").GetComponent<QuestionEditor>().CreateQuestion(buttonData.question, buttonData.rightAnswer, buttonData.wrongAnswer1, buttonData.wrongAnswer2, buttonData.wrongAnswer3);
 
         //Handle local IDs (Remove?)
         nextId++;
@@ -74,7 +74,13 @@ public class CreateButton : MonoBehaviour
 
     public void LoadQuestionButtons()
     {
-        questions = transform.parent.Find("PanelMainMenu").GetComponent<QuestionEditor>().questions;
+        //Clear content gameobject
+        foreach (Transform child in contentEdit.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+
+        questions = transform.parent.Find("Manager").GetComponent<QuestionEditor>().questions;
         foreach (var question in questions)
         {
             //Spawn button for editing
@@ -139,7 +145,7 @@ public class CreateButton : MonoBehaviour
                 child.GetComponentInChildren<Text>().text = _currentEditData.question;
             }
         }
-        transform.parent.Find("PanelMainMenu").GetComponent<QuestionEditor>().EditQuestion(_currentEditData.id, _currentEditData.question, _currentEditData.rightAnswer, _currentEditData.wrongAnswer1, _currentEditData.wrongAnswer2, _currentEditData.wrongAnswer3);
+        transform.parent.Find("Manager").GetComponent<QuestionEditor>().EditQuestion(_currentEditData.id, _currentEditData.question, _currentEditData.rightAnswer, _currentEditData.wrongAnswer1, _currentEditData.wrongAnswer2, _currentEditData.wrongAnswer3);
 
     }
 
@@ -183,7 +189,7 @@ public class CreateButton : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-        transform.parent.Find("PanelMainMenu").GetComponent<QuestionEditor>().RemoveAll();
+        transform.parent.Find("Manager").GetComponent<QuestionEditor>().RemoveAll();
         maxId = 0;
         nextId = 1;
         Debug.Log("next id: " + nextId);
@@ -215,7 +221,8 @@ public class CreateButton : MonoBehaviour
                 {
                     GetMaxID();
                 }
-                transform.parent.Find("PanelMainMenu").GetComponent<QuestionEditor>().RemoveSingle(deleteId);
+                Debug.Log("Remove");
+                transform.parent.Find("Manager").GetComponent<QuestionEditor>().RemoveSingle(deleteId);
                 Destroy(child.gameObject);
             }
         }

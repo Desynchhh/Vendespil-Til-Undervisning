@@ -4395,6 +4395,7 @@ GameObject:
   - component: {fileID: 177583045}
   - component: {fileID: 177583046}
   - component: {fileID: 177583047}
+  - component: {fileID: 177583038}
   m_Layer: 5
   m_Name: Manager
   m_TagString: Untagged
@@ -4402,6 +4403,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &177583038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 177583037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d257d64d2a43aa642a7708b75305991f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questions: []
 --- !u!4 &177583039
 Transform:
   m_ObjectHideFlags: 0
@@ -23811,7 +23824,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1327644677}
   - component: {fileID: 1327644676}
-  - component: {fileID: 1327644675}
   - component: {fileID: 1327644678}
   m_Layer: 5
   m_Name: PanelMainMenu
@@ -23820,18 +23832,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &1327644675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1327644674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d257d64d2a43aa642a7708b75305991f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questions: []
 --- !u!222 &1327644676
 CanvasRenderer:
   m_ObjectHideFlags: 0

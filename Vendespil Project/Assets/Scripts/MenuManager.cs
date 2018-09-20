@@ -72,6 +72,7 @@ public class MenuManager : MonoBehaviour
         transform.parent.Find("PanelEditMenu").GetComponent<CreateButton>().editId = editId;
         PanelEditMenu.SetActive(false);
         PanelEditQuestion.SetActive(true);
+        
     }
 
     public void GoToMainMenu()
@@ -83,6 +84,7 @@ public class MenuManager : MonoBehaviour
         PanelLoginWarning.SetActive(false);
         PanelPickList.SetActive(false);
         PanelMainMenu.SetActive(true);
+        gameObject.GetComponent<QuestionEditor>().LoadAtMain();
     }
    
     //public void OpenQuestionPanel(string questionName)

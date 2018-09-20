@@ -9,7 +9,7 @@ public class QuestionEditor : MonoBehaviour {
 
     public List<QuestionForEdit> questions = new List<QuestionForEdit>();
 
-    private void OnEnable()
+    public void LoadAtMain()
     {
         StartCoroutine(LoadQuestionsForEdit());
     }
@@ -110,7 +110,7 @@ public class QuestionEditor : MonoBehaviour {
         ApiHandler api = GameObject.Find("ApiHandler").GetComponentInChildren<ApiHandler>();
 
         Dictionary<string, string> post = new Dictionary<string, string>();
-        post.Add("action", "insertNewQuestion");
+        post.Add("action", "editQuestionById");
         post.Add("id", id.ToString());
         post.Add("question", question);
         post.Add("correctAnswer", correctAnswer);
