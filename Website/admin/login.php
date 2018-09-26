@@ -1,17 +1,14 @@
 <?php
-include_once (__DIR__ . '/../config.php');
+include_once (__DIR__ . '/../autoload.php');
 include_once (__DIR__ . '/../classes/LoginClass.php');
 
 $Login = new LoginClass();
 
-// Check if user is logged in
-if (isset($_SESSION['loggedIn']))
-{
+if (Identification::isUserLoggedIn()){
     header('Location:index.php');
 }
 
-if (isset($_POST['login']))
-{
+if (isset($_POST['login'])) {
     $Login->handleLogin($_POST['username'], $_POST['password'], 'index.php');
 }
 

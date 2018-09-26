@@ -164,6 +164,28 @@ class ApiClass {
     }
 
     /**
+     * Return simple array with all teams. The key of the array is the teamId
+     * and value of keys is the teamName.
+     * For an example:
+     * [1] => "Team 1"
+     * [2] => "Team 2"
+     * etc.
+     * @return array
+     */
+    public function getAllTeamIdsAndNames()
+    {
+        $teams = $this->getAllTeams();
+        $returnArray = array();
+
+        foreach ($teams as $key => $value)
+        {
+            $returnArray[$value['id']] = $value['name'];
+        }
+
+        return $returnArray;
+    }
+
+    /**
      * Return array of teams form database based on name.
      * @param $name string
      * @return array
@@ -171,8 +193,7 @@ class ApiClass {
     public function getTeamByName($name)
     {
         $this->_db->where('name', $name);
-        $data = $this->_db->get('teams');
-        return $data;
+        return $this->_db->get('teams');
     }
 
     /**
@@ -194,8 +215,7 @@ class ApiClass {
     public function getQuestionsByTeamId($id)
     {
         $this->_db->where('teamId', $id);
-        $questions = $this->_db->get('questions');
-        return $questions;
+        return $this->_db->get('questions');
     }
 
     /**
@@ -207,8 +227,7 @@ class ApiClass {
     public function getQuestionsByUserId($id)
     {
         $this->_db->where('userId', $id);
-        $questions = $this->_db->get('questions');
-        return $questions;
+        return $this->_db->get('questions');
     }
 
     /**
@@ -219,8 +238,7 @@ class ApiClass {
     public function getQuestionById($id)
     {
         $this->_db->where('id', $id);
-        $question = $this->_db->get('questions');
-        return $question;
+        return $this->_db->get('questions');
     }
 
     /**
@@ -246,7 +264,7 @@ class ApiClass {
 	public function deleteAllQuestionsByUserId($id)
 	{
 		$this->_db->where('userId', $id);
-        return $this->_db->delete('users') ? true : false;
+        return $this->_db->delete('questions') ? true : false;
 	}
 
     /**
@@ -286,6 +304,31 @@ class ApiClass {
         $this->_db->where ('id', $id);
 
         return $this->_db->update('questions', $data) ? true : false;
+    }
+
+    /**
+     * Update the user table in the database.
+     * @param $id
+     * @param null $name
+     * @param null $username
+     * @param null $password
+     * @param null $teamId
+     * @param null $isAdmin
+     * @return bool
+     */
+    public function editUserById($id, $name = null, $username = null, $password = null, $teamId = "setNull", $isAdmin = null)
+    {
+        $data = array();
+
+        if ($name     != null) $data['name']     = $name;
+        if ($username != null) $data['username'] = $username;
+        if ($password != null) $data['password'] = $password;
+        if ($teamId   != "setNull") $data['teamId']   = $teamId;
+        if ($isAdmin  != null) $data['isAdmin']  = $isAdmin;
+
+        $this->_db->where ('id', $id);
+
+        return $this->_db->update('users', $data) ? true : false;
     }
 
     /**
@@ -372,6 +415,17 @@ class ApiClass {
     }
 
     /**
+     * Delete user in the database based on user ID.
+     * @param $id int
+     * @return bool
+     */
+    public function deleteUserByUserId($id)
+    {
+        $this->_db->where('id', $id);
+        return $this->_db->delete('users') ? true : false;
+    }
+
+    /**
      * Return array of user based on username.
      * @param $name string
      * @return array
@@ -397,13 +451,52 @@ class ApiClass {
     }
 
     /**
+     * Return array of users where teamId
+     * is equal to the given parameter.
+     * @return array
+     */
+    public function getAllUsers_Admin()
+    {
+        try
+        {
+            $this->_db->orderBy('id');
+            return $this->_db->get('users');
+        }
+        catch (exception $e)
+        {
+            die($e);
+        }
+    }
+
+
+    /**
+     * Return array of users where teamId
+     * is equal to the given parameter.
+     * @param $id int
+     * @return array
+     */
+    public function getUsersByTeamId_Admin($id)
+    {
+        if ($id == null || $id == "nulL")
+        {
+            $this->_db->where('teamId', NULL, 'IS');
+        }
+        else
+        {
+            $this->_db->where ('teamId', $id);
+        }
+
+        return $this->_db->get('users');
+    }
+
+    /**
      * Return array of all users that has no team id
      * @return array
      */
     public function getAllUsersWithNoTeam()
     {
-        $this->_db->where('teamId', null);
-        $select = Array('id', 'name', 'username', 'isAdmin', 'teamId');
+        $this->_db->where('teamId', NULL, 'IS');
+        $select = Array('id', 'name', 'username', 'password', 'isAdmin', 'teamId');
         return $this->_db->get('users', null, $select);
     }
 

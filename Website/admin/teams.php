@@ -13,7 +13,9 @@ $api = new ApiClass();
             {
                 // get users with no team first
                 $total_users_with_no_team = count($api->getAllUsersWithNoTeam());
-                echo "<li>Brugere uden team (antal brugere: {$total_users_with_no_team}) <a href=''>se brugere</a></li>";
+                echo "<li>Brugere uden team (antal brugere: {$total_users_with_no_team}) <a href='users.php?selectedTeam=noTeam'>se brugere</a></li>";
+
+
 
                 // now we loop all the teams and so on
                 foreach ($teams as $team)
@@ -23,7 +25,7 @@ $api = new ApiClass();
                     $total_users = count($users);
 
                     // check if team id is the "no team"
-                    echo "<li>{$team['name']} (antal brugere: {$total_users}) <a href=''>se brugere</a> | <a href=''>rediger</a> | <a href=''>slet</a></li>";
+                    echo "<li>{$team['name']} (antal brugere: {$total_users}) <a href='users.php?selectedTeam={$team['id']}'>se brugere</a> | <a href=''>rediger</a></li>";
                 }
             }
             else
