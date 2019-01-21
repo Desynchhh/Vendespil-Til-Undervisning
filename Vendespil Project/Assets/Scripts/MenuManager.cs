@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Animations;
 using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
@@ -15,16 +14,27 @@ public class MenuManager : MonoBehaviour
     public GameObject PanelQuestion;
     public GameObject PanelResults;
     public GameObject PanelWarning;
+    public GameObject PanelLogin;
+    public GameObject PanelLoginWarning;
+    public GameObject PanelPickList;
 
     [Header("Background")]
+    public GameObject bgOverlay;
     public Image background;
     public Sprite bgDefault;
     public Sprite bgGame;
 
+    public void ChooseQuestions()
+    {
+        PanelMainMenu.SetActive(false);
+        PanelPickList.SetActive(true);
+        background.sprite = bgGame;
+    }
+
     public void PlayGame()
     {
+        PanelPickList.SetActive(false);
         PanelResults.SetActive(false);
-        PanelMainMenu.SetActive(false);
         PanelQuestion.SetActive(true);
         background.sprite = bgGame;
     }
@@ -58,17 +68,23 @@ public class MenuManager : MonoBehaviour
 
     public void GoToEditQuestion(int editId)
     {
-        transform.GetComponent<EditXML>().EditID = editId;
+        //transform.GetComponent<EditXML>().EditID = editId;
         transform.parent.Find("PanelEditMenu").GetComponent<CreateButton>().editId = editId;
         PanelEditMenu.SetActive(false);
         PanelEditQuestion.SetActive(true);
+        
     }
 
     public void GoToMainMenu()
     {
+        bgOverlay.SetActive(false);
         PanelResults.SetActive(false);
         PanelEditMenu.SetActive(false);
+        PanelLogin.SetActive(false);
+        PanelLoginWarning.SetActive(false);
+        PanelPickList.SetActive(false);
         PanelMainMenu.SetActive(true);
+        gameObject.GetComponent<QuestionEditor>().LoadAtMain();
     }
    
     //public void OpenQuestionPanel(string questionName)
@@ -81,10 +97,5 @@ public class MenuManager : MonoBehaviour
     public void ResetGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
     }
 }

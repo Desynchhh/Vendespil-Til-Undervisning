@@ -21,11 +21,12 @@ public class GameController : MonoBehaviour
     public Text progress;
 
     [Header("Question Info")]
-    public GameObject contentEdit;
+    private int userID;
 
     [Header("Sorting Lists")]
-    private List<Transform> unorderedQuestions = new List<Transform>();
-    private List<Transform> orderedQuestions = new List<Transform>();
+    public List<MakeList.LoadedQuestion> selectedQuestions = new List<MakeList.LoadedQuestion>();
+    public List<MakeList.LoadedQuestion> unorderedQuestions = new List<MakeList.LoadedQuestion>();
+    public List<MakeList.LoadedQuestion> orderedQuestions = new List<MakeList.LoadedQuestion>();
     private string rightAnswer;
 
     [Header("Variables")]
@@ -34,8 +35,6 @@ public class GameController : MonoBehaviour
     private int totalAnswered;
     private int answeredRight;
     private int answeredWrong;
-    [HideInInspector]
-    public bool hasOrderedQuestions;
 
     [Header("Question Sprites")]
     public Sprite btnBlack;
@@ -59,16 +58,14 @@ public class GameController : MonoBehaviour
 
     [Header("Buttons")]
     public GameObject btnNext;
-    public GameObject btnBack;
 
     [Header("Results Field")]
-    public GameObject rightAnswerScore;
+    public GameObject score;
 
     [Header("Smiley")]
-    public Transform smiley;
-    private Image smileyFace;
-    private Transform smileyCannons;
-    private Transform smileyArms;
+    public Image smileyFace;
+    public Transform smileyCannons;
+    public Transform smileyArms;
     public Sprite score0;
     public Sprite scoreLt50;
     public Sprite score50;
@@ -77,34 +74,29 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        smileyFace = smiley.Find("Face").GetComponent<Image>();
-        smileyCannons = smiley.Find("Cannons");
-        smileyArms = smiley.Find("Arms");
         txtBlack = new Color32(0x00, 0x00, 0x31, 0xFF);
         txtWhite = Color.white;
         txtRed = new Color32(0xE6, 0x1E, 0x31, 0xFF);
         txtGreen = new Color32(0x88, 0xD6, 0x0D, 0xFF);
     }
 
+    public void SetQuestions(List <MakeList.LoadedQuestion> questions)
+    {
+        selectedQuestions = questions;
+    }
+
     public void SetQuestionsRandomOrder()
     {
-        if (orderedQuestions.Count >= 0 || unorderedQuestions.Count >= 0)
-        {
-            totalQuestions = 0;
-            totalAnswered = 0;
-            unorderedQuestions.Clear();
-            orderedQuestions.Clear();
-        }
+        orderedQuestions.Clear();
 
-        foreach (Transform child in contentEdit.transform)
+        foreach (var question in selectedQuestions)
         {
-            unorderedQuestions.Add(child);
+            unorderedQuestions.Add(question);
             totalQuestions++;
         }
 
         if (totalQuestions == 0)
         {
-            hasOrderedQuestions = false;
             PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().fontSize = 46;
             PanelWarning.transform.Find("WarningText").Find("Text").GetComponent<Text>().text = "DER ER IKKE OPRETTET NOGEN SPØRGSMÅL!\n\n OPRET MINDST ÉT SPØRGSMÅL FOR AT SPILLE";
             PanelWarning.transform.Find("btnOK").gameObject.SetActive(true);
@@ -115,12 +107,9 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            hasOrderedQuestions = true;
             for (int i = 0; i <= totalQuestions - 1; i++)
             {
-                Transform temp;
                 int randomIndex = Random.Range(0, unorderedQuestions.Count);
-                temp = unorderedQuestions[randomIndex];
                 orderedQuestions.Add(unorderedQuestions[randomIndex]);
                 unorderedQuestions.RemoveAt(randomIndex);
             }
@@ -151,14 +140,13 @@ public class GameController : MonoBehaviour
             GetComponent<MenuManager>().GoToResults();
         }
 
-        else if (questionField.GetComponentInChildren<Text>().text != orderedQuestions[totalAnswered].GetChild(0).GetComponent<ButtonManager>().question)
+        else if (questionField.GetComponentInChildren<Text>().text != orderedQuestions[totalAnswered].question)
         {
             progress.text = totalAnswered + 1 + "/" + totalQuestions;
-
-            ButtonManager questionInfo = orderedQuestions[totalAnswered].GetChild(0).GetComponent<ButtonManager>();
-            rightAnswer = questionInfo.answer;
-            questionField.GetComponentInChildren<Text>().text = questionInfo.question;
-            SetRandomOrder(questionInfo);
+            
+            rightAnswer = orderedQuestions[totalAnswered].rightAnswer;
+            questionField.GetComponentInChildren<Text>().text = orderedQuestions[totalAnswered].question;
+            SetRandomOrder(orderedQuestions[totalAnswered].rightAnswer, orderedQuestions[totalAnswered].wrongAnswer1, orderedQuestions[totalAnswered].wrongAnswer2, orderedQuestions[totalAnswered].wrongAnswer3);
         }
     }
 
@@ -227,7 +215,7 @@ public class GameController : MonoBehaviour
             smileyFace.sprite = score0;
             smileyArms.gameObject.SetActive(true);
             smileyCannons.gameObject.SetActive(false);
-            rightAnswerScore.GetComponentInChildren<Text>().color = txtRed;
+            score.GetComponentInChildren<Text>().color = txtRed;
             bgOverlay.GetComponent<Image>().sprite = overlayBad;
         }
         else if (answeredRight == totalQuestions)
@@ -235,7 +223,7 @@ public class GameController : MonoBehaviour
             smileyFace.sprite = score100;
             smileyArms.gameObject.SetActive(false);
             smileyCannons.gameObject.SetActive(true);
-            rightAnswerScore.GetComponentInChildren<Text>().color = txtGreen;
+            score.GetComponentInChildren<Text>().color = txtGreen;
             bgOverlay.GetComponent<Image>().sprite = overlayGood;
         }
         else if (answeredRight < totalQuestions / 2)
@@ -243,7 +231,7 @@ public class GameController : MonoBehaviour
             smileyFace.sprite = scoreLt50;
             smileyArms.gameObject.SetActive(false);
             smileyCannons.gameObject.SetActive(false);
-            rightAnswerScore.GetComponentInChildren<Text>().color = txtRed;
+            score.GetComponentInChildren<Text>().color = txtRed;
             bgOverlay.GetComponent<Image>().sprite = overlayBad;
         }
         else if (answeredRight > totalQuestions / 2)
@@ -251,7 +239,7 @@ public class GameController : MonoBehaviour
             smileyFace.sprite = scoreGt50;
             smileyArms.gameObject.SetActive(false);
             smileyCannons.gameObject.SetActive(false);
-            rightAnswerScore.GetComponentInChildren<Text>().color = txtGreen;
+            score.GetComponentInChildren<Text>().color = txtGreen;
             bgOverlay.GetComponent<Image>().sprite = overlayGood;
         }
         else if (answeredRight == totalQuestions / 2)
@@ -259,28 +247,26 @@ public class GameController : MonoBehaviour
             smileyFace.sprite = score50;
             smileyArms.gameObject.SetActive(false);
             smileyCannons.gameObject.SetActive(false);
-            rightAnswerScore.GetComponentInChildren<Text>().color = txtBlack;
+            score.GetComponentInChildren<Text>().color = txtBlack;
             bgOverlay.gameObject.SetActive(false);
         }
-        rightAnswerScore.GetComponentInChildren<Text>().text = string.Format("DU FIK\n {0} / {1}\n RIGTIGE!", answeredRight, totalQuestions);
+        score.GetComponentInChildren<Text>().text = string.Format("DU FIK\n {0} / {1}\n RIGTIGE!", answeredRight, totalQuestions);
     }
 
-    private void SetRandomOrder(ButtonManager questionInfo)
+    private void SetRandomOrder(string rightAnswer, string wrongAnswer1, string wrongAnswer2, string wrongAnswer3)
     {
         List<string> answersList = new List<string>();
         List<string> randomOrderList = new List<string>();
-        answersList.Add(questionInfo.answer);
-        answersList.Add(questionInfo.wrongAnswer1);
-        if(questionInfo.wrongAnswer2 != "")
-            answersList.Add(questionInfo.wrongAnswer2);
-        if (questionInfo.wrongAnswer3 != "")
-            answersList.Add(questionInfo.wrongAnswer3);
+        answersList.Add(rightAnswer);
+        answersList.Add(wrongAnswer1);
+        if(wrongAnswer2 != "")
+            answersList.Add(wrongAnswer2);
+        if (wrongAnswer3 != "")
+            answersList.Add(wrongAnswer3);
         int listCount = answersList.Count-1;
         for (int i = 0; i <= listCount; i++)
         {
-            string temp;
             int randomIndex = Random.Range(0, answersList.Count);
-            temp = answersList[randomIndex];
             randomOrderList.Add(answersList[randomIndex]);
             answersList.RemoveAt(randomIndex);
         }
@@ -300,5 +286,13 @@ public class GameController : MonoBehaviour
         }
         else
             btnAnswer4.SetActive(false);
+    }
+
+    public void Reset()
+    {
+        unorderedQuestions.Clear();
+        orderedQuestions.Clear();
+        totalAnswered = 0;
+        totalQuestions = 0;
     }
 }
